@@ -1,0 +1,37 @@
+2013-07-24 00:06:05 Error: [MissingLayoutException] Layout file "D:\xampp\htdocs\surveyor\app\View\Layouts\login.ctp" is missing.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\View\View.php(503): View->_getLayoutFileName('login')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\View\View.php(473): View->renderLayout('', 'login')
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(959): View->render(NULL, NULL)
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(110): Controller->render()
+#4 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#5 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2013-07-24 00:19:53 Error: [MissingLayoutException] Layout file "D:\xampp\htdocs\surveyor\app\View\Layouts\login.ctp" is missing.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\View\View.php(503): View->_getLayoutFileName('login')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\View\View.php(473): View->renderLayout('', 'login')
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(959): View->render(NULL, NULL)
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(110): Controller->render()
+#4 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#5 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2013-07-23 11:21:54 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-23 11:21:54 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-23 11:21:54 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-23 11:30:16 Error: [MissingControllerException] Controller class Index.htmlController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-23 11:32:39 Error: [MissingControllerException] Controller class Index.htmlController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-23 11:34:03 Error: [MissingControllerException] Controller class Index.htmlController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-23 11:34:14 Error: [MissingControllerException] Controller class Index.htmlController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
