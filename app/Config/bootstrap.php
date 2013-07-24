@@ -84,6 +84,7 @@
  *	));
  */
 Cache::config('default', array('engine' => 'File'));
+Configure::write('base_url','http://localhost/surveyor/');
 
 /**
  * The settings below can be used to set additional paths to models, views and controllers.

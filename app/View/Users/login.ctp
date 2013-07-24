@@ -7,7 +7,7 @@
           <div class="input-icon left">
             <i class="icon-user"></i>
             <!--<input class="m-wrap" type="text" placeholder="Username" />-->
-            <?php echo $this->Form->input('email',array('type' => 'text', 'class' => 'm-wrap', 'laceholder' => 'Username', 'label' => false));?>
+            <?php echo $this->Form->input('email',array('type' => 'text', 'class' => 'm-wrap', 'placeholder' => 'Email', 'label' => false));?>
           </div>
         </div>
       </div>
@@ -16,7 +16,7 @@
           <div class="input-icon left">
             <i class="icon-lock"></i>
 <!--            <input class="m-wrap" type="password" style="" placeholder="Password" />-->
-            <?php echo $this->Form->input('password',array('type' => 'password', 'label' => false,'placeholder' => 'Password'));?>
+            <?php echo $this->Form->input('password',array('type' => 'password', 'class' => 'm-wrap','label' => false,'placeholder' => 'Password'));?>
           </div>
         </div>
       </div>
@@ -24,18 +24,19 @@
         <label class="checkbox">
         <input type="checkbox" /> Remember me
         </label>
-<!--        <a href="index.html" id="login-btn" class="btn green pull-right">
+        <a href="index.html" id="login-btn" class="btn green pull-right">
         Login <i class="m-icon-swapright m-icon-white"></i>
-        </a>    -->
-          <?php echo $this->Form->end('Login',array('class' => 'btn green pull-right')); ?>
+        </a>    
+          <?php // echo $this->Form->end('Login',array('class' => 'btn green pull-right'));
+          echo $this->Form->end();?>
       </div>
     <!-- END LOGIN FORM -->   
     
-    <script>
-        $(document).ready(function(){
-            $("#login-btn").click(function(e){
-                e.preventDefault();
-                $("#UserLoginForm").submit();
-            });
+<script>
+    $(document).ready(function(){
+        $("#login-btn").click(function(e){
+            e.preventDefault();
+            $("#UserLoginForm").submit();
         });
-    </script>
+    });
+</script>

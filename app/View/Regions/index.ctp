@@ -4,14 +4,12 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('title'); ?></th>
-			<th><?php echo $this->Paginator->sort('code'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($regions as $region): ?>
 	<tr>
 		<td><?php echo h($region['Region']['id']); ?>&nbsp;</td>
 		<td><?php echo h($region['Region']['title']); ?>&nbsp;</td>
-		<td><?php echo h($region['Region']['code']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $region['Region']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $region['Region']['id'])); ?>

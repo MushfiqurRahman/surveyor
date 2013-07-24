@@ -10,12 +10,7 @@
 		<dd>
 			<?php echo h($region['Region']['title']); ?>
 			&nbsp;
-		</dd>
-		<dt><?php echo __('Code'); ?></dt>
-		<dd>
-			<?php echo h($region['Region']['code']); ?>
-			&nbsp;
-		</dd>
+		</dd>		
 	</dl>
 </div>
 <div class="actions">
@@ -37,7 +32,6 @@
 		<th><?php echo __('Id'); ?></th>
 		<th><?php echo __('Region Id'); ?></th>
 		<th><?php echo __('Title'); ?></th>
-		<th><?php echo __('Code'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
@@ -47,7 +41,6 @@
 			<td><?php echo $area['id']; ?></td>
 			<td><?php echo $area['region_id']; ?></td>
 			<td><?php echo $area['title']; ?></td>
-			<td><?php echo $area['code']; ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'areas', 'action' => 'view', $area['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'areas', 'action' => 'edit', $area['id'])); ?>
