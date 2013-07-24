@@ -128,6 +128,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         <div class="page-content">
             <?php echo $this->Session->flash(); ?>
             <?php echo $this->fetch('content'); ?>
+            <?php echo $this->element('links'); ?>
         </div>
         	
     </div>

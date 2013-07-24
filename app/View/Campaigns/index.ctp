@@ -44,9 +44,6 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Campaign'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Campaign Details'), array('controller' => 'campaign_details', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Campaign Detail'), array('controller' => 'campaign_details', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Surveys'), array('controller' => 'surveys', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Survey'), array('controller' => 'surveys', 'action' => 'add')); ?> </li>
+		
 	</ul>
 </div>

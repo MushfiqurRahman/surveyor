@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 23, 2013 at 10:59 AM
+-- Generation Time: Jul 24, 2013 at 11:20 AM
 -- Server version: 5.1.33
 -- PHP Version: 5.2.9
 
@@ -30,12 +30,15 @@ CREATE TABLE IF NOT EXISTS `ages` (
   `lower_age` int(11) NOT NULL,
   `upper_age` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `ages`
 --
 
+INSERT INTO `ages` (`id`, `lower_age`, `upper_age`) VALUES
+(1, 18, 22),
+(2, 23, 25);
 
 -- --------------------------------------------------------
 
@@ -47,14 +50,15 @@ CREATE TABLE IF NOT EXISTS `areas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `region_id` int(11) NOT NULL,
   `title` varchar(40) NOT NULL,
-  `code` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `areas`
 --
 
+INSERT INTO `areas` (`id`, `region_id`, `title`) VALUES
+(4, 4, 'Sylhet');
 
 -- --------------------------------------------------------
 
@@ -66,8 +70,8 @@ CREATE TABLE IF NOT EXISTS `campaigns` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(120) NOT NULL,
   `total_target` int(11) NOT NULL DEFAULT '0',
-  `start_date` int(11) NOT NULL,
-  `end_date` int(11) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -85,11 +89,8 @@ CREATE TABLE IF NOT EXISTS `campaigns` (
 CREATE TABLE IF NOT EXISTS `campaign_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `campaign_id` int(11) NOT NULL,
-  `region_id` int(11) NOT NULL,
-  `area_id` int(11) NOT NULL,
-  `region_total` int(11) NOT NULL,
-  `area_total` int(11) NOT NULL,
-  `house_totals` varchar(256) NOT NULL,
+  `house_id` int(11) NOT NULL,
+  `house_target` varchar(256) NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -127,14 +128,16 @@ CREATE TABLE IF NOT EXISTS `houses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `area_id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
-  `code` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `houses`
 --
 
+INSERT INTO `houses` (`id`, `area_id`, `title`) VALUES
+(7, 4, 'MBKB Sunamgonj'),
+(8, 4, 'South Sylhet Company Limited');
 
 -- --------------------------------------------------------
 
@@ -147,12 +150,17 @@ CREATE TABLE IF NOT EXISTS `mobiles` (
   `representative_id` int(7) NOT NULL,
   `mobile_no` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5857 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5869 ;
 
 --
 -- Dumping data for table `mobiles`
 --
 
+INSERT INTO `mobiles` (`id`, `representative_id`, `mobile_no`) VALUES
+(5868, 36, '8801712068773'),
+(5867, 34, '8801915741711'),
+(5866, 32, '8801915741710'),
+(5865, 30, '8801915741709');
 
 -- --------------------------------------------------------
 
@@ -168,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `mo_logs` (
   `datetime` varchar(30) NOT NULL,
   `time_int` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=242 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `mo_logs`
@@ -190,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `mt_logs` (
   `datetime` varchar(30) NOT NULL,
   `time_int` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=155 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `mt_logs`
@@ -225,14 +233,15 @@ CREATE TABLE IF NOT EXISTS `occupations` (
 CREATE TABLE IF NOT EXISTS `regions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
-  `code` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `regions`
 --
 
+INSERT INTO `regions` (`id`, `title`) VALUES
+(4, 'Sylhet');
 
 -- --------------------------------------------------------
 
@@ -247,12 +256,24 @@ CREATE TABLE IF NOT EXISTS `representatives` (
   `name` varchar(50) NOT NULL,
   `br_code` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
 
 --
 -- Dumping data for table `representatives`
 --
 
+INSERT INTO `representatives` (`id`, `house_id`, `superviser_id`, `name`, `br_code`) VALUES
+(30, 7, 0, 'Mamun Ahmed Kha', ''),
+(31, 7, 30, 'Sheiku Miftauzzaman', 'BR1'),
+(32, 7, 0, 'Mamun Ahmed Kha', ''),
+(33, 7, 32, 'Shah Soharul Islam', 'BR2'),
+(34, 7, 0, 'Mamun Ahmed Kha', ''),
+(35, 7, 34, 'Sohel Mia', 'BR3'),
+(36, 8, 0, 'Ajit Bunarjee ', ''),
+(37, 8, 36, 'Komol', 'BR1151'),
+(38, 8, 36, 'Junayed Ahmed', 'BR1152'),
+(39, 8, 36, 'Mahbub Alom', 'BR1153'),
+(40, 8, 36, 'Biplab Miah', 'BR1154');
 
 -- --------------------------------------------------------
 
@@ -263,6 +284,7 @@ CREATE TABLE IF NOT EXISTS `representatives` (
 CREATE TABLE IF NOT EXISTS `surveys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `campaign_id` int(11) NOT NULL,
+  `house_id` int(11) NOT NULL,
   `representative_id` int(11) NOT NULL,
   `mo_log_id` int(11) NOT NULL,
   `survey_counter` int(3) NOT NULL DEFAULT '1',
@@ -293,11 +315,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(128) NOT NULL,
   `password` varchar(50) NOT NULL,
   `created` datetime NOT NULL,
-  `modified` int(11) NOT NULL,
+  `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `users`
 --
 
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `created`, `modified`) VALUES
+(6, 'Mushfiqur', 'Rahman', 'mushfique@codetrio.com', 'c112e8d4ac9314e97bd1554c09245294e53b9095', '2013-07-24 10:58:31', '0000-00-00 00:00:00');

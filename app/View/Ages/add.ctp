@@ -3,8 +3,8 @@
 	<fieldset>
 		<legend><?php echo __('Add Age'); ?></legend>
 	<?php
-		echo $this->Form->input('lower_age');
-		echo $this->Form->input('upper_age');
+		echo $this->Form->input('lower_age', array('required' => true));
+		echo $this->Form->input('upper_age', array('required' => true));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

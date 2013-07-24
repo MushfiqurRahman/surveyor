@@ -5,7 +5,7 @@
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('region_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('title'); ?></th>
-			<th><?php echo $this->Paginator->sort('code'); ?></th>
+			
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($areas as $area): ?>
@@ -15,7 +15,7 @@
 			<?php echo $this->Html->link($area['Region']['title'], array('controller' => 'regions', 'action' => 'view', $area['Region']['id'])); ?>
 		</td>
 		<td><?php echo h($area['Area']['title']); ?>&nbsp;</td>
-		<td><?php echo h($area['Area']['code']); ?>&nbsp;</td>
+		
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $area['Area']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $area['Area']['id'])); ?>

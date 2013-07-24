@@ -4,8 +4,7 @@
 		<legend><?php echo __('Add Area'); ?></legend>
 	<?php
 		echo $this->Form->input('region_id');
-		echo $this->Form->input('title');
-		echo $this->Form->input('code');
+		echo $this->Form->input('title', array('required' => true));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
@@ -16,9 +15,6 @@
 
 		<li><?php echo $this->Html->link(__('List Areas'), array('action' => 'index')); ?></li>
 		<li><?php echo $this->Html->link(__('List Regions'), array('controller' => 'regions', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Region'), array('controller' => 'regions', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Campaigns'), array('controller' => 'campaigns', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Campaign'), array('controller' => 'campaigns', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Houses'), array('controller' => 'houses', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New House'), array('controller' => 'houses', 'action' => 'add')); ?> </li>
 	</ul>

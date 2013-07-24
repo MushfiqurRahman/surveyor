@@ -4874,3 +4874,95 @@
 #1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RegionsController), Object(CakeRequest), Object(CakeResponse))
 #2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2013-07-24 10:30:15 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-24 23:30:24 Error: [MissingActionException] Action PagesController::home() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:31:21 Error: [MissingActionException] Action PagesController::home() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:31:31 Error: [MissingActionException] Action SurveysController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(SurveysController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:31:31 Error: [MissingActionException] Action SurveysController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(SurveysController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:31:31 Error: [MissingActionException] Action SurveysController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(SurveysController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:32:13 Error: [MissingActionException] Action CampaignsController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(CampaignsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:32:13 Error: [MissingActionException] Action CampaignsController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(CampaignsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:32:13 Error: [MissingActionException] Action CampaignsController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(CampaignsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:44:18 Error: [MissingActionException] Action AgesController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(AgesController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:44:19 Error: [MissingActionException] Action AgesController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(AgesController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:44:19 Error: [MissingActionException] Action AgesController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(AgesController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:45:55 Error: [MissingActionException] Action AreasController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(AreasController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:45:55 Error: [MissingActionException] Action AreasController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(AreasController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:45:55 Error: [MissingActionException] Action AreasController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(AreasController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-24 23:46:04 Error: [NotFoundException] Invalid age
+#0 [internal function]: AgesController->edit('favicon.png')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(AgesController), Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(AgesController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-24 23:46:04 Error: [NotFoundException] Invalid age
+#0 [internal function]: AgesController->edit('favicon.png')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(AgesController), Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(AgesController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-24 23:49:33 Error: [MissingActionException] Action RegionsController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RegionsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
