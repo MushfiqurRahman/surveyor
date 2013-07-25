@@ -4974,3 +4974,31 @@
 #1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(CampaignsController), Object(CakeRequest), Object(CakeResponse))
 #2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2013-07-25 10:45:30 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-26 00:07:58 Error: [MissingActionException] Action MoLogsController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(MoLogsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-26 00:07:58 Error: [MissingActionException] Action MoLogsController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(MoLogsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-26 00:07:58 Error: [MissingActionException] Action MoLogsController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(MoLogsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-26 00:08:05 Error: [MissingActionException] Action MoLogsController::add() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(MoLogsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-26 00:08:15 Error: [MissingActionException] Action MoLogsController::add_sale() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(MoLogsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}

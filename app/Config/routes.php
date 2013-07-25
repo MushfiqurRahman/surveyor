@@ -28,6 +28,7 @@
 	//Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 Router::connect('/', array('controller' => 'users', 'action' => 'login'));
+Router::connect('/sms_survey.php', array('controller' => 'MoLogs', 'action' => 'add_survey'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
