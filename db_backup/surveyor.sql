@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 24, 2013 at 11:20 AM
+-- Generation Time: Jul 25, 2013 at 01:29 AM
 -- Server version: 5.1.33
 -- PHP Version: 5.2.9
 
@@ -73,12 +73,14 @@ CREATE TABLE IF NOT EXISTS `campaigns` (
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `campaigns`
 --
 
+INSERT INTO `campaigns` (`id`, `title`, `total_target`, `start_date`, `end_date`) VALUES
+(3, 'Gold Campaign', 100000, '2013-07-25 00:00:00', '2013-07-26 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -90,15 +92,17 @@ CREATE TABLE IF NOT EXISTS `campaign_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `campaign_id` int(11) NOT NULL,
   `house_id` int(11) NOT NULL,
-  `house_target` varchar(256) NOT NULL,
-  `created` datetime NOT NULL,
+  `house_target` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `campaign_details`
 --
 
+INSERT INTO `campaign_details` (`id`, `campaign_id`, `house_id`, `house_target`) VALUES
+(4, 3, 8, 60000),
+(3, 3, 7, 40000);
 
 -- --------------------------------------------------------
 

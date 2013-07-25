@@ -53,7 +53,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<link rel="stylesheet" type="text/css" href="<?php echo Configure::read('base_url');?>assets/chosen-bootstrap/chosen/chosen.css" />
 	<link rel="stylesheet" href="<?php echo Configure::read('base_url');?>assets/data-tables/DT_bootstrap.css" />
 	<link rel="shortcut icon" href="favicon.png" />
-        
+        <link href="<?php echo Configure::read('base_url');?>css/CalendarControl.css" rel="stylesheet" />
         
         <script src="<?php echo Configure::read('base_url');?>assets/js/jquery-1.8.3.min.js"></script>	
 	<!--[if lt IE 9]>
@@ -82,6 +82,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<script type="text/javascript" src="<?php echo Configure::read('base_url');?>assets/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="<?php echo Configure::read('base_url');?>assets/data-tables/DT_bootstrap.js"></script>
 	<script src="<?php echo Configure::read('base_url');?>assets/js/app.js"></script>
+        
+        <script src="<?php echo Configure::read('base_url');?>js/CalendarControl.js"></script>
 	
 	<!-- BEGAIN CHART JS -->
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>

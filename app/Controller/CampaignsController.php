@@ -39,14 +39,22 @@ class CampaignsController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
+                    //pr($this->request->data);exit;
+                    $this->request->data['Campaign']['start_date'] = $this->request->data['Campaign']['start_date'].' 00:00:00';
+                    $this->request->data['Campaign']['end_date'] = $this->request->data['Campaign']['end_date'].' 00:00:00';
+                    if($this->Campaign->check_total($this->request->data)){
 			$this->Campaign->create();
-			if ($this->Campaign->save($this->request->data)) {
+			if ($this->Campaign->saveAssociated($this->request->data)) {                        
 				$this->Session->setFlash(__('The campaign has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The campaign could not be saved. Please, try again.'));
 			}
+                    }else{
+                        $this->Session->setFlash(__('Save Failed! Total target and sum of houses target are not equal.'));
+                    }
 		}
+                $this->set('houses',$this->Campaign->CampaignDetail->House->house_list(null));
 	}
 
 /**

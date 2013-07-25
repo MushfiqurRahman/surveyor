@@ -136,9 +136,9 @@ class House extends AppModel {
 //            if( isset($data['House']['id']) && $data['House']['id'] ){
 //                $conditions = array('House.id' => $data['House']['id']);
 //            }else if( $data['Area']['id'] ){
-            if( $data['Area']['id'] ){
+            if( isset($data['Area']['id']) && $data['Area']['id'] ){
                 $conditions = array('House.area_id' => $data['Area']['id']);
-            }else if( $data['Region']['id'] ){
+            }else if( isset($data['Region']['id']) && $data['Region']['id'] ){
                 $areaIds = $this->Area->find('list', array('fields' => array('Area.id'),
                     'conditions' => array('Area.region_id' => $data['Region']['id'])));                
                 $conditions = array('House.area_id' => $areaIds);

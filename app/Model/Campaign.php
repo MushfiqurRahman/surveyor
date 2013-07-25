@@ -104,5 +104,21 @@ class Campaign extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+        
+        
+        /**
+         *
+         * @return boolean 
+         */
+        public function check_total( $data = array() ){
+            $houseTotal = 0;
+            foreach($data['CampaignDetail'] as $cd){
+                $houseTotal += $cd['house_target'];
+            }
+            if( $data['Campaign']['total_target']==$houseTotal){
+                return true;
+            }
+            return false;
+        }
 
 }
