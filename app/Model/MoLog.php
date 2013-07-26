@@ -29,7 +29,7 @@ class MoLog extends AppModel{
         
         //pr($res);exit;
         
-        if( count($res)>0 && $res[0]['outlets']['code']==$tlp ){
+        if( count($res)>0 ){
             return $res;
         }
         return false;
@@ -143,10 +143,10 @@ public function mobile_number_process($mobile_num_temp) {
     }
     
     	
-    public function send_sms_free_of_charge($to, $outlet_id = 0, $msg,$recid,$keyword, $date = '', $time_int = 0){
+    public function send_sms_free_of_charge($to, $msg,$recid,$keyword, $date = '', $time_int = 0){
     
-		$this->query("INSERT INTO mt_logs(msisdn, outlet_id, sms,keyword,datetime,time_int) VALUES('$to',".
-                        $outlet_id.",'$msg','$keyword','$date',$time_int)");
+		$this->query("INSERT INTO mt_logs(msisdn, sms,keyword,datetime,time_int) VALUES('$to',".
+                        "'$msg','$keyword','$date',$time_int)");
 		
 		$date=date('Y-m-d h:i A');
 		$ftp = fopen("log.txt",'a+');

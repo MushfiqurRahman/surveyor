@@ -115,7 +115,7 @@ class Survey extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'age_id' => array(
+		'age' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -200,13 +200,13 @@ class Survey extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Age' => array(
-			'className' => 'Age',
-			'foreignKey' => 'age_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
+//		'Age' => array(
+//			'className' => 'Age',
+//			'foreignKey' => 'age_id',
+//			'conditions' => '',
+//			'fields' => '',
+//			'order' => ''
+//		),
 		'Occupation' => array(
 			'className' => 'Occupation',
 			'foreignKey' => 'occupation_id',

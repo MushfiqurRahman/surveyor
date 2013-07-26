@@ -3,8 +3,8 @@
 	<fieldset>
 		<legend><?php echo __('Add Occupation'); ?></legend>
 	<?php
-		echo $this->Form->input('title');
-		echo $this->Form->input('code');
+		echo $this->Form->input('title', array('required'));
+		echo $this->Form->input('code', array('required'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>
@@ -13,8 +13,6 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 
-		<li><?php echo $this->Html->link(__('List Occupations'), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Surveys'), array('controller' => 'surveys', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Survey'), array('controller' => 'surveys', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Occupations'), array('action' => 'index'));?></li>		
 	</ul>
 </div>

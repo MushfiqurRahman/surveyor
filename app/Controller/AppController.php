@@ -35,6 +35,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
     
     public $total_outlet = 0;
+    public $current_campaign_detail = array();
     
     public $components = array(
         'Session',
@@ -48,6 +49,16 @@ class AppController extends Controller {
 
     public function beforeFilter(){    
         parent::beforeFilter();
+        
+        //since the current campaign detail is necessary everywhere
+        $this->loadModel('Campaign');
+        $this->Campaign->recursive = -1;
+        $conditions = array();
+        $conditions['DATE(Campaign.start_date) <='] = date('Y-m-d');
+        $conditions['DATE(Campaign.end_date) >='] = date('Y-m-d');
+        $this->current_campaign_detail = $this->Campaign->find('first',array('conditions' => $conditions));
+        
+        $this->set('current_campaign_detail',$this->current_campaign_detail);
     }
 
     public function isAuthorized($user) {

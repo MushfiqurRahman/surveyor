@@ -1,2 +1,22 @@
 88 Your SMS format is wrong, plesae try again with right format.	2013-07-26 12:08 AM
 88 Your SMS format is wrong, plesae try again with right format.	2013-07-26 12:08 AM
+8801685089560 Sorry! Invalid Occupaton code!	2013-07-26 02:56 PM
+8801685089560 Thank you! Your message have been received.	2013-07-26 02:58 PM
+8801685089560 Thank you! Your message have been received.	2013-07-26 03:01 PM
+8801685089560 Thank you! Your message have been received.	2013-07-26 03:03 PM
+8801685089560 Thank you! Your message have been received.	2013-07-26 03:06 PM
+8801685089560 Thank you! Your message have been received.	2013-07-26 03:07 PM
+8801685089560 Thank you! Your message have been received.	2013-07-26 03:21 PM
+8801685089560 Thank you! Your message have been received.	2013-07-26 03:23 PM
+8801685089560 Thank you! Your message have been received.	2013-07-26 03:25 PM
+8801685089560 Thank you! Your message have been received.	2013-07-26 03:29 PM
+8801685089560 Thank you! Survey for mobile no/name have been updated.	2013-07-26 03:29 PM
+8801685089560 Sorry! You already inserted values for this consumer	2013-07-26 03:30 PM
+8801685089560 Thank you! Survey for mobile no/name have been updated.	2013-07-26 03:32 PM
+8801685089560 Sorry! You already inserted values for this consumer	2013-07-26 03:33 PM
+8801685089560 Invalid BR code! Please try again with valid code.	2013-07-26 03:33 PM
+8801685089560 Your SMS format is wrong, plesae try again with right format.	2013-07-26 03:33 PM
+8801685089560 Your SMS format is wrong, plesae try again with right format.	2013-07-26 03:34 PM
+8801685089560 Thank you! Your message have been received.	2013-07-26 03:34 PM
+8801685089560 Thank you! Your message have been updated.	2013-07-26 03:35 PM
+8801685089560 Thank you! Your message have been received.	2013-07-26 03:35 PM

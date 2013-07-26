@@ -10,7 +10,7 @@
 		echo $this->Form->input('survey_counter');
 		echo $this->Form->input('name');
 		echo $this->Form->input('phone');
-		echo $this->Form->input('age_id');
+		echo $this->Form->input('age');
 		echo $this->Form->input('adc');
 		echo $this->Form->input('occupation_id');
 	?>

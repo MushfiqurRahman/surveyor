@@ -11,7 +11,7 @@ class Age extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'id';
+	//public $displayField = 'id';
 /**
  * Validation rules
  *
@@ -74,19 +74,19 @@ class Age extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Survey' => array(
-			'className' => 'Survey',
-			'foreignKey' => 'age_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
+//		'Survey' => array(
+//			'className' => 'Survey',
+//			'foreignKey' => 'age_id',
+//			'dependent' => false,
+//			'conditions' => '',
+//			'fields' => '',
+//			'order' => '',
+//			'limit' => '',
+//			'offset' => '',
+//			'exclusive' => '',
+//			'finderQuery' => '',
+//			'counterQuery' => ''
+//		)
 	);
 
 }

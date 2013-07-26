@@ -38,6 +38,7 @@ class SurveysController extends AppController {
  * @return void
  */
 	public function add() {
+            
 		if ($this->request->is('post')) {
 			$this->Survey->create();
 			if ($this->Survey->save($this->request->data)) {
@@ -50,7 +51,7 @@ class SurveysController extends AppController {
 		$campaigns = $this->Survey->Campaign->find('list');
 		$representatives = $this->Survey->Representative->find('list');
 		$moLogs = $this->Survey->MoLog->find('list');
-		$ages = $this->Survey->Age->find('list');
+		//$ages = $this->Survey->Age->find('list');
 		$occupations = $this->Survey->Occupation->find('list');
 		$houses = $this->Survey->House->find('list');
 		$this->set(compact('campaigns', 'representatives', 'moLogs', 'ages', 'occupations', 'houses'));
