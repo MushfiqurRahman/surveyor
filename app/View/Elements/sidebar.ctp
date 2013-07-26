@@ -14,7 +14,7 @@
 			<!-- BEGIN SIDEBAR MENU -->
 			<ul>
 				<li class="active">
-					<a href="index.html">
+					<a href="<?php echo Configure::read('base_url');?>surveys/dashboard">
 					<i class="icon-home"></i> Dashboard
 					<span class="selected"></span>
 					</a>					
