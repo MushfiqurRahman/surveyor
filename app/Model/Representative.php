@@ -86,8 +86,8 @@ class Representative extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Sale' => array(
-			'className' => 'Sale',
+		'Survey' => array(
+			'className' => 'Survey',
 			'foreignKey' => 'representative_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -99,10 +99,10 @@ class Representative extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Section' => array(
-			'className' => 'Section',
-			'foreignKey' => 'representative_id',
-		),
+//		'Section' => array(
+//			'className' => 'Section',
+//			'foreignKey' => 'representative_id',
+//		),
                 'Mobile' => array(
                     'className' => 'Mobile',
                     'foreignKey' => 'representative_id'

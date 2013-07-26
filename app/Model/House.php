@@ -43,16 +43,16 @@ class House extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'code' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
+//		'code' => array(
+//			'notempty' => array(
+//				'rule' => array('notempty'),
+//				//'message' => 'Your custom message here',
+//				//'allowEmpty' => false,
+//				//'required' => false,
+//				//'last' => false, // Stop validation after this rule
+//				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+//			),
+//		),
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -77,20 +77,7 @@ class House extends AppModel {
  *
  * @var array
  */
-	public $hasMany = array(
-		'Outlet' => array(
-			'className' => 'Outlet',
-			'foreignKey' => 'house_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
+	public $hasMany = array(		
 		'Representative' => array(
 			'className' => 'Representative',
 			'foreignKey' => 'house_id',
@@ -104,8 +91,8 @@ class House extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Section' => array(
-			'className' => 'Section',
+		'Survey' => array(
+			'className' => 'Survey',
 			'foreignKey' => 'house_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -150,6 +137,14 @@ class House extends AppModel {
                 'conditions' => $conditions));
 
             return $houses;
+        }
+        
+        public function id_from_list($houseList){
+            $ids = array();
+            foreach($houseList as $k => $v){
+                $ids[] = $k;
+            }
+            return $ids;
         }
 
 }

@@ -39,82 +39,7 @@
 				</div>
 				<!-- END PAGE HEADER-->
 				<div id="dashboard">
-					<!-- BEGIN DASHBOARD STATS -->
-					<div class="row-fluid">
-						<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
-							<div class="dashboard-stat blue">
-								<div class="visual">
-									<i class="icon-comments"></i>
-								</div>
-								<div class="details">
-									<div class="number">
-										<?php echo $current_campaign_detail['Campaign']['total_target'];?>
-									</div>
-									
-								</div>
-								<a class="more" href="#">
-								Total Allocation
-								</a>						
-							</div>
-						</div>
-						<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
-							<div class="dashboard-stat gold">
-								<div class="visual">
-									<i class="icon-shopping-cart"></i>
-								</div>
-								<div class="details">
-									<div class="number">549</div>
-									
-								</div>
-								<a class="more" href="#">
-								Target Till Date
-								</a>						
-							</div>
-						</div>
-						<div class="span3 responsive" data-tablet="span6  fix-offset" data-desktop="span3">
-							<div class="dashboard-stat purple">
-								<div class="visual">
-									<i class="icon-globe"></i>
-								</div>
-								<div class="details">
-									<div class="number"><?php echo $achieved_total;?></div>
-									
-								</div>
-								<a class="more" href="#">
-								Achieved Till Date
-								</a>						
-							</div>
-						</div>
-						<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
-							<div class="dashboard-stat green">
-								<div class="visual">
-									<i class="icon-shopping-cart"></i>
-								</div>
-								<div class="details">
-									<div class="number"><?php echo $achieved_percentage.'%';?></div>
-									
-								</div>
-								<a class="more" href="#">
-								Achievement Percentage
-								</a>						
-							</div>
-						</div>
-						<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
-							<div class="dashboard-stat yellow">
-								<div class="visual">
-									<i class="icon-bar-chart"></i>
-								</div>
-								<div class="details">
-									<div class="number">123</div>
-									
-								</div>
-								<a class="more" href="#">
-								Required Rate
-								</a>						
-							</div>
-						</div>
-					</div>
-					<!-- END DASHBOARD STATS -->
+					<?php echo $this->element('dashboard_stat');?>
 					<div class="clearfix"></div>
 					
 					<div class="row-fluid">
@@ -133,13 +58,31 @@
 							<div class="portlet-body">
 								<div style="height:75px;">
 								
-								<form class="form-horizontal" name="search" method="post" action="report.html" id="">
+<!--								<form class="form-horizontal" name="search" method="post" action="report.html" id="">-->
+                                                                <?php echo $this->Form->create('Survey',array('type' => 'post', 'action' => 'report', 'class' => 'form-horizontal'));?>
 									<div style="width:20%; margin-left:50px;">
 										<label>Dispatch Details</label>
 									</div>
 							
 									<div style="width:100%; margin-top:10px; margin-left:50px;">
-										<select name="region" id="region" style="width:23%;float:left;">									
+                                                                            <?php 
+                                                                                echo $this->Form->input('Region.id',array('type' => 'select', 
+                                                                                    'options' => $regions, 'empty' => 'All Region', 'label' => false,
+                                                                                    'class' => 'regionId', 'id' => 'first', 'style' => 'width:23%;float:left;',
+                                                                                    'div' => false));
+                                                                                
+                                                                                echo $this->Form->input('Area.id', array('type' => 'select', 
+                                                                                    'options' => array(), 'empty' => 'All Area','label' => false,
+                                                                                    'id' => 'area_first', 'class' => 'areaId', 'style' => 'width:23%;float:left; margin-left:15px;','div' => false));
+
+                                                                                echo $this->Form->input('House.id', array('type' => 'select',
+                                                                                    'options' => array(), 'empty' => 'All House','label' => false,
+                                                                                    'id' => 'house_first', 'style' => 'width:23%;float:left; margin-left:15px; margin-right:20px;',
+                                                                                    'div' => false));
+                                                                                
+                                                                                //echo $this->Form->end(array('label' => 'Submit', 'class' => 'mws-button orange','style' => 'float:left; margin-top:-2px;'));
+                                                                            ?>
+<!--										<select name="region" id="region" style="width:23%;float:left;">									
 										 <option value="">All Region</option>
 										 <option value="">Dhaka</option>
 										 <option value="">Chitagong</option>
@@ -155,7 +98,7 @@
 										</select>
 										<select name="house" id="house" style="width:23%;float:left; margin-left:15px; margin-right:20px;">									
 										<option value="">All House</option>
-										</select>
+										</select>-->
 										
 										<input type="submit" value="Submit" class="btn green" style="margin-top:-2px;"/>
 										<input type="reset" value="Reset" class="btn red" style="margin-top:-2px;"/>
@@ -191,3 +134,50 @@
 					
 					
 				</div>
+
+<script>
+	var base_url = '<?php echo Configure::read('base_url');?>';
+	$(document).ready(function(){		
+		$(".regionId").change(function(e){
+			find_areas( $(this).val(), $(this).attr('id') );	
+		});
+                
+                $(".areaId").change(function(){                    
+                    find_houses( $(this).val(), $(this).attr('id') );	
+                });
+		
+		function find_areas( regionId, elementId ){                    
+			$.ajax({
+				url: base_url+'areas/ajax_area_list',
+				type: 'post',
+				data: 'region_id='+regionId,
+				success: function(response){					
+					var areas = $.parseJSON(response);
+					var areaId = 'area_'+elementId;	
+                                        $("#area_"+elementId).html('<select name="data[Area][id]" id="area_'+elementId+'"><option value="">All Area</option></select>');
+                                        $("#house_"+elementId).html('<select name="data[House][id]" id="house_'+elementId+'"><option value="">All House</option></select>');
+					$.each(areas, function(ind,val){                                            
+						$('#area_'+elementId).append('<option value="'+ind+'">'+val+'</option>');						
+					});
+				}
+			});
+		}
+                
+                function find_houses( areaId, elementId ){                   
+                    $.ajax({
+                            url: base_url+'houses/ajax_house_list',
+                            type: 'post',
+                            data: 'area_id='+areaId,
+                            success: function(response){                                
+                                    var houses = $.parseJSON(response);
+                                    var houseId = 'house_'+elementId.substring(5,elementId.length);	
+                                    $("#"+houseId).html('<select name="data[House][id]" id="'+houseId+'"><option value="">All House</option></select>');
+                                    $.each(houses, function(ind,val){
+                                        
+                                            $('#'+houseId).append('<option value="'+ind+'">'+val+'</option>');						
+                                    });
+                            }
+                    });                
+                }
+	});
+</script>

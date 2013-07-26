@@ -5235,3 +5235,34 @@
 #3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(CampaignsController), Object(CakeRequest), Object(CakeResponse))
 #4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #5 {main}
+2013-07-26 10:07:41 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-26 10:07:42 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-26 23:25:34 Error: [MissingActionException] Action SurveysController::assets() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(SurveysController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-26 23:54:16 Error: [MissingActionException] Action SurveysController::report.html() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(SurveysController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-27 00:22:03 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Sale.id' in 'where clause'
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('SELECT `Survey`...', Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('SELECT `Survey`...', Array, Array)
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(1058): DboSource->fetchAll('SELECT `Survey`...', false)
+#4 D:\xampp\htdocs\surveyor\lib\Cake\Model\Model.php(2698): DboSource->read(Object(Survey), Array)
+#5 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Component\PaginatorComponent.php(172): Model->find('all', Array)
+#6 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(1084): PaginatorComponent->paginate(NULL, Array, Array)
+#7 D:\xampp\htdocs\surveyor\app\Controller\SurveysController.php(77): Controller->paginate()
+#8 [internal function]: SurveysController->report()
+#9 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(SurveysController), Array)
+#10 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#11 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(SurveysController), Object(CakeRequest), Object(CakeResponse))
+#12 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}

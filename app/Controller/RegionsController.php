@@ -85,9 +85,12 @@ class RegionsController extends AppController {
                 $sup['Mobile'] = $this->_get_mobile_nos( $objWorksheet->getCellByColumnAndRow(3,$i)->getValue() );
                 $supId = $this->_save_representative( $sup );
                 
+                //echo '<pre>';print_r($sup);
+                
                 $br['Representative']['house_id'] = $houseId;
                 $br['Representative']['name'] = $objWorksheet->getCellByColumnAndRow(0,$i)->getValue();
                 $br['Representative']['superviser_id'] = $supId;
+                $br['Representative']['superviser_name'] = $sup['Representative']['name'];
                 $br['Representative']['br_code'] = $objWorksheet->getCellByColumnAndRow(1,$i)->getValue();
                 $brId = $this->_save_representative( $br );                
             }
@@ -165,7 +168,7 @@ class RegionsController extends AppController {
          */
 	protected function _save_representative( $rep ){ 
             
-            if( isset($rep['Mobile']) ){
+            if( isset($rep['Mobile']) && !empty($rep['Mobile']) ){
             
                 $inMob = array();
                 foreach( $rep['Mobile'] as $mb ){
@@ -174,6 +177,8 @@ class RegionsController extends AppController {
 
                 $rpttvs = $this->Region->Area->House->Representative->Mobile->find('all',array('conditions' =>
                     array('Mobile.mobile_no' => $inMob), 'recursive' => -1));
+                
+                //echo '<pre>';print_r($rpttvs);
 
                 if( count($rpttvs)>0 ){
                     return $rpttvs[0]['Mobile']['representative_id'];

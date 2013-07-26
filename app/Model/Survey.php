@@ -222,4 +222,48 @@ class Survey extends AppModel {
 			'order' => ''
 		)
 	);
+        
+        
+         /**
+        *
+        * @return type 
+        */
+        public function get_contain_array(){
+
+            return array(
+                'Representative' => array(
+                    'fields' => array('name','superviser_name'),
+                    'House' => array(
+                                'fields' => array('title'),
+                                'Area' => array(
+                                    'fields' => array('title'),
+                                    'Region' => array('fields' => array('title')))),
+                    ),
+                'Occupation' => array('title')
+            );
+        }
+        
+        /**
+         *
+         * @return type 
+         */
+        public function set_conditions( $surveyIds = null, $data = array() ){
+        
+            //pr($outletIds);exit;
+            
+            $conditions = array();
+            
+            if( $surveyIds ){
+                $conditions[]['Survey.id'] = $surveyIds;                
+            }else{
+                $conditions[]['Survey.id'] = 0;
+            }
+//            if( isset($data['from_date']) && !empty($data['from_date']) ){
+//                $conditions[]['DATE(Sale.date) >='] = $data['from_date'];
+//            }
+//            if( isset($data['till_date']) && !empty($data['till_date']) ){
+//                $conditions[]['DATE(Sale.date) <='] = $data['till_date'];
+//            }
+            return $conditions;
+        }
 }

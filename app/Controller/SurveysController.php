@@ -18,9 +18,15 @@ class SurveysController extends AppController {
         
         
         $ach_percentage = ceil($achieved_total*100/$this->current_campaign_detail['Campaign']['total_target']);
+        $required_rate = ceil(($this->current_campaign_detail['Campaign']['total_target'] - $achieved_total)/($camp_date_diff-$day_passed));
         
+        $target_till_date = ceil($this->current_campaign_detail['Campaign']['total_target']*$day_passed/$camp_date_diff);
+        
+        $this->set('target_till_date',$target_till_date);
+        $this->set('required_rate',$required_rate);
         $this->set('achieved_percentage',$ach_percentage);        
         $this->set('achieved_total',$achieved_total);
+        $this->set('regions', $this->Survey->House->Area->Region->find('list'));
     }
 
 
@@ -39,6 +45,63 @@ class SurveysController extends AppController {
          */
         public function dashboard(){
             
+        }
+        
+        public function report(){
+            $this->_set_request_data_from_params();
+            //$this->_format_date_fields();
+
+            
+            $houseList = $this->Survey->House->house_list($this->request->data);//('list', array('conditions' => $this->_set_conditions()));
+                       
+            
+            if( isset($this->request->data['House']['id']) && !empty($this->request->data['House']['id']) ){
+                $houseIds[] = $this->request->data['House']['id'];
+            }else{
+                $houseIds = $this->Survey->House->id_from_list($houseList);                
+            }
+            $SurveyIds = $this->Survey->find('list',array('fields' => 'id','conditions' => 
+                array('Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
+                      'Survey.house_id' => $houseIds)));            
+
+            $this->Survey->Behaviors->load('Containable');
+            
+            //var_dump($this->Survey->set_conditions($SurveyIds, $this->request->data));exit;
+
+            $this->paginate = array(
+                'contain' => $this->Survey->get_contain_array(),
+                'conditions' => $this->Survey->set_conditions($SurveyIds, $this->request->data),                                    
+                'order' => array('Survey.created' => 'DESC'),
+                'limit' => 10,
+            );                
+            $Surveys = $this->paginate();
+
+            //pr($Surveys);exit;
+
+            
+            
+            $this->set('houses', $houseList);
+            //$this->set('productsList',$this->Survey->SurveyDetail->Product->find('list',array('fields' => array('id','name'))));
+            $this->set('Surveys', $Surveys);
+            
+        }
+        
+        protected function _set_conditions(){
+            $conditions = array();
+            if( $this->request->data['Area']['id'] ){
+                $conditions[]['area_id'] = $this->request->data['Area']['id'];
+            }else if( $this->request->data['Region']['id'] ){
+                $areas = $this->Survey->House->Area->find('list',array('conditions' => array(
+                    'Area.region_id' => $this->request->data['Region']['id']
+                )));
+                
+                $areaIds = array();
+                foreach($areas as $k => $v){
+                    $areaIds[] = $k;
+                }
+                $conditions[]['area_id'] = $areaIds;
+            }
+            return $conditions;
         }
 
 /**
