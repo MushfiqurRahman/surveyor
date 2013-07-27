@@ -266,4 +266,15 @@ class Survey extends AppModel {
 //            }
             return $conditions;
         }
+        
+        public function get_region_wise_achievements( $current_campaign, $regions ){
+            $result = array();
+            
+            $i=5;
+            foreach($regions as $rg){
+                $result[$rg] = 70+$i;   
+                $i+=5;
+            }
+            return $result;            
+        }
 }

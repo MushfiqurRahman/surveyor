@@ -80,6 +80,7 @@ class RegionsController extends AppController {
                 
                 $sup['Representative']['house_id'] = $houseId;
                 $sup['Representative']['name'] = $objWorksheet->getCellByColumnAndRow(2,$i)->getValue();
+                $sup['Representative']['superviser_name'] = $sup['Representative']['name'];
                 $sup['Representative']['superviser_id'] = 0;
                 $sup['Representative']['br_code'] = '';
                 $sup['Mobile'] = $this->_get_mobile_nos( $objWorksheet->getCellByColumnAndRow(3,$i)->getValue() );

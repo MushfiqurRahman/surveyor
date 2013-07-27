@@ -7,26 +7,12 @@ App::uses('AppController', 'Controller');
  */
 class SurveysController extends AppController {
     
+    public $region_list = array();
+    
     public function beforeFilter() {
         parent::beforeFilter();
-        $achieved_total = $this->Survey->find('count');
-        
-        $diff = abs(strtotime($this->current_campaign_detail['Campaign']['start_date']) - strtotime($this->current_campaign_detail['Campaign']['end_date']));
-        $camp_date_diff = $diff/(24*3600);
-        
-        $day_passed = ceil(abs(time() - strtotime($this->current_campaign_detail['Campaign']['start_date']))/(24*3600));
-        
-        
-        $ach_percentage = ceil($achieved_total*100/$this->current_campaign_detail['Campaign']['total_target']);
-        $required_rate = ceil(($this->current_campaign_detail['Campaign']['total_target'] - $achieved_total)/($camp_date_diff-$day_passed));
-        
-        $target_till_date = ceil($this->current_campaign_detail['Campaign']['total_target']*$day_passed/$camp_date_diff);
-        
-        $this->set('target_till_date',$target_till_date);
-        $this->set('required_rate',$required_rate);
-        $this->set('achieved_percentage',$ach_percentage);        
-        $this->set('achieved_total',$achieved_total);
-        $this->set('regions', $this->Survey->House->Area->Region->find('list'));
+        $this->region_list = $this->Survey->House->Area->Region->find('list');
+        $this->set('regions', $this->region_list);
     }
 
 
@@ -44,7 +30,26 @@ class SurveysController extends AppController {
          * 
          */
         public function dashboard(){
+            $achieved_total = $this->Survey->find('count');
+
+            $diff = abs(strtotime($this->current_campaign_detail['Campaign']['start_date']) - strtotime($this->current_campaign_detail['Campaign']['end_date']));
+            $camp_date_diff = $diff/(24*3600);
+
+            $day_passed = ceil(abs(time() - strtotime($this->current_campaign_detail['Campaign']['start_date']))/(24*3600));
+
+
+            $ach_percentage = ceil($achieved_total*100/$this->current_campaign_detail['Campaign']['total_target']);
+            $required_rate = ceil(($this->current_campaign_detail['Campaign']['total_target'] - $achieved_total)/($camp_date_diff-$day_passed));
+
+            $target_till_date = ceil($this->current_campaign_detail['Campaign']['total_target']*$day_passed/$camp_date_diff);
             
+            $regionwise_achievements = $this->Survey->get_region_wise_achievements($this->current_campaign_detail, $this->region_list);
+
+            $this->set('target_till_date',$target_till_date);
+            $this->set('required_rate',$required_rate);
+            $this->set('achieved_percentage',$ach_percentage);        
+            $this->set('achieved_total',$achieved_total);
+            $this->set('regionwise_achievements',$regionwise_achievements);
         }
         
         public function report(){

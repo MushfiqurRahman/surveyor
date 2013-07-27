@@ -91,14 +91,23 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Achievement Percentage (%)'],
-          ['Dhaka',  90],
-          ['Chittagong',  80],
-          ['Bogura',  92],
-          ['Shylet',  87],
-		  ['Khulna',  83]
-        ]);
+//        var data = google.visualization.arrayToDataTable([
+//          ['Year', 'Achievement Percentage (%)'],
+//          ['Dhaka',  90],
+//          ['Chittagong',  80],
+//          ['Bogura',  92],
+//          ['Shylet',  87],
+//		  ['Khulna',  83]
+//        ]);           
+
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Achievement Percentage (%)'],
+                <?php 
+                    foreach($regionwise_achievements as $rg => $ac){
+                        echo '["'.$rg.'", '.$ac.'],';
+                    }
+                ?>
+                ]);
 
         var options = {
           title: '',
