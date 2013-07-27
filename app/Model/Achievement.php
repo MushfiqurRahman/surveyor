@@ -166,8 +166,7 @@ class Achievement extends AppModel {
                 }
                 $i++;
             }
-            $this->saveMany($achievement);
-            $this->log(print_r($achievement,true),'error');
+            $this->saveMany($achievement);            
         }
         
         /**
@@ -182,8 +181,19 @@ class Achievement extends AppModel {
                 $updatedData[$k]['Achievement'] = $ach['Achievement'];
                 $updatedData[$k]['Achievement']['region_target'] = $this->_get_region_target($data, $ach['Achievement']['region_id']);
             }            
-            $this->saveMany($updatedData);
-            $this->log(print_r($updatedData,true),'error');
+            $this->saveMany($updatedData);            
+        }
+        
+        /**
+         *
+         * @param type $house_id 
+         */
+        public function increment_chievement( $house_id, $campaign_id ){
+            $area_id = $this->Region->Area->House->field('area_id',array('House.id' => $house_id));
+            $region_id = $this->Region->Area->field('region_id',array('Area.id' => $area_id));
+            
+            $this->query('UPDATE achievements SET achievements.region_achieved=achievements.region_achieved+1 '.
+                    'WHERE achievements.region_id='.$region_id.' AND achievements.campaign_id='.$campaign_id);
         }
         
         

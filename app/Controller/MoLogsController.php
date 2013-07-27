@@ -242,6 +242,9 @@ class MoLogsController extends AppController{
 
                         $errorFound = false;
                         $msg = 'Thank you! Your message have been received.';
+                        
+                        $this->loadModel('Achievement');
+                        $this->Achievement->increment_chievement($repId[0]['representatives']['house_id'], $this->current_campaign_detail['Campaign']['id']);
                     }
                 }
             }

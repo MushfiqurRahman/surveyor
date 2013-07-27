@@ -52,11 +52,14 @@ class AppController extends Controller {
         
         //since the current campaign detail is necessary everywhere
         $this->loadModel('Campaign');
-        $this->Campaign->recursive = -1;
+        $this->Campaign->unbindModel(array('hasMany' => array('CampaignDetail','Survey')));
+
         $conditions = array();
         $conditions['DATE(Campaign.start_date) <='] = date('Y-m-d');
         $conditions['DATE(Campaign.end_date) >='] = date('Y-m-d');
         $this->current_campaign_detail = $this->Campaign->find('first',array('conditions' => $conditions));
+        
+        //pr($this->current_campaign_detail);
         
         $this->set('current_campaign_detail',$this->current_campaign_detail);
     }
