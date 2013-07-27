@@ -104,7 +104,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                 ['Year', 'Achievement Percentage (%)'],
                 <?php 
                     foreach($regionwise_achievements as $rg => $ac){
-                        echo '["'.$rg.'", '.$ac.'],';
+                        echo '["'.$rg.'", '.$ac['parcent_achieved'].'],';
                     }
                 ?>
                 ]);

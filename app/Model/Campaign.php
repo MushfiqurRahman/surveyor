@@ -121,6 +121,10 @@ class Campaign extends AppModel {
         
         /**
          *
+         * @desc The following method is useful when a new campaign being created. User may enter campaign target
+         * not equal to the sum of all the house targets. That's why the following method. Used in
+         * CampaignsController's add and edit method.
+         * 
          * @return boolean 
          */
         public function check_total( $data = array() ){
@@ -132,6 +136,34 @@ class Campaign extends AppModel {
                 return true;
             }
             return false;
+        }
+        
+        /**
+         *
+         * @desc Used in Surveys controller's in report method.
+         * 
+         * @param type $house_ids 
+         */
+        public function achievements_by_house($house_ids = array(), $campaign_id){
+            $campDetails = $this->CampaignDetail->find('all',array(
+                'conditions' => array(
+                    'campaign_id' => $campaign_id,
+                    'house_id' => $house_ids),
+                'recursive' => -1));
+            
+            $achievements_by_house = array();
+            $total_target = $total_ach = 0;
+            foreach( $campDetails as $cmp ){
+                $total_target += $cmp['CampaignDetail']['house_target'];
+                $total_ach += $cmp['CampaignDetail']['house_achieved'];
+            }
+            $achievements_by_house['total_allocation'] = $total_target;
+            $achievements_by_house['achieved_total'] = $total_ach;
+            $achievements_by_house['achievement_parcentage'] = round(100*$total_ach/$total_target);
+            $achievements_by_house['target_till_date'] = 0;
+            $achievements_by_house['required_rate'] = 0;
+            
+            return $achievements_by_house;
         }
 
 }

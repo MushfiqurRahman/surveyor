@@ -30,25 +30,26 @@ class SurveysController extends AppController {
          * 
          */
         public function dashboard(){
-            $achieved_total = $this->Survey->find('count');
+            $achievements = array();
+            
+            $achievements_by_house['total_allocation'] = $this->current_campaign_detail['Campaing']['total_target'];
+            
+            $achievements['achieved_total'] = $this->Survey->find('count');
 
             $diff = abs(strtotime($this->current_campaign_detail['Campaign']['start_date']) - strtotime($this->current_campaign_detail['Campaign']['end_date']));
             $camp_date_diff = $diff/(24*3600);
 
-            $day_passed = ceil(abs(time() - strtotime($this->current_campaign_detail['Campaign']['start_date']))/(24*3600));
+            $day_passed = round(abs(time() - strtotime($this->current_campaign_detail['Campaign']['start_date']))/(24*3600));
 
 
-            $ach_percentage = ceil($achieved_total*100/$this->current_campaign_detail['Campaign']['total_target']);
-            $required_rate = ceil(($this->current_campaign_detail['Campaign']['total_target'] - $achieved_total)/($camp_date_diff-$day_passed));
+            $achievements['achievement_parcentage'] = round($achieved_total*100/$this->current_campaign_detail['Campaign']['total_target']);
+            $achievements['required_rate'] = round(($this->current_campaign_detail['Campaign']['total_target'] - $achievements['achieved_total'])/($camp_date_diff-$day_passed));
 
-            $target_till_date = ceil($this->current_campaign_detail['Campaign']['total_target']*$day_passed/$camp_date_diff);
+            $achievements['target_till_date'] = round($this->current_campaign_detail['Campaign']['total_target']*$day_passed/$camp_date_diff);
             
             $regionwise_achievements = $this->Survey->get_region_wise_achievements($this->current_campaign_detail, $this->region_list);
 
-            $this->set('target_till_date',$target_till_date);
-            $this->set('required_rate',$required_rate);
-            $this->set('achieved_percentage',$ach_percentage);        
-            $this->set('achieved_total',$achieved_total);
+            $this->set('achievements',$achievements);
             $this->set('regionwise_achievements',$regionwise_achievements);
         }
         
@@ -65,6 +66,9 @@ class SurveysController extends AppController {
             }else{
                 $houseIds = $this->Survey->House->id_from_list($houseList);                
             }
+            
+            
+            
             $SurveyIds = $this->Survey->find('list',array('fields' => 'id','conditions' => 
                 array('Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
                       'Survey.house_id' => $houseIds)));            
@@ -80,10 +84,10 @@ class SurveysController extends AppController {
                 'limit' => 10,
             );                
             $Surveys = $this->paginate();
-
-            //pr($Surveys);exit;
-
             
+            $this->set('achievements',$this->Survey->Campaign->achievements_by_house($houseIds, $this->current_campaign_detail['Campaign']['id']));
+
+            //pr($Surveys);exit;           
             
             $this->set('houses', $houseList);
             //$this->set('productsList',$this->Survey->SurveyDetail->Product->find('list',array('fields' => array('id','name'))));

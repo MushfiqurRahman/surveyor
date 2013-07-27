@@ -268,13 +268,16 @@ class Survey extends AppModel {
         }
         
         public function get_region_wise_achievements( $current_campaign, $regions ){
-            $result = array();
-            
-            $i=5;
-            foreach($regions as $rg){
-                $result[$rg] = 70+$i;   
-                $i+=5;
+            $reg_achievements = array();
+            foreach($regions as $k => $rg){
+                foreach( $current_campaign['Achievement'] as $ach ){
+                    if( $ach['region_id']==$k ){
+                        $reg_achievements[$rg]['parcent_achieved'] = round(($ach['region_achieved']*100)/$ach['region_target']);
+                        $reg_achievements[$rg]['total_disbursed'] = $ach['region_achieved'];
+                        break;
+                    }
+                }
             }
-            return $result;            
+            return $reg_achievements;            
         }
 }

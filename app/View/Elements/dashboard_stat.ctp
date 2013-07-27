@@ -7,7 +7,7 @@
 								</div>
 								<div class="details">
 									<div class="number">
-										<?php echo $current_campaign_detail['Campaign']['total_target'];?>
+										<?php echo $achievements['total_allocation'];?>
 									</div>
 									
 								</div>
@@ -22,7 +22,7 @@
 									<i class="icon-shopping-cart"></i>
 								</div>
 								<div class="details">
-									<div class="number"><?php echo $target_till_date;?></div>
+									<div class="number"><?php echo $achievements['target_till_date'];?></div>
 									
 								</div>
 								<a class="more" href="#">
@@ -36,7 +36,7 @@
 									<i class="icon-globe"></i>
 								</div>
 								<div class="details">
-									<div class="number"><?php echo $achieved_total;?></div>
+									<div class="number"><?php echo $achievements['achieved_total'];?></div>
 									
 								</div>
 								<a class="more" href="#">
@@ -50,7 +50,7 @@
 									<i class="icon-shopping-cart"></i>
 								</div>
 								<div class="details">
-									<div class="number"><?php echo $achieved_percentage.'%';?></div>
+									<div class="number"><?php echo $achievements['achievement_parcentage'].'%';?></div>
 									
 								</div>
 								<a class="more" href="#">
@@ -64,7 +64,7 @@
 									<i class="icon-bar-chart"></i>
 								</div>
 								<div class="details">
-									<div class="number"><?php echo $required_rate;?></div>
+									<div class="number"><?php echo $achievements['required_rate'];?></div>
 									
 								</div>
 								<a class="more" href="#">

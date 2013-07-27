@@ -194,6 +194,10 @@ class Achievement extends AppModel {
             
             $this->query('UPDATE achievements SET achievements.region_achieved=achievements.region_achieved+1 '.
                     'WHERE achievements.region_id='.$region_id.' AND achievements.campaign_id='.$campaign_id);
+            
+            $this->query('UPDATE campaign_details SET campaign_details.house_achieved = '.
+                    'campaign_details.house_achieved+1 WHERE campaign_details.campaign_id='.
+                    $campaign_id.' AND campaign_details.house_id='.$house_id);
         }
         
         
