@@ -80,7 +80,7 @@ class Campaign extends AppModel {
 		'CampaignDetail' => array(
 			'className' => 'CampaignDetail',
 			'foreignKey' => 'campaign_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -102,7 +102,20 @@ class Campaign extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
+                'Achievement' => array(
+			'className' => 'Achievement',
+			'foreignKey' => 'campaign_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 	);
         
         

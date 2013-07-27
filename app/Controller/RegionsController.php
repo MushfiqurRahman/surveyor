@@ -15,6 +15,7 @@ class RegionsController extends AppController {
  */
 	
 	public function index() {
+            
             $this->Region->recursive = 0;
             $this->set('regions', $this->paginate());
 	}        

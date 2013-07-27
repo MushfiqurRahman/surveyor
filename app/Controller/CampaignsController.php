@@ -13,7 +13,7 @@ class CampaignsController extends AppController {
  *
  * @return void
  */
-	public function index() {
+	public function index() {            
 		$this->Campaign->recursive = 0;
 		$this->set('campaigns', $this->paginate());
 	}
@@ -44,7 +44,11 @@ class CampaignsController extends AppController {
                     $this->request->data['Campaign']['end_date'] = $this->request->data['Campaign']['end_date'].' 00:00:00';
                     if($this->Campaign->check_total($this->request->data)){
 			$this->Campaign->create();
-			if ($this->Campaign->saveAssociated($this->request->data)) {                        
+			if ($this->Campaign->saveAssociated($this->request->data)) {  
+                            
+                            //setting regionwise target
+                            $this->Campaign->Achievement->set_region_target($this->request->data, $this->Campaign->id);
+                            
 				$this->Session->setFlash(__('The campaign has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -69,15 +73,28 @@ class CampaignsController extends AppController {
 			throw new NotFoundException(__('Invalid campaign'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Campaign->save($this->request->data)) {
+                    //pr($this->data);exit;
+                    if($this->Campaign->check_total($this->request->data)){
+			if ($this->Campaign->saveAssociated($this->request->data)) {
+                            
+                            $this->Campaign->Achievement->update_region_target($this->request->data, $id);
 				$this->Session->setFlash(__('The campaign has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The campaign could not be saved. Please, try again.'));
 			}
-		} else {
-			$this->request->data = $this->Campaign->read(null, $id);
+                    }else{
+                        $this->Session->setFlash(__('Save Failed! Total target and sum of houses target are not equal.'));
+                    }
 		}
+                $this->Campaign->Behaviors->load('Containable');
+                $this->request->data = $this->Campaign->find('first',array('contain' => array(
+                    'CampaignDetail' => array(
+                        'fields' => array('id','house_id','house_target'),
+                        'House' => array('title')
+                    )),
+                    'conditions' => array('Campaign.id' => $id)));
+                    //pr($this->request->data);
 	}
 
 /**
