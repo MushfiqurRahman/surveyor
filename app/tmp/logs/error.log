@@ -53,3 +53,93 @@
 #10 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(CakeRequest))
 #11 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
 #12 {main}
+2013-07-29 02:41:26 Error: [MissingActionException] Action ConsumptionsController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(ConsumptionsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-29 02:41:26 Error: [MissingActionException] Action ConsumptionsController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(ConsumptionsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-29 02:41:27 Error: [MissingActionException] Action ConsumptionsController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(ConsumptionsController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-29 02:41:39 Error: [MissingActionException] Action RepresentativesController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-29 02:41:39 Error: [MissingActionException] Action RepresentativesController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-29 02:41:39 Error: [MissingActionException] Action RepresentativesController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-07-29 03:10:33 Error: [NotFoundException] Invalid representative
+#0 [internal function]: RepresentativesController->view('favicon.png')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(RepresentativesController), Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-29 03:10:33 Error: [NotFoundException] Invalid representative
+#0 [internal function]: RepresentativesController->view('favicon.png')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(RepresentativesController), Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-29 03:10:33 Error: [NotFoundException] Invalid representative
+#0 [internal function]: RepresentativesController->view('favicon.png')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(RepresentativesController), Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-29 03:11:26 Error: [CakeException] Method onlyAllow does not exist
+#0 [internal function]: CakeRequest->__call('onlyAllow', Array)
+#1 D:\xampp\htdocs\surveyor\app\Controller\RepresentativesController.php(174): CakeRequest->onlyAllow('post', 'delete')
+#2 [internal function]: RepresentativesController->delete('12245')
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(RepresentativesController), Array)
+#4 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#5 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#6 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2013-07-29 03:11:26 Error: [NotFoundException] Invalid representative
+#0 [internal function]: RepresentativesController->delete('favicon.png')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(RepresentativesController), Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-29 03:11:26 Error: [NotFoundException] Invalid representative
+#0 [internal function]: RepresentativesController->delete('favicon.png')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(RepresentativesController), Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-29 03:11:27 Error: [NotFoundException] Invalid representative
+#0 [internal function]: RepresentativesController->delete('favicon.png')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(RepresentativesController), Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-29 03:12:54 Error: [CakeException] Method onlyAllow does not exist
+#0 [internal function]: CakeRequest->__call('onlyAllow', Array)
+#1 D:\xampp\htdocs\surveyor\app\Controller\RepresentativesController.php(174): CakeRequest->onlyAllow('post', 'delete')
+#2 [internal function]: RepresentativesController->delete('12244')
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(RepresentativesController), Array)
+#4 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#5 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#6 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}

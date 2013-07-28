@@ -5,16 +5,20 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('house_id');
-                echo $this->Form->input('ss_id', array('options' => $ss_id));
+                if( $this->data['Representative']['superviser_id']>0){
+                    echo $this->Form->input('superviser_id', array('options' => $ss_id));
+                    echo $this->Form->input('br_code', array('label' => 'BR Code(If not Superviser)'));
+                }
 		echo $this->Form->input('name');
-		echo $this->Form->input('sr_code', array('label' => 'SS/SR/TSA Code'));
-    ?>
+		
+        ?>
             <table>
                 <tr>
                     <td>
                         <div  class="mobile_nos">
                             <?php
-                                if( count($this->request->data['Mobile'])>0 ){
+                                
+                                if( isset($this->request->data['Mobile']) && count($this->request->data['Mobile'])>0 ){
                                     $i = 0;
                                     foreach($this->request->data['Mobile'] as $mb){
                                         if( $i==0 ){?>
@@ -39,25 +43,15 @@
                         <div style="float:left"><a href="javascript:void(0);" id="add_more_mobile">Add More Mobile</a><br/></div>
                     </td>
                 </tr>
-            </table>
-        <?php
-		echo $this->Form->input('type', array('type' => 'select', 'options' => 
-                    array('ss' => 'Sales Superviser','sr' => 'Sales Representative', 'tsa' => 'TSA'),
-                    'label' => 'Type', 'selected' => $this->request->data['Representative']['type']));
-	?>
+            </table>       
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-
 		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Representative.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Representative.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List Representatives'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Houses'), array('controller' => 'houses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New House'), array('controller' => 'houses', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Sales'), array('controller' => 'sales', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Sale'), array('controller' => 'sales', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
 <script>

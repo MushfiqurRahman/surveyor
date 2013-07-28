@@ -25,13 +25,13 @@ class RepresentativesController extends AppController {
         /**
          * 
          */
-        public function ajax_ss_list(){
+        public function ajax_superviser_list(){
             $this->layout = $this->autoRender = false;
             
             if( $this->request->is('ajax') ){
                 if( isset($_POST['house_id']) ){      
                     
-                    $ssList = $this->Representative->repList_with_mobile($_POST['house_id'], 'ss');
+                    $ssList = $this->Representative->repList_with_mobile($_POST['house_id'], 'superviser');
                     
                     echo json_encode($ssList);
                 }else{
@@ -82,21 +82,29 @@ class RepresentativesController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
                     
+                    //pr($this->data);exit;
+                    
 //                    if( $this->request->data['Representative']['type']=='sr' && 
 //                      (!isset($this->request->data['Representative']['ss_id']) || empty($this->request->data['Representative']['ss_id']))){
 //                        $this->Session->setFlash(__('Save failed!Sales representative must have a Sales superviser.'));
 //                    }else{
                     
                         $mobile_found = $this->_check_mobile_nos();                    
-                        if( !$mobile_found ){
+                        if( !$mobile_found && $this->data['Representative']['type']!='br' ){
                             $this->Session->setFlash('Please give at least single mobile no. It\'s essential');
                         }else{
-                            $this->Representative->create();
-                            if ($this->Representative->saveAssociated($this->request->data)) {
-                                    $this->Session->setFlash(__('The representative has been saved'));
-                                    $this->redirect(array('action' => 'index'));
-                            } else {
-                                    $this->Session->setFlash(__('The representative could not be saved. Please, try again.'));
+                            if( empty($this->data['Representative']['br_code']) ){
+                                $this->Session->setFlash('Save Failed! Empty br code not allowed.');
+                            }else{
+                                $this->request->data['Representative']['superviser_name'] = $this->Representative->field('name',
+                                        array('id' => $this->request->data['Representative']['superviser_id']));
+                                $this->Representative->create();
+                                if ($this->Representative->saveAssociated($this->request->data)) {
+                                        $this->Session->setFlash(__('The representative has been saved'));
+                                        $this->redirect(array('action' => 'index'));
+                                } else {
+                                        $this->Session->setFlash(__('The representative could not be saved. Please, try again.'));
+                                }
                             }
                         }
 //                    }
@@ -144,7 +152,7 @@ class RepresentativesController extends AppController {
 			$this->request->data = $this->Representative->find('first', $options);
                         
                         $this->set('ss_id', array($this->Representative->repList_with_mobile($this->request->data['Representative']['house_id'],
-                                'ss')));
+                                's')));
 		}
 		$houses = $this->Representative->House->find('list');
 		$this->set(compact('houses'));
@@ -163,7 +171,7 @@ class RepresentativesController extends AppController {
 		if (!$this->Representative->exists()) {
 			throw new NotFoundException(__('Invalid representative'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+		//$this->request->onlyAllow('post', 'delete');
 		if ($this->Representative->delete()) {
 			$this->Session->setFlash(__('Representative deleted'));
 			$this->redirect(array('action' => 'index'));

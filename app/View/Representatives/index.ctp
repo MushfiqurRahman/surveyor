@@ -33,7 +33,7 @@
                 <td><?php echo h($representative['Representative']['br_code']);?></td>
 		
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $representative['Representative']['id'])); ?>
+			
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $representative['Representative']['id'])); ?>
 			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $representative['Representative']['id']), null, __('Are you sure you want to delete # %s?', $representative['Representative']['id'])); ?>
 		</td>
@@ -57,10 +57,6 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Representative'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Houses'), array('controller' => 'houses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New House'), array('controller' => 'houses', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Sales'), array('controller' => 'sales', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Sale'), array('controller' => 'sales', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Representative'), array('action' => 'add')); ?></li>		
 	</ul>
 </div>

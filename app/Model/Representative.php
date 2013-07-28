@@ -119,12 +119,10 @@ class Representative extends AppModel {
                         'on representatives.id = mobiles.representative_id where representatives.house_id='.
                         $houseId;
             if( $rep_type ){
-                $qry .= ' AND representatives.type="'.$rep_type.'"';
-            }else{
-                $qry .= ' AND representatives.type="sr"';
+                $qry .= ' AND representatives.superviser_id=0';
             }
             if( $ss_id ){
-                $qry .= ' AND representatives.ss_id='.$ss_id;
+                $qry .= ' AND representatives.superviser_id='.$ss_id;
             }
             $res = $this->query($qry);
                     
