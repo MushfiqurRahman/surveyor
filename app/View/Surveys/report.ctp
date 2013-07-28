@@ -61,16 +61,22 @@
                             <div class="portlet-body">
                                     <div style="height:330px;">
 
-                                    <form class="form-horizontal" name="search" method="post" action="" id="">
+     <form class="form-horizontal" name="search" method="post" action="report" id="">
+         
+    
 
             <div>
                     <div class="control-group">
     <label class="control-label">House Name</label>
     <div class="controls">
-        <select class="span6 m-wrap" data-placeholder="Choose a House" tabindex="1">
-        <option value="" />All House
-
-        </select>
+        <?php 
+            //echo $this->Form->create('Survey',array('type' => 'get', 'action'=>'report', 'class' => 'form-horizontal'));    
+            echo $this->Form->input('house_id',array('type' => 'select', 'options' => $houses, 
+                'label' => false, 'class' => 'span6 m-wrap', 'empty' => 'Choose a House'));
+        ?>
+        <input type="hidden" name="data[Region][id]" value="<?php echo $this->data['Region']['id'];?>"/>
+        <input type="hidden" name="data[Area][id]" value="<?php echo $this->data['Area']['id'];?>"/>
+        <input type="hidden" name="data[House][id]" value="<?php echo $this->data['House']['id'];?>"/>
     </div>
     </div>
 
@@ -78,11 +84,14 @@
                     <div class="control-group">
     <label class="control-label">Date Ranges</label>
     <div class="controls">
-        <div id="form-date-range" class="btn">
-        <i class="icon-calendar"></i>
+<!--        <div id="form-date-range" class="btn">
+        <i class="icon-calendar"></i>        
         &nbsp;<span></span> 
         <b class="caret"></b>
-        </div>
+        </div>-->
+
+        <input size="25" name="start_date" onFocus="this.value=''" onClick="showCalendarControl(this);" type="text"  value="<?php echo isset($this->data['start_date']) ? $this->data['start_date'] : '';?>" />
+        <input size="25" name="end_date" onFocus="this.value=''" onClick="showCalendarControl(this);" type="text"  value="<?php echo isset($this->data['end_date']) ? $this->data['end_date'] : '';?>" />   
     </div>
     </div>
 
@@ -92,13 +101,12 @@
                     <div class="control-group">
     <label class="control-label">Age Group</label>
     <div class="controls">
-        <select class="span6 m-wrap" data-placeholder="Choose a House" tabindex="1">
-        <option value="" />Any
-                                            <option value="" />18 - 22
-                                            <option value="" />23 - 25
-                                            <option value="" />25 - 30
-                                            <option value="" />30+
-
+        <select class="span6 m-wrap" name="age_limit" tabindex="1">
+            <option value="0" <?php echo isset($this->data['age_limit'])&&$this->data['age_limit']=='0' ?'selected':'';?>/>Any
+            <option value="18.22" <?php echo isset($this->data['age_limit'])&&$this->data['age_limit']=='18.22'?'selected':'';?>/>18 - 22
+            <option value="23.25" <?php echo isset($this->data['age_limit']) && $this->data['age_limit']=='23.25'?'selected':'';?>/>23 - 25
+            <option value="26.30" <?php echo isset($this->data['age_limit']) && $this->data['age_limit']=='26.30'?'selected':'';?>/>26 - 30
+            <option value="31" <?php echo isset($this->data['age_limit']) && $this->data['age_limit']=='31'?'selected':'';?>/>30+
         </select>
     </div>
     </div>
@@ -106,12 +114,15 @@
                     <div class="control-group">
     <label class="control-label">ADC</label>
     <div class="controls">
-        <select class="span6 m-wrap" data-placeholder="Choose a House" tabindex="1">
-        <option value="" />Any
-                                            <option value="" />1 - 5
-                                            <option value="" />6 - 8
-                                            <option value="" />9 - 11
-        <option value="" />11+
+        <select class="span6 m-wrap" name="adc" tabindex="1">
+            <?php
+                $options = array('0' => 'Any','1.5' => '1 - 5','6.8' => '6 - 8', '9.11' => '9 - 11', '12' => '11+');
+                foreach($options as $k => $op){
+                    echo '<option value="'.$k.'"';
+                    echo isset($this->data['adc']) && $this->data['adc']==$k ? 'selected' : '';
+                    echo ' />'.$op;
+                }
+            ?>
         </select>
     </div>
     </div>
@@ -119,14 +130,37 @@
                     <div class="control-group">
     <label class="control-label">Occupation</label>
     <div class="controls">
-        <select class="span6 m-wrap" data-placeholder="Choose a House" tabindex="1">
-        <option value="" />Any
-                                            <option value="" />Student
-                                            <option value="" />Service
-                                            <option value="" />Business
-        <option value="" />Others
+        <?php 
+            echo $this->Form->input('occupation_id',array('type' => 'select', 'class' => 'span6 m-wrap',
+                'options' => $occupations, 'empty' => 'Select Occupation', 'label' => false));           
+                 
+     
+            $url_params = array();
 
-        </select>
+            if( isset($this->data['start_date']) ){
+                $url_params['start_date'] = $this->data['start_date'];
+            }
+            if( isset($this->data['end_date']) ){
+                $url_params['end_date'] = $this->data['end_date'];
+            }
+            $url_params['region_id'] = $this->data['Region']['id'];
+            $url_params['area_id'] = $this->data['Area']['id'];
+            $url_params['house_id'] = $this->data['House']['house_id'];
+            if( isset($this->data['occupation_id']) ){
+                $url_params['occupation_id'] = $this->data['occupation_id'];
+            }
+            if( isset($this->data['age_limit']) ){
+                $url_params['age_limit'] = $this->data['age_limit'];
+            }
+            if( isset($this->data['adc']) ){
+                $url_params['adc'] = $this->data['adc'];
+            }
+            $this->Paginator->options(array('url' => $url_params));
+
+            //pr($this->data);
+    
+            
+        ?>
     </div>
     </div>
             </div>
@@ -222,3 +256,9 @@
 
 
     </div>
+
+<script>
+    $(document).ready(function(){
+            
+    });
+</script>

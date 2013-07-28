@@ -8,23 +8,32 @@ App::uses('AppController', 'Controller');
 class SurveysController extends AppController {
     
     public $region_list = array();
+    public $total_camp_days;
+    public $day_passed;
     
+    /**
+     * 
+     */
     public function beforeFilter() {
         parent::beforeFilter();
         $this->region_list = $this->Survey->House->Area->Region->find('list');
         $this->set('regions', $this->region_list);
+        
+        $diff = abs(strtotime($this->current_campaign_detail['Campaign']['start_date']) - strtotime($this->current_campaign_detail['Campaign']['end_date']));
+        $this->total_camp_days = $diff/(24*3600);
+        $this->day_passed = round(abs(time() - strtotime($this->current_campaign_detail['Campaign']['start_date']))/(24*3600));
+
     }
-
-
+    
 /**
  * index method
  *
  * @return void
  */
-	public function index() {
-		$this->Survey->recursive = 0;
-		$this->set('surveys', $this->paginate());
-	}
+    public function index() {
+        $this->Survey->recursive = 0;
+        $this->set('surveys', $this->paginate());
+    }
         
         /**
          * 
@@ -32,20 +41,13 @@ class SurveysController extends AppController {
         public function dashboard(){
             $achievements = array();
             
-            $achievements_by_house['total_allocation'] = $this->current_campaign_detail['Campaing']['total_target'];
-            
+            $achievements['total_allocation'] = $this->current_campaign_detail['Campaign']['total_target'];            
             $achievements['achieved_total'] = $this->Survey->find('count');
+            
+            $achievements['achievement_parcentage'] = round($achievements['achieved_total']*100/$this->current_campaign_detail['Campaign']['total_target']);
+            $achievements['required_rate'] = round(($this->current_campaign_detail['Campaign']['total_target'] - $achievements['achieved_total'])/($this->total_camp_days - $this->day_passed));
 
-            $diff = abs(strtotime($this->current_campaign_detail['Campaign']['start_date']) - strtotime($this->current_campaign_detail['Campaign']['end_date']));
-            $camp_date_diff = $diff/(24*3600);
-
-            $day_passed = round(abs(time() - strtotime($this->current_campaign_detail['Campaign']['start_date']))/(24*3600));
-
-
-            $achievements['achievement_parcentage'] = round($achieved_total*100/$this->current_campaign_detail['Campaign']['total_target']);
-            $achievements['required_rate'] = round(($this->current_campaign_detail['Campaign']['total_target'] - $achievements['achieved_total'])/($camp_date_diff-$day_passed));
-
-            $achievements['target_till_date'] = round($this->current_campaign_detail['Campaign']['total_target']*$day_passed/$camp_date_diff);
+            $achievements['target_till_date'] = round($this->current_campaign_detail['Campaign']['total_target']*$this->day_passed/$this->total_camp_days);
             
             $regionwise_achievements = $this->Survey->get_region_wise_achievements($this->current_campaign_detail, $this->region_list);
 
@@ -54,20 +56,15 @@ class SurveysController extends AppController {
         }
         
         public function report(){
-            $this->_set_request_data_from_params();
-            //$this->_format_date_fields();
-
+            $this->_set_request_data_from_params();            
             
             $houseList = $this->Survey->House->house_list($this->request->data);//('list', array('conditions' => $this->_set_conditions()));
                        
-            
             if( isset($this->request->data['House']['id']) && !empty($this->request->data['House']['id']) ){
                 $houseIds[] = $this->request->data['House']['id'];
             }else{
                 $houseIds = $this->Survey->House->id_from_list($houseList);                
             }
-            
-            
             
             $SurveyIds = $this->Survey->find('list',array('fields' => 'id','conditions' => 
                 array('Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
@@ -81,20 +78,27 @@ class SurveysController extends AppController {
                 'contain' => $this->Survey->get_contain_array(),
                 'conditions' => $this->Survey->set_conditions($SurveyIds, $this->request->data),                                    
                 'order' => array('Survey.created' => 'DESC'),
-                'limit' => 10,
+                'limit' => 2,
             );                
             $Surveys = $this->paginate();
             
-            $this->set('achievements',$this->Survey->Campaign->achievements_by_house($houseIds, $this->current_campaign_detail['Campaign']['id']));
+            $this->set('achievements',$this->Survey->Campaign->achievements_by_house(
+                    $houseIds, $this->current_campaign_detail['Campaign']['id'],
+                    $this->total_camp_days, $this->day_passed));
 
             //pr($Surveys);exit;           
             
             $this->set('houses', $houseList);
+            $this->set('occupations', $this->Survey->Occupation->find('list'));
             //$this->set('productsList',$this->Survey->SurveyDetail->Product->find('list',array('fields' => array('id','name'))));
             $this->set('Surveys', $Surveys);
             
         }
         
+        /**
+         *
+         * @return type 
+         */
         protected function _set_conditions(){
             $conditions = array();
             if( $this->request->data['Area']['id'] ){

@@ -144,26 +144,25 @@ class Campaign extends AppModel {
          * 
          * @param type $house_ids 
          */
-        public function achievements_by_house($house_ids = array(), $campaign_id){
+        public function achievements_by_house($house_ids = array(), $campaign_id, $camp_days, $day_passed){
             $campDetails = $this->CampaignDetail->find('all',array(
                 'conditions' => array(
                     'campaign_id' => $campaign_id,
                     'house_id' => $house_ids),
                 'recursive' => -1));
             
-            $achievements_by_house = array();
+            $achievements = array();
             $total_target = $total_ach = 0;
             foreach( $campDetails as $cmp ){
                 $total_target += $cmp['CampaignDetail']['house_target'];
                 $total_ach += $cmp['CampaignDetail']['house_achieved'];
             }
-            $achievements_by_house['total_allocation'] = $total_target;
-            $achievements_by_house['achieved_total'] = $total_ach;
-            $achievements_by_house['achievement_parcentage'] = round(100*$total_ach/$total_target);
-            $achievements_by_house['target_till_date'] = 0;
-            $achievements_by_house['required_rate'] = 0;
-            
-            return $achievements_by_house;
+            $achievements['total_allocation'] = $total_target;
+            $achievements['achieved_total'] = $total_ach;
+            $achievements['achievement_parcentage'] = round(100*$total_ach/$total_target);
+            $achievements['target_till_date'] = round($achievements['total_allocation']*$day_passed/$camp_days);
+            $achievements['required_rate'] = round(($achievements['total_allocation'] - $achievements['achieved_total'])/($camp_days - $day_passed));
+            return $achievements;
         }
 
 }

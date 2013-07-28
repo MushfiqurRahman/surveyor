@@ -248,8 +248,6 @@ class Survey extends AppModel {
          * @return type 
          */
         public function set_conditions( $surveyIds = null, $data = array() ){
-        
-            //pr($outletIds);exit;
             
             $conditions = array();
             
@@ -258,15 +256,52 @@ class Survey extends AppModel {
             }else{
                 $conditions[]['Survey.id'] = 0;
             }
-//            if( isset($data['from_date']) && !empty($data['from_date']) ){
-//                $conditions[]['DATE(Sale.date) >='] = $data['from_date'];
-//            }
-//            if( isset($data['till_date']) && !empty($data['till_date']) ){
-//                $conditions[]['DATE(Sale.date) <='] = $data['till_date'];
+            if( isset($data['start_date']) && !empty($data['start_date']) ){
+                $conditions[]['DATE(Survey.created) >='] = $data['start_date'];
+            }
+            if( isset($data['end_date']) && !empty($data['end_date']) ){
+                $conditions[]['DATE(Survey.created) <='] = $data['end_date'];
+            }
+            if( isset($data['occupation_id']) && !empty($data['occupation_id']) ){
+                $conditions[]['Survey.occupation_id'] = $data['occupation_id'];
+            }
+            if( isset($data['age_limit']) && !empty($data['age_limit']) ){
+                $limits = $this->_get_limits($data['age_limit']);
+                $conditions[]['age >='] = $limits['lower'];
+                $conditions[]['age <='] = $limit['upper'];
+            }
+            if( isset($data['adc']) && !empty($data['adc']) ){
+                $limits = $this->_get_limits($data['age_limit']);
+                $conditions[]['adc >='] = $limits['lower'];
+                $conditions[]['adc <='] = $limits['upper'];
+            }
+//            if( isset($data['']) && !empty($data['']) ){
+//                $conditions[][''] = $data[''];
 //            }
             return $conditions;
         }
         
+        /**
+         * 
+         */
+        protected function _get_limits( $str ){
+            $hasSeperator = strpos($str,'.');
+            
+            if( $hasSeperator!==false ){
+                $res['lower'] = substr($str,0,$hasSeperator);
+                $res['upper'] = substr($str, $hasSeperator);
+            }else{
+                $res['lower'] = $res['upper'] = $str;
+            }
+            return $str;
+        }
+        
+        /**
+         *
+         * @param type $current_campaign
+         * @param type $regions
+         * @return type 
+         */
         public function get_region_wise_achievements( $current_campaign, $regions ){
             $reg_achievements = array();
             foreach($regions as $k => $rg){
