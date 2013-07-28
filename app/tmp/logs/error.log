@@ -4,3 +4,52 @@
 2013-07-28 10:41:40 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
 #0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2013-07-29 02:05:46 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'representatives.type' in 'where clause'
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('select * from r...', Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('select * from r...', Array, Array)
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(516): DboSource->fetchAll('select * from r...')
+#4 D:\xampp\htdocs\surveyor\lib\Cake\Model\Model.php(3055): DboSource->query('select * from r...')
+#5 D:\xampp\htdocs\surveyor\app\Model\Representative.php(129): Model->query(Array, Array)
+#6 D:\xampp\htdocs\surveyor\app\Controller\RepresentativesController.php(147): Representative->repList_with_mobile('select * from r...')
+#7 [internal function]: RepresentativesController->edit('259', 'ss')
+#8 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs('10460')
+#9 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(RepresentativesController), Array)
+#10 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(CakeRequest))
+#11 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2013-07-29 02:05:46 Error: [NotFoundException] Invalid representative
+#0 [internal function]: RepresentativesController->edit('favicon.png')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(RepresentativesController), Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-29 02:05:46 Error: [NotFoundException] Invalid representative
+#0 [internal function]: RepresentativesController->edit('favicon.png')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(RepresentativesController), Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-29 02:05:46 Error: [NotFoundException] Invalid representative
+#0 [internal function]: RepresentativesController->edit('favicon.png')
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(RepresentativesController), Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-07-29 02:06:54 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'representatives.type' in 'where clause'
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('select * from r...', Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('select * from r...', Array, Array)
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(516): DboSource->fetchAll('select * from r...')
+#4 D:\xampp\htdocs\surveyor\lib\Cake\Model\Model.php(3055): DboSource->query('select * from r...')
+#5 D:\xampp\htdocs\surveyor\app\Model\Representative.php(129): Model->query(Array, Array)
+#6 D:\xampp\htdocs\surveyor\app\Controller\RepresentativesController.php(147): Representative->repList_with_mobile('select * from r...')
+#7 [internal function]: RepresentativesController->edit('259', 'ss')
+#8 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs('10460')
+#9 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(RepresentativesController), Array)
+#10 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(CakeRequest))
+#11 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(RepresentativesController), Object(CakeRequest), Object(CakeResponse))
+#12 {main}

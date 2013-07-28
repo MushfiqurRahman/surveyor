@@ -82,10 +82,10 @@ class RepresentativesController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
                     
-                    if( $this->request->data['Representative']['type']=='sr' && 
-                      (!isset($this->request->data['Representative']['ss_id']) || empty($this->request->data['Representative']['ss_id']))){
-                        $this->Session->setFlash(__('Save failed!Sales representative must have a Sales superviser.'));
-                    }else{
+//                    if( $this->request->data['Representative']['type']=='sr' && 
+//                      (!isset($this->request->data['Representative']['ss_id']) || empty($this->request->data['Representative']['ss_id']))){
+//                        $this->Session->setFlash(__('Save failed!Sales representative must have a Sales superviser.'));
+//                    }else{
                     
                         $mobile_found = $this->_check_mobile_nos();                    
                         if( !$mobile_found ){
@@ -99,7 +99,7 @@ class RepresentativesController extends AppController {
                                     $this->Session->setFlash(__('The representative could not be saved. Please, try again.'));
                             }
                         }
-                    }
+//                    }
 		}
 		$houses = $this->Representative->House->find('list');
 		$this->set(compact('houses'));

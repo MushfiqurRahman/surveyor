@@ -6,17 +6,22 @@
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('house_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th><?php echo $this->Paginator->sort('mobile_no'); ?></th>
-			<th><?php echo $this->Paginator->sort('type'); ?></th>
+                        <th><?php echo $this->Paginator->sort('superviser_name'); ?></th>
+			<th><?php echo $this->Paginator->sort('mobile_no'); ?></th>			
+                        <th><?php echo $this->Paginator->sort('br_code'); ?></th>	
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
-	<?php foreach ($representatives as $representative): ?>
+	<?php 
+            //pr($representatives);exit;
+        foreach ($representatives as $representative): ?>
 	<tr>
 		<td><?php echo h($representative['Representative']['id']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($representative['House']['title'], array('controller' => 'houses', 'action' => 'view', $representative['House']['id'])); ?>
 		</td>
+                
 		<td><?php echo h($representative['Representative']['name']); ?>&nbsp;</td>
+                <td><?php echo h($representative['Representative']['superviser_id']==0 ? '' : $representative['Representative']['superviser_name']);?></td>
 		<td><?php 
                         if( !empty($representative['Mobile']) ){
                             foreach($representative['Mobile'] as $mb){
@@ -24,7 +29,9 @@
                             }
                         }
                     ?>&nbsp;</td>
-		<td><?php echo h($representative['Representative']['type']); ?>&nbsp;</td>
+                
+                <td><?php echo h($representative['Representative']['br_code']);?></td>
+		
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $representative['Representative']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $representative['Representative']['id'])); ?>

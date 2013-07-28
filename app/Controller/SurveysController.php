@@ -78,7 +78,7 @@ class SurveysController extends AppController {
                 'contain' => $this->Survey->get_contain_array(),
                 'conditions' => $this->Survey->set_conditions($SurveyIds, $this->request->data),                                    
                 'order' => array('Survey.created' => 'ASC'),
-                'limit' => 1,
+                'limit' => 10,
             );                
             $Surveys = $this->paginate();
             

@@ -82,15 +82,18 @@ class MoLogsController extends AppController{
         $processed['lastMoLogId'] = $this->MoLog->save_log($processed['mobile_number'],$sms,$processed['keyword'],$processed['date'],$processed['time_int']);
         
         $processed['params'] = array();
+        $processed['params'][0] = $processed['keyword'];
         
-        $tok = strtok( $sms, ' ,\t\n');
+        $comma_sep_sms = substr($sms, strpos($sms,' '));
+        
+        $tok = strtok( $comma_sep_sms, ',\n');
         $tok = trim($tok);
         for(;1;){
             if($tok==false){
                 break;
             }            
             $processed['params'][] = $tok;
-            $tok = strtok(' ,\t\n');
+            $tok = strtok(',\n');
             $tok = trim($tok);
         }
         $processed['params'][0] = isset($processed['params'][0]) ? strtoupper($processed['params'][0]) : 'XXX';
@@ -192,6 +195,7 @@ class MoLogsController extends AppController{
         
         $this->layout = $this->autoRender = false;
         $processed = $this->_processing();
+        //print_r($processed);
         
         $errorFound = true;
         $ttl_msg_part = count($processed['params']);
@@ -203,7 +207,7 @@ class MoLogsController extends AppController{
         }else{                           
             $repId = $this->MoLog->check_rep_br_code( $processed['params'][1]);
             
-            //print_r($processed);
+            
 
             if( !is_array($repId) ){
                 $error = 'Invalid BR code! Please try again with valid code.';                    
