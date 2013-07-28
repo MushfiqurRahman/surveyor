@@ -108,17 +108,16 @@ class AppController extends Controller {
                 $this->request->data['Area']['id'] = $this->request->params['named']['area_id'];
             }            
             if( isset($this->request->params['named']['house_id']) ){
-                //$this->request->data['House']['id'] = $this->request->params['named']['house_id'];
-                $this->request->data['house_id'] = $this->request->params['named']['house_id'];
+                $this->request->data['House']['id'] = $this->request->params['named']['house_id'];
             }            
             
             if( isset($this->request->params['named']['age_limit']) ){
                 $this->request->data['age_limit'] = $this->request->params['named']['age_limit'];
             }
-            if( isset($this->request->params['named']['from_date']) ){
+            if( isset($this->request->params['named']['start_date']) ){
                 $this->request->data['start_date'] = $this->request->params['named']['start_date'];
             }
-            if( isset($this->request->params['named']['till_date']) ){
+            if( isset($this->request->params['named']['end_date']) ){
                 $this->request->data['end_date'] = $this->request->params['named']['end_date'];
             }
             if( isset($this->request->params['named']['adc']) ){

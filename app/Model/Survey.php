@@ -268,12 +268,16 @@ class Survey extends AppModel {
             if( isset($data['age_limit']) && !empty($data['age_limit']) ){
                 $limits = $this->_get_limits($data['age_limit']);
                 $conditions[]['age >='] = $limits['lower'];
-                $conditions[]['age <='] = $limit['upper'];
+                if( isset($limits['upper']) ){
+                    $conditions[]['age <='] = $limits['upper'];
+                }                
             }
             if( isset($data['adc']) && !empty($data['adc']) ){
-                $limits = $this->_get_limits($data['age_limit']);
+                $limits = $this->_get_limits($data['adc']);
                 $conditions[]['adc >='] = $limits['lower'];
-                $conditions[]['adc <='] = $limits['upper'];
+                if( isset($limits['upper']) ){
+                    $conditions[]['adc <='] = $limits['upper'];
+                }
             }
 //            if( isset($data['']) && !empty($data['']) ){
 //                $conditions[][''] = $data[''];
@@ -289,11 +293,11 @@ class Survey extends AppModel {
             
             if( $hasSeperator!==false ){
                 $res['lower'] = substr($str,0,$hasSeperator);
-                $res['upper'] = substr($str, $hasSeperator);
+                $res['upper'] = substr($str, $hasSeperator+1);
             }else{
-                $res['lower'] = $res['upper'] = $str;
+                $res['lower'] = $str;
             }
-            return $str;
+            return $res;
         }
         
         /**
@@ -314,5 +318,31 @@ class Survey extends AppModel {
                 }
             }
             return $reg_achievements;            
+        }
+        
+        /**
+         * @desc Used in surveys controller for excel export. In the export_report method
+         * @param type $surveys 
+         */
+        public function format_for_export( $surveys ){
+            $formatted = array();
+            $i = 0;
+            
+            foreach( $surveys as $srv ){
+                $formatted[$i]['id'] = $srv['Survey']['id'];
+                $formatted[$i]['region'] = $srv['Representative']['House']['Area']['Region']['title'];
+                $formatted[$i]['area'] = $srv['Representative']['House']['Area']['title'];
+                $formatted[$i]['house'] = $srv['Representative']['House']['title'];
+                $formatted[$i]['br_name'] = $srv['Representative']['name'];
+                $formatted[$i]['sup_name'] = $srv['Representative']['superviser_name'];
+                $formatted[$i]['customer_name'] = $srv['Survey']['name'];
+                $formatted[$i]['phone_no'] = $srv['Survey']['phone'];
+                $formatted[$i]['age'] = $srv['Survey']['age'];
+                $formatted[$i]['adc'] = $srv['Survey']['adc'];
+                $formatted[$i]['occupation'] = $srv['Occupation']['title'];
+                $formatted[$i]['date'] = date('Y-m-d',strtotime($srv['Survey']['created']));
+                $i++;
+            }
+            return $formatted;
         }
 }

@@ -1,0 +1,6 @@
+2013-07-28 10:41:22 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-07-28 10:41:40 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

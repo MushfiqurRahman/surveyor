@@ -7,6 +7,8 @@ App::uses('AppController', 'Controller');
  */
 class SurveysController extends AppController {
     
+    public $helpers = array('Excel');
+    
     public $region_list = array();
     public $total_camp_days;
     public $day_passed;
@@ -56,7 +58,7 @@ class SurveysController extends AppController {
         }
         
         public function report(){
-            $this->_set_request_data_from_params();            
+            $this->_set_request_data_from_params();  
             
             $houseList = $this->Survey->House->house_list($this->request->data);//('list', array('conditions' => $this->_set_conditions()));
                        
@@ -71,14 +73,12 @@ class SurveysController extends AppController {
                       'Survey.house_id' => $houseIds)));            
 
             $this->Survey->Behaviors->load('Containable');
-            
-            //var_dump($this->Survey->set_conditions($SurveyIds, $this->request->data));exit;
 
             $this->paginate = array(
                 'contain' => $this->Survey->get_contain_array(),
                 'conditions' => $this->Survey->set_conditions($SurveyIds, $this->request->data),                                    
-                'order' => array('Survey.created' => 'DESC'),
-                'limit' => 2,
+                'order' => array('Survey.created' => 'ASC'),
+                'limit' => 1,
             );                
             $Surveys = $this->paginate();
             
@@ -90,9 +90,41 @@ class SurveysController extends AppController {
             
             $this->set('houses', $houseList);
             $this->set('occupations', $this->Survey->Occupation->find('list'));
-            //$this->set('productsList',$this->Survey->SurveyDetail->Product->find('list',array('fields' => array('id','name'))));
             $this->set('Surveys', $Surveys);
+        }
+        
+        /**
+         * @desc Export report in xlsx file 
+         */
+        public function export_report(){
             
+            $this->layout = 'ajax';           
+            
+            if( !empty($this->request->data) ){
+                
+                $houseList = $this->Survey->House->house_list($this->request->data);
+                       
+                if( isset($this->request->data['House']['id']) && !empty($this->request->data['House']['id']) ){
+                    $houseIds[] = $this->request->data['House']['id'];
+                }else{
+                    $houseIds = $this->Survey->House->id_from_list($houseList);                
+                }
+
+                $SurveyIds = $this->Survey->find('list',array('fields' => 'id','conditions' => 
+                    array('Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
+                        'Survey.house_id' => $houseIds)));            
+
+                $this->Survey->Behaviors->load('Containable');
+
+                $Surveys = $this->Survey->find('all', array(
+                    'contain' => $this->Survey->get_contain_array(),
+                    'conditions' => array('Survey.id' => $SurveyIds),                                    
+                    'order' => array('Survey.created' => 'ASC')
+                ));                                
+                $Surveys = $this->Survey->format_for_export($Surveys);
+                
+                $this->set('surveys',$Surveys);                
+            }
         }
         
         /**

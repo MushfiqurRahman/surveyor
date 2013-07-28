@@ -71,12 +71,13 @@
     <div class="controls">
         <?php 
             //echo $this->Form->create('Survey',array('type' => 'get', 'action'=>'report', 'class' => 'form-horizontal'));    
-            echo $this->Form->input('house_id',array('type' => 'select', 'options' => $houses, 
-                'label' => false, 'class' => 'span6 m-wrap', 'empty' => 'Choose a House'));
+            $selected_house_id = isset($this->data['House']['id']) ? $this->data['House']['id'] : '';
+            echo $this->Form->input('House.id',array('type' => 'select', 'options' => $houses, 
+                'label' => false, 'class' => 'span6 m-wrap', 'empty' => 'Choose a House', 'selected' => $selected_house_id));
         ?>
         <input type="hidden" name="data[Region][id]" value="<?php echo $this->data['Region']['id'];?>"/>
         <input type="hidden" name="data[Area][id]" value="<?php echo $this->data['Area']['id'];?>"/>
-        <input type="hidden" name="data[House][id]" value="<?php echo $this->data['House']['id'];?>"/>
+<!--        <input type="hidden" name="data[House][id]" value="<?php echo $this->data['House']['id'];?>"/>-->
     </div>
     </div>
 
@@ -132,7 +133,7 @@
     <div class="controls">
         <?php 
             echo $this->Form->input('occupation_id',array('type' => 'select', 'class' => 'span6 m-wrap',
-                'options' => $occupations, 'empty' => 'Select Occupation', 'label' => false));           
+                'options' => $occupations, 'empty' => 'Any', 'label' => false));           
                  
      
             $url_params = array();
@@ -143,9 +144,15 @@
             if( isset($this->data['end_date']) ){
                 $url_params['end_date'] = $this->data['end_date'];
             }
-            $url_params['region_id'] = $this->data['Region']['id'];
-            $url_params['area_id'] = $this->data['Area']['id'];
-            $url_params['house_id'] = $this->data['House']['house_id'];
+            if( isset($this->data['Region']['id']) && $this->data['Region']['id']){
+                $url_params['region_id'] = $this->data['Region']['id'];
+            }
+            if( isset($this->data['Area']['id']) && $this->data['Area']['id']){
+                $url_params['area_id'] = $this->data['Area']['id'];
+            }
+            if( isset($this->data['House']['id']) && $this->data['House']['id']){
+                $url_params['house_id'] = $this->data['House']['id'];
+            }
             if( isset($this->data['occupation_id']) ){
                 $url_params['occupation_id'] = $this->data['occupation_id'];
             }
@@ -155,11 +162,7 @@
             if( isset($this->data['adc']) ){
                 $url_params['adc'] = $this->data['adc'];
             }
-            $this->Paginator->options(array('url' => $url_params));
-
-            //pr($this->data);
-    
-            
+            $this->Paginator->options(array('url' => $url_params));            
         ?>
     </div>
     </div>
@@ -249,6 +252,12 @@
                             </div>
                     </div>
                     <!-- END EXAMPLE TABLE PORTLET-->
+                    <form action="export_report" method="post">
+                        <input type="hidden" name="data[Region][id]" value="<?php echo isset($this->data['Region']['id']) ? $this->data['Region']['id'] : '';?>"/>
+                        <input type="hidden" name="data[Area][id]" value="<?php echo isset($this->data['Area']['id']) ? $this->data['Area']['id'] : '';?>"/>
+                        <input type="hidden" name="data[House][id]" value="<?php echo isset($this->data['House']['id']) ? $this->data['House']['id'] : '';?>"/>
+                        <input type="submit" name="export_report" value="Export"/>
+                    </form>
 
                             <!-- END MAIN CONTENT-->
                     </div>
