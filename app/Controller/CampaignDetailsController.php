@@ -98,5 +98,6 @@ class CampaignDetailsController extends AppController {
 		}
 		$this->Session->setFlash(__('Campaign detail was not deleted'));
 		$this->redirect(array('action' => 'index'));
-	}
+	}       
+        
 }

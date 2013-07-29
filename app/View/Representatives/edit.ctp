@@ -3,14 +3,16 @@
 	<fieldset>
 		<legend><?php echo __('Edit SS/SR/TSA'); ?></legend>
 	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('house_id');
+		echo $this->Form->input('id');		
                 if( $this->data['Representative']['superviser_id']>0){
+                    echo $this->Form->input('house_id', array('disabled' => 'disabled'));
                     echo $this->Form->input('superviser_id', array('options' => $ss_id));
-                    echo $this->Form->input('br_code', array('label' => 'BR Code(If not Superviser)'));
+                    echo $this->Form->input('br_code', array('label' => 'BR Code(If not Superviser)', 'required' => true));
+                    echo $this->Form->input('type',array('type' => 'hidden','value' => 'br'));
+                }else{
+                    echo $this->Form->input('type',array('type' => 'hidden','value' => 'superviser'));
                 }
-		echo $this->Form->input('name');
-		
+		echo $this->Form->input('name', array('required' => true));
         ?>
             <table>
                 <tr>
@@ -66,7 +68,7 @@
             if( confirm('Are you sure you want to delete this mobile no?') ){
                 var mobile_id = $(this).attr('id').replace('mob_id_','');
                 $.ajax({
-                   url:'/representatives/delete_mobile',
+                   url:"<?php echo Configure::read('base_url');?>/representatives/delete_mobile",
                    type:'post',
                    data:'id='+mobile_id,
                    success:function(res){

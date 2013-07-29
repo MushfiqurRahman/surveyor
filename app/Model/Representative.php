@@ -125,6 +125,8 @@ class Representative extends AppModel {
                 $qry .= ' AND representatives.superviser_id='.$ss_id;
             }
             $res = $this->query($qry);
+            
+            //pr($res);exit;
                     
             $repList = array();
 

@@ -75,8 +75,16 @@
             echo $this->Form->input('House.id',array('type' => 'select', 'options' => $houses, 
                 'label' => false, 'class' => 'span6 m-wrap', 'empty' => 'Choose a House', 'selected' => $selected_house_id));
         ?>
-        <input type="hidden" name="data[Region][id]" value="<?php echo $this->data['Region']['id'];?>"/>
-        <input type="hidden" name="data[Area][id]" value="<?php echo $this->data['Area']['id'];?>"/>
+        <?php
+            if( isset($this->data['Region']['id']) ){
+                echo $this->Form->input('Region.id',array('type' => 'hidden'));
+            }
+            if( isset($this->data['Area']['id']) ){
+                echo $this->Form->input('Area.id', array('type' => 'hidden'));
+            }
+        ?>
+<!--        <input type="hidden" name="data[Region][id]" value="<?php echo $this->data['Region']['id'];?>"/>
+        <input type="hidden" name="data[Area][id]" value="<?php echo $this->data['Area']['id'];?>"/>-->
 <!--        <input type="hidden" name="data[House][id]" value="<?php echo $this->data['House']['id'];?>"/>-->
     </div>
     </div>
@@ -244,9 +252,9 @@
                                     </table>
                                 <div class="paging">
 	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+		echo $this->Paginator->prev('< ' . __('previous | '), array(), null, array('class' => 'prev disabled'));
+		echo $this->Paginator->numbers(array('separator' => ' | '));
+		echo $this->Paginator->next(__(' | next') . ' >', array(), null, array('class' => 'next disabled'));
 	?>
 	</div>
                             </div>

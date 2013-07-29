@@ -81,25 +81,7 @@
                                                                                     'div' => false));
                                                                                 
                                                                                 //echo $this->Form->end(array('label' => 'Submit', 'class' => 'mws-button orange','style' => 'float:left; margin-top:-2px;'));
-                                                                            ?>
-<!--										<select name="region" id="region" style="width:23%;float:left;">									
-										 <option value="">All Region</option>
-										 <option value="">Dhaka</option>
-										 <option value="">Chitagong</option>
-										 <option value="">Shylet</option>
-										 <option value="">Khulna</option>
-										 <option value="">Rajshahi</option>
-										 <option value="">Barishal</option>
-										 <option value="">Rangpur</option>
-											
-										</select>
-										<select name="area" id="area" style="width:23%;float:left; margin-left:15px;">									
-										<option value="">All Area</option>
-										</select>
-										<select name="house" id="house" style="width:23%;float:left; margin-left:15px; margin-right:20px;">									
-										<option value="">All House</option>
-										</select>-->
-										
+                                                                            ?>										
 										<input type="submit" value="Submit" class="btn green" style="margin-top:-2px;"/>
 										<input type="reset" value="Reset" class="btn red" style="margin-top:-2px;"/>
 									</div>
@@ -113,7 +95,7 @@
 						
 							<!-- BEGIN STACK CHART CONTROLS PORTLET-->
 						<div class="portlet box yellow">
-							<div class="portlet-title">
+							<div class="portlet-title">                                                            
 								<h4><i class="icon-reorder"></i>Till Date (%) By Region</h4>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
@@ -122,9 +104,17 @@
 								</div>
 							</div>
 							<div class="portlet-body">
-							
+                                                            <div>
+                                                                <h5>Disbursed by Region</h5>
+                                                                <ul>
+                                                                <?php
+                                                                    foreach( $regionwise_achievements as $rg => $v ){
+                                                                        echo '<li>'.$rg.' '.$v['total_disbursed'].'</li>';
+                                                                    }
+                                                                ?>
+                                                                </ul>
+                                                            </div>
 								<div id="chart_div" style="width: 950px; height: 300px;"></div>
-
 							</div>
 						</div>
 						<!-- END STACK CHART CONTROLS PORTLET-->

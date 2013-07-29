@@ -77,7 +77,7 @@ class SurveysController extends AppController {
             $this->paginate = array(
                 'contain' => $this->Survey->get_contain_array(),
                 'conditions' => $this->Survey->set_conditions($SurveyIds, $this->request->data),                                    
-                'order' => array('Survey.created' => 'ASC'),
+                'order' => array('Survey.created' => 'DESC'),
                 'limit' => 10,
             );                
             $Surveys = $this->paginate();
@@ -119,7 +119,7 @@ class SurveysController extends AppController {
                 $Surveys = $this->Survey->find('all', array(
                     'contain' => $this->Survey->get_contain_array(),
                     'conditions' => array('Survey.id' => $SurveyIds),                                    
-                    'order' => array('Survey.created' => 'ASC')
+                    'order' => array('Survey.created' => 'DESC')
                 ));                                
                 $Surveys = $this->Survey->format_for_export($Surveys);
                 
