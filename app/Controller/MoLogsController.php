@@ -144,7 +144,7 @@ class MoLogsController extends AppController{
         if( $survey_id ){
             //if $survey_counter != $surveyDetails[0]['surveys']['survey_counter'] then definately wrong. 
             if( $survey_counter != $surveyDetails[0]['surveys']['survey_counter'] ){
-                $data['error'] = 'Sorry! You already inserted values for this consumer';
+                $data['error'] = 'Sorry! You already inserted values for this customer.';
                 return $data;
             }else{
                 $data['Survey']['survey_counter'] = $survey_counter;
@@ -162,7 +162,7 @@ class MoLogsController extends AppController{
             }
         }
         if( !$valid ){
-            $data['error'] = 'Sorry! Invalid Occupaton code!';
+            $data['error'] = 'Sorry! Invalid Occupation code!';
             return $data;
         }else{
             $data['Survey']['occupation_id'] = $occp_id;
@@ -178,11 +178,46 @@ class MoLogsController extends AppController{
         }
         
         //check mobile no
+        if( strlen($params[3])<11 ){
+            $data['error'] = 'Sorry! Invalid customers mobile no.';
+            return $data;
+        }
         $data['Survey']['name'] = $params[2];
         $data['Survey']['phone'] = $params[3];
         $data['Survey']['mo_log_id'] = $moLogId;
         
         return $data;
+    }
+    
+    /**
+     *
+     * @param type $repId
+     * @param type $customer_phone_no
+     * @param type $msg_counter
+     * @return boolean 
+     */
+    protected function _is_update( $repId, $customer_phone_no, $msg_counter = 0 ){
+        
+        $qry = 'SELECT surveys.id, surveys.survey_counter FROM surveys '.
+                    'WHERE surveys.representative_id='.$repId.
+                    ' AND surveys.campaign_id='.$this->current_campaign_detail['Campaign']['id'].
+                    ' AND surveys.survey_counter='.$msg_counter.' AND DATE(surveys.created)="'.
+                date('Y-m-d').'"';
+        $res = $this->MoLog->query($qry);
+
+        if( count($res)>0 ){
+            return $res;
+        }else{
+            $res = $this->MoLog->query('SELECT surveys.id, surveys.survey_counter FROM surveys '.
+                        'WHERE representative_id='.$repId.
+                        ' AND campaign_id='.$this->current_campaign_detail['Campaign']['id'].
+                        ' AND phone="'.$customer_phone_no.'"');
+            if( count($res)>0 ){
+                $res['error'] = 'Sorry! You have already inserted values for this customer.';
+                return $res;
+            }
+        }
+        return false;
     }
     
         
@@ -204,24 +239,26 @@ class MoLogsController extends AppController{
             $ttl_msg_part != 8) {
             
             $error = "Your SMS format is wrong, plesae try again with right format.";            
+        }else if( strlen($processed['mobile_number']) <13 ){
+            $error = 'Sorry! Your mobile number is invalid.';
         }else{                           
             $repId = $this->MoLog->check_rep_br_code( $processed['params'][1]);
-            
-            
 
             if( !is_array($repId) ){
                 $error = 'Invalid BR code! Please try again with valid code.';                    
             }else{
                 $this->loadModel('Survey');
 
-                $res = $this->MoLog->query('SELECT surveys.id, surveys.survey_counter FROM surveys '.
-                        'WHERE representative_id='.$repId[0]['representatives']['id'].
-                        ' AND campaign_id='.$this->current_campaign_detail['Campaign']['id'].
-                        ' AND phone="'.$processed['params'][3].'"');
+//                $res = $this->MoLog->query('SELECT surveys.id, surveys.survey_counter FROM surveys '.
+//                        'WHERE representative_id='.$repId[0]['representatives']['id'].
+//                        ' AND campaign_id='.$this->current_campaign_detail['Campaign']['id'].
+//                        ' AND phone="'.$processed['params'][3].'"');
 
-                //pr($res);exit;
-                //obviously update
-                if(count($res)>0) { 
+                $res = $this->_is_update($repId[0]['representatives']['id'], $processed['params'][3], $processed['params'][7]);
+                
+                if( isset($res['error']) ){
+                    $error = $res['error'];
+                }else if(count($res)>0 && $res!=false) { 
                     $survey_detail = $this->_format_survey($processed['params'], $res[0]['surveys']['id'], $processed['params'][ $ttl_msg_part - 1 ], $processed['lastMoLogId'], $res);
 
                     if( isset($survey_detail['error']) ){   
