@@ -178,8 +178,8 @@ class MoLogsController extends AppController{
         }
         
         //check mobile no
-        if( strlen($params[3])<11 ){
-            $data['error'] = 'Sorry! Invalid customers mobile no.';
+        if( strlen($params[3])<11 || strlen($params[3])>11 ){
+            $data['error'] = 'Sorry! Consumer phone number must be of 11 digits. Please try again with right number.';
             return $data;
         }
         $data['Survey']['name'] = $params[2];

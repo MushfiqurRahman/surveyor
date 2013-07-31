@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 27, 2013 at 03:24 PM
+-- Generation Time: Jul 31, 2013 at 05:50 AM
 -- Server version: 5.1.33
 -- PHP Version: 5.2.9
 
@@ -32,18 +32,23 @@ CREATE TABLE IF NOT EXISTS `achievements` (
   `region_target` int(11) NOT NULL DEFAULT '0',
   `region_achieved` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `achievements`
 --
 
 INSERT INTO `achievements` (`id`, `campaign_id`, `region_id`, `region_target`, `region_achieved`) VALUES
-(7, 8, 28, 60, 9),
+(7, 8, 28, 60, 16),
 (8, 8, 29, 45, 0),
 (9, 8, 30, 50, 0),
 (10, 8, 31, 55, 0),
-(11, 8, 32, 75, 3);
+(11, 8, 32, 75, 3),
+(12, 9, 28, 4680, 0),
+(13, 9, 29, 0, 0),
+(14, 9, 30, 0, 0),
+(15, 9, 31, 0, 0),
+(16, 9, 32, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -90,8 +95,8 @@ INSERT INTO `areas` (`id`, `region_id`, `title`) VALUES
 (88, 29, 'Comilla'),
 (89, 29, 'Chowmuhuni'),
 (90, 30, 'Sylhet'),
-(91, 30, 'B.Baria'),
-(92, 30, 'Mymensingh'),
+(91, 30, 'B. Baria'),
+(92, 30, 'Mymensing'),
 (93, 31, 'Bogra'),
 (94, 31, 'Rajshahi'),
 (95, 31, 'Rangpur'),
@@ -112,14 +117,15 @@ CREATE TABLE IF NOT EXISTS `campaigns` (
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `campaigns`
 --
 
 INSERT INTO `campaigns` (`id`, `title`, `total_target`, `start_date`, `end_date`) VALUES
-(8, 'First Campaign', 285, '2013-07-27 00:00:00', '2013-07-31 00:00:00');
+(8, 'First Campaign', 285, '2013-07-25 00:00:00', '2013-07-31 00:00:00'),
+(9, 'Second Campaign', 6240, '2013-07-29 00:00:00', '2013-07-31 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -134,14 +140,14 @@ CREATE TABLE IF NOT EXISTS `campaign_details` (
   `house_target` int(11) NOT NULL,
   `house_achieved` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=290 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=293 ;
 
 --
 -- Dumping data for table `campaign_details`
 --
 
 INSERT INTO `campaign_details` (`id`, `campaign_id`, `house_id`, `house_target`, `house_achieved`) VALUES
-(233, 8, 259, 5, 4),
+(233, 8, 259, 5, 11),
 (234, 8, 260, 5, 0),
 (235, 8, 261, 5, 0),
 (236, 8, 262, 5, 0),
@@ -197,7 +203,10 @@ INSERT INTO `campaign_details` (`id`, `campaign_id`, `house_id`, `house_target`,
 (286, 8, 312, 5, 0),
 (287, 8, 313, 5, 0),
 (288, 8, 314, 5, 0),
-(289, 8, 315, 5, 0);
+(289, 8, 315, 5, 0),
+(290, 9, 267, 3360, 0),
+(291, 9, 268, 1320, 0),
+(292, 9, 268, 1560, 0);
 
 -- --------------------------------------------------------
 
@@ -244,7 +253,7 @@ INSERT INTO `houses` (`id`, `area_id`, `title`) VALUES
 (265, 83, 'Sales Promotion Service'),
 (266, 84, 'Alam Corporation Limited'),
 (267, 84, 'Hossain Brothers'),
-(268, 85, 'Azahar  Trading Ltd.'),
+(268, 85, 'Azahar Trading Ltd.'),
 (269, 85, 'A.M.I & Company'),
 (270, 85, 'S.M Shahnewaz & Com'),
 (271, 86, 'Zahid Enterprise'),
@@ -304,7 +313,7 @@ CREATE TABLE IF NOT EXISTS `mobiles` (
   `representative_id` int(7) NOT NULL,
   `mobile_no` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6309 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6311 ;
 
 --
 -- Dumping data for table `mobiles`
@@ -436,7 +445,7 @@ CREATE TABLE IF NOT EXISTS `mo_logs` (
   `datetime` varchar(30) NOT NULL,
   `time_int` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=101 ;
 
 --
 -- Dumping data for table `mo_logs`
@@ -454,7 +463,45 @@ INSERT INTO `mo_logs` (`id`, `msisdn`, `sms`, `keyword`, `datetime`, `time_int`)
 (59, '8801914825528', 'BR 276, EMAN, 01885079531, 33, 15, B, 3', 'BR', '2013-07-28', 1374962059),
 (60, '8801914825528', 'BR 1459, ASHRAF, 01785079591, 33, 15, B, 1', 'BR', '2013-07-28', 1374962069),
 (61, '8801914825528', 'BR 1459, RIFAT, 01785079532, 33, 15, B, 2', 'BR', '2013-07-28', 1374962076),
-(62, '8801914825528', 'BR 1460, RAJU, 01785079533, 33, 10, D, 1', 'BR', '2013-07-28', 1374962085);
+(62, '8801914825528', 'BR 1460, RAJU, 01785079533, 33, 10, D, 1', 'BR', '2013-07-28', 1374962085),
+(63, '8801914825528', 'BR 1, SOHEL, 01911174811, 24, 10, B, 1', 'BR', '2013-07-30', 1375126058),
+(64, '8801914825528', 'BR 1, SOHEL, 01911174811, 24, 12, B, 1', 'BR', '2013-07-30', 1375126512),
+(65, '8801914825528', 'BR 1, SIMIR, 01911174810, 24, 12, B, 1', 'BR', '2013-07-29', 1375040168),
+(66, '8801914825528', 'BR 1, SIMIR MIA, 01911174810, 24, 12, B, 1', 'BR', '2013-07-29', 1375040399),
+(67, '8801914825528', 'BR 1, SIMIR MIA,01911174810,24,12,B,1', 'BR', '2013-07-29', 1375041083),
+(68, '8801914825528', 'BR 1, SIMIR MIA,01911174810,24,12,B,1', 'BR', '2013-07-29', 1375041138),
+(69, '8801914825528', 'BR 1, SIMIR MIA,01911174810,24,12,B,1', 'BR', '2013-07-29', 1375041243),
+(70, '8801914825528', 'BR 1, SIMIR MIA,01911174810,24,12,B,1', 'BR', '2013-07-29', 1375041252),
+(71, '8801914825528', 'BR 1, SIMIR MIA,01911174810,24,12,B,1', 'BR', '2013-07-29', 1375041455),
+(72, '8801914825528', 'BR 1, ABDULLAH,01911174815,24,12,B,2', 'BR', '2013-07-29', 1375041521),
+(73, '8801914825528', 'BR 1, ABDUR RAHMAN,01911174815,24,12,B,2', 'BR', '2013-07-29', 1375041550),
+(74, '8801914825528', 'BR 1, BILLAH, 01685999999, 24, 10, B, 1', 'BR', '2013-07-30', 1375186827),
+(75, '8801914825528', 'BR 1, BILLAH, 01685999990, 24, 10, B, 1', 'BR', '2013-07-30', 1375186836),
+(76, '8801914825528', 'BR 1, BILLAH, 01685999960, 24, 10, B, 1', 'BR', '2013-07-30', 1375186845),
+(77, '8801914825528', 'BR 1, BILLAH, 01685999967, 24, 10, B, 1', 'BR', '2013-07-30', 1375190270),
+(78, '8801914825528', 'BR 1, BILLAH, 01685999867, 24, 10, B, 1', 'BR', '2013-07-30', 1375190279),
+(79, '8801914825528', 'BR 1, BILLAH, 01685599867, 24, 10, B, 1', 'BR', '2013-07-30', 1375190482),
+(80, '8801914825528', 'BR 1, BILLAH, 01585599867, 24, 10, B, 1', 'BR', '2013-07-30', 1375190569),
+(81, '8801914825528', 'BR 1, BILLAH, 01555599867, 24, 10, B, 1', 'BR', '2013-07-30', 1375190694),
+(82, '8801914825528', 'BR 1, BILLAH, 01155599867, 24, 10, B, 1', 'BR', '2013-07-30', 1375190776),
+(83, '8801914825528', 'BR 1, BILLAH, 01155599867, 24, 10, B, 1', 'BR', '2013-07-30', 1375190819),
+(84, '8801914825528', 'BR 1, BILLAH, 01155599867, 24, 10, B, 2', 'BR', '2013-07-30', 1375190912),
+(85, '881914825528', 'BR 1, BILLAH, 01155599867, 24, 10, B, 2', 'BR', '2013-07-30', 1375190920),
+(86, '8801914825528', 'BR 1, BILLAH, 1155599867, 24, 10, B, 2', 'BR', '2013-07-30', 1375190930),
+(87, '8801914825528', 'BR 1, BILLAH, 1155599867, 24, 10, B, 2', 'BR', '2013-07-30', 1375191072),
+(88, '8801914825528', 'BR 1, BILLAH, 1155599867, 24, 10, B, 2', 'BR', '2013-07-30', 1375191194),
+(89, '8801914825528', 'BR 1, BILLAH, 1155599067, 24, 10, B, 3', 'BR', '2013-07-30', 1375192689),
+(90, '8801914825528', 'BR 1, BILLAH, 01155599067, 24, 10, B, 3', 'BR', '2013-07-30', 1375192694),
+(91, '8801914825528', 'BR 1, BILLAH, 01155599007, 24, 10, B, 4', 'BR', '2013-07-30', 1375192974),
+(92, '8801914825528', 'BR 1, BILLAH, 01155599007, 24, 10, B, 5', 'BR', '2013-07-30', 1375192984),
+(93, '8801914825528', 'BR 1, BILLAH, 01155509007, 24, 10, B, 5', 'BR', '2013-07-30', 1375192994),
+(94, '8801914825528', 'BR 1, BILLAH, 01955509007, 24, 10, B, 6', 'BR', '2013-07-30', 1375193055),
+(95, '8801914825528', 'BR 1, BILLAH, 01955509000, 24, 10, B, 7', 'BR', '2013-07-30', 1375193127),
+(96, '8801914825528', 'BR 1, BILLAH, 01955500000, 24, 10, B, 8', 'BR', '2013-07-30', 1375193169),
+(97, '8801914825528', 'BR 1, BILLAH, 01155500000, 24, 10, B, 9', 'BR', '2013-07-30', 1375193212),
+(98, '8801914825528', 'BR 1, BILLAH, 01155500000, 24, 10, B, 9', 'BR', '2013-07-30', 1375193246),
+(99, '88', 'BR 1, BILLAH, 168, 24, 10, B, 1', 'BR', '2013-07-31', 1375248374),
+(100, '8801914825528', 'BR 1, BILLAH, 168, 24, 10, B, 1', 'BR', '2013-07-31', 1375248379);
 
 -- --------------------------------------------------------
 
@@ -470,7 +517,7 @@ CREATE TABLE IF NOT EXISTS `mt_logs` (
   `datetime` varchar(30) NOT NULL,
   `time_int` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=81 ;
 
 --
 -- Dumping data for table `mt_logs`
@@ -488,7 +535,40 @@ INSERT INTO `mt_logs` (`id`, `msisdn`, `sms`, `keyword`, `datetime`, `time_int`)
 (44, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-28', 1374962059),
 (45, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-28', 1374962069),
 (46, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-28', 1374962076),
-(47, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-28', 1374962085);
+(47, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-28', 1374962085),
+(48, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-30', 1375126058),
+(49, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375126512),
+(50, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-29', 1375040168),
+(51, '8801914825528', 'Your SMS format is wrong, plesae try again with right format.', 'BR', '2013-07-29', 1375040399),
+(52, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-29', 1375041455),
+(53, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-29', 1375041521),
+(54, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-29', 1375041550),
+(55, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-30', 1375186827),
+(56, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-30', 1375186836),
+(57, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-30', 1375186845),
+(58, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375190270),
+(59, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375190279),
+(60, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375190482),
+(61, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375190569),
+(62, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375190694),
+(63, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375190776),
+(64, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375190819),
+(65, '8801914825528', 'Sorry! You have already inserted values for this customer.', 'BR', '2013-07-30', 1375190912),
+(66, '881914825528', 'Sorry! Your mobile number is invalid.', 'BR', '2013-07-30', 1375190920),
+(67, '8801914825528', 'Sorry! Invalid customer''s mobile no.', 'BR', '2013-07-30', 1375191072),
+(68, '8801914825528', 'Sorry! Invalid customers mobile no.', 'BR', '2013-07-30', 1375191194),
+(69, '8801914825528', 'Sorry! Invalid customers mobile no.', 'BR', '2013-07-30', 1375192689),
+(70, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375192694),
+(71, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375192974),
+(72, '8801914825528', 'Sorry! You have already inserted values for this customer.', 'BR', '2013-07-30', 1375192984),
+(73, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375192994),
+(74, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375193055),
+(75, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375193127),
+(76, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375193169),
+(77, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-30', 1375193212),
+(78, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375193246),
+(79, '88', 'Sorry! Your mobile number is invalid.', 'BR', '2013-07-31', 1375248374),
+(80, '8801914825528', 'Sorry! Consumer phone number must be of 11 digits. Please try again with right number.', 'BR', '2013-07-31', 1375248379);
 
 -- --------------------------------------------------------
 
@@ -532,7 +612,7 @@ CREATE TABLE IF NOT EXISTS `regions` (
 
 INSERT INTO `regions` (`id`, `title`) VALUES
 (28, 'Dhaka'),
-(29, 'CTG'),
+(29, 'Chittagong'),
 (30, 'Sylhet'),
 (31, 'Bogra'),
 (32, 'Khulna');
@@ -551,7 +631,7 @@ CREATE TABLE IF NOT EXISTS `representatives` (
   `name` varchar(50) NOT NULL,
   `br_code` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12244 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12246 ;
 
 --
 -- Dumping data for table `representatives`
@@ -559,7 +639,7 @@ CREATE TABLE IF NOT EXISTS `representatives` (
 
 INSERT INTO `representatives` (`id`, `house_id`, `superviser_id`, `superviser_name`, `name`, `br_code`) VALUES
 (10459, 259, 0, 'Md. Rakib Hossen', 'Md. Rakib Hossen', ''),
-(10460, 259, 10459, 'Md. Rakib Hossen', 'Md Kazi Salaudin Harun', '1'),
+(10460, 259, 10485, 'Md. Rakib Hossen', 'Md Kazi Salaudin Harun', '1'),
 (10461, 259, 10459, 'Md. Rakib Hossen', 'AKRAM HOSSAIN', '2'),
 (10462, 259, 10459, 'Md. Rakib Hossen', 'MD.YAMEN HOSSAIN', '3'),
 (10463, 259, 10459, 'Md. Rakib Hossen', 'MD.NURUZZAMAN RANA', '4'),
@@ -2344,7 +2424,8 @@ INSERT INTO `representatives` (`id`, `house_id`, `superviser_id`, `superviser_na
 (12240, 315, 12218, 'Md. Al Amin', 'New BR', '1672'),
 (12241, 315, 12218, 'Md. Al Amin', 'New BR', '1673'),
 (12242, 315, 12218, 'Md. Al Amin', 'New BR', '1674'),
-(12243, 315, 12218, 'Md. Al Amin', 'New BR', '1675');
+(12243, 315, 12218, 'Md. Al Amin', 'New BR', '1675'),
+(12245, 259, 10459, 'Md. Rakib Hossen', 'Again Just test', '987654321');
 
 -- --------------------------------------------------------
 
@@ -2368,7 +2449,7 @@ CREATE TABLE IF NOT EXISTS `surveys` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `surveys`
@@ -2386,7 +2467,24 @@ INSERT INTO `surveys` (`id`, `campaign_id`, `house_id`, `representative_id`, `re
 (28, 8, 266, 10746, '8801914825528', 59, 3, 'EMAN', '01885079531', 33, 15, 2, '2013-07-28 03:54:19', '2013-07-28 03:54:19'),
 (29, 8, 301, 12019, '8801914825528', 60, 1, 'ASHRAF', '01785079591', 33, 15, 2, '2013-07-28 03:54:29', '2013-07-28 03:54:29'),
 (30, 8, 301, 12019, '8801914825528', 61, 2, 'RIFAT', '01785079532', 33, 15, 2, '2013-07-28 03:54:36', '2013-07-28 03:54:36'),
-(31, 8, 301, 12020, '8801914825528', 62, 1, 'RAJU', '01785079533', 33, 10, 4, '2013-07-28 03:54:45', '2013-07-28 03:54:45');
+(31, 8, 301, 12020, '8801914825528', 62, 1, 'RAJU', '01785079533', 33, 10, 4, '2013-07-28 03:54:45', '2013-07-28 03:54:45'),
+(32, 8, 259, 10460, '8801914825528', 83, 1, 'BILLAH', '01155599867', 24, 10, 2, '2013-07-30 01:27:38', '2013-07-30 19:26:59'),
+(33, 8, 259, 10460, '8801914825528', 71, 1, 'SIMIR MIA', '01911174810', 24, 12, 2, '2013-07-29 01:36:08', '2013-07-29 01:57:35'),
+(34, 8, 259, 10460, '8801914825528', 73, 2, 'ABDUR RAHMAN', '01911174815', 24, 12, 2, '2013-07-29 01:58:41', '2013-07-29 01:59:10'),
+(35, 8, 259, 10460, '8801914825528', 74, 1, 'BILLAH', '01685999999', 24, 10, 2, '2013-07-30 18:20:27', '2013-07-30 18:20:27'),
+(36, 8, 259, 10460, '8801914825528', 75, 1, 'BILLAH', '01685999990', 24, 10, 2, '2013-07-30 18:20:36', '2013-07-30 18:20:36'),
+(37, 8, 259, 10460, '8801914825528', 76, 1, 'BILLAH', '01685999960', 24, 10, 2, '2013-07-30 18:20:46', '2013-07-30 18:20:46'),
+(38, 8, 259, 10460, '8801914825528', 77, 1, 'BILLAH', '01685999967', 24, 10, 2, '2013-07-30 19:17:50', '2013-07-30 19:17:50'),
+(39, 8, 259, 10460, '8801914825528', 78, 1, 'BILLAH', '01685999867', 24, 10, 2, '2013-07-30 19:17:59', '2013-07-30 19:17:59'),
+(40, 8, 259, 10460, '8801914825528', 79, 1, 'BILLAH', '01685599867', 24, 10, 2, '2013-07-30 19:21:22', '2013-07-30 19:21:22'),
+(41, 8, 259, 10460, '8801914825528', 80, 1, 'BILLAH', '01585599867', 24, 10, 2, '2013-07-30 19:22:49', '2013-07-30 19:22:49'),
+(42, 8, 259, 10460, '8801914825528', 90, 3, 'BILLAH', '01155599067', 24, 10, 2, '2013-07-30 19:58:14', '2013-07-30 19:58:14'),
+(43, 8, 259, 10460, '8801914825528', 91, 4, 'BILLAH', '01155599007', 24, 10, 2, '2013-07-30 20:02:54', '2013-07-30 20:02:54'),
+(44, 8, 259, 10460, '8801914825528', 93, 5, 'BILLAH', '01155509007', 24, 10, 2, '2013-07-30 20:03:14', '2013-07-30 20:03:14'),
+(45, 8, 259, 10460, '8801914825528', 94, 6, 'BILLAH', '01955509007', 24, 10, 2, '2013-07-30 20:04:15', '2013-07-30 20:04:15'),
+(46, 8, 259, 10460, '8801914825528', 95, 7, 'BILLAH', '01955509000', 24, 10, 2, '2013-07-30 20:05:27', '2013-07-30 20:05:27'),
+(47, 8, 259, 10460, '8801914825528', 96, 8, 'BILLAH', '01955500000', 24, 10, 2, '2013-07-30 20:06:09', '2013-07-30 20:06:09'),
+(48, 8, 259, 10460, '8801914825528', 98, 9, 'BILLAH', '01155500000', 24, 10, 2, '2013-07-30 20:06:52', '2013-07-30 20:07:26');
 
 -- --------------------------------------------------------
 
@@ -2400,6 +2498,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(20) NOT NULL,
   `email` varchar(128) NOT NULL,
   `password` varchar(50) NOT NULL,
+  `is_cc` tinyint(1) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -2409,5 +2508,5 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `created`, `modified`) VALUES
-(6, 'Mushfiqur', 'Rahman', 'mushfique@codetrio.com', 'c112e8d4ac9314e97bd1554c09245294e53b9095', '2013-07-24 10:58:31', '0000-00-00 00:00:00');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `is_cc`, `created`, `modified`) VALUES
+(6, 'Mushfiqur', 'Rahman', 'mushfique@codetrio.com', 'c112e8d4ac9314e97bd1554c09245294e53b9095', 1, '2013-07-24 10:58:31', '2013-07-31 11:46:25');

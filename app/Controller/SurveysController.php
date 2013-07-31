@@ -1,4 +1,5 @@
 <?php
+
 App::uses('AppController', 'Controller');
 /**
  * Surveys Controller
@@ -24,7 +25,11 @@ class SurveysController extends AppController {
         $diff = abs(strtotime($this->current_campaign_detail['Campaign']['start_date']) - strtotime($this->current_campaign_detail['Campaign']['end_date']));
         
         $this->total_camp_days = 1+($diff/(24*3600));
-        $this->day_passed = round(abs(strtotime(date('Y-m-d',time())) - strtotime($this->current_campaign_detail['Campaign']['start_date']))/(24*3600));        
+        
+        
+        //echo abs(strtotime(date('Y-m-d')) - strtotime($this->current_campaign_detail['Campaign']['start_date']));exit;
+        
+        $this->day_passed = floor(abs(strtotime(date('Y-m-d',time())) - strtotime($this->current_campaign_detail['Campaign']['start_date']))/(24*3600));        
         
 //        echo $this->total_camp_days;
 //        echo ' '.$this->day_passed;
@@ -56,11 +61,13 @@ class SurveysController extends AppController {
             $achievements['achievement_parcentage'] = round($achievements['achieved_total']*100/$this->current_campaign_detail['Campaign']['total_target']);
             $achievements['required_rate'] = round(($this->current_campaign_detail['Campaign']['total_target'] - $achievements['achieved_total'])/($this->total_camp_days - $this->day_passed));
 
-            $achievements['target_till_date'] = round($this->current_campaign_detail['Campaign']['total_target']*$this->day_passed/$this->total_camp_days);
+            $achievements['target_till_date'] = round($this->current_campaign_detail['Campaign']['total_target']*($this->day_passed+1)/$this->total_camp_days);
             
             $regionwise_achievements = $this->Survey->get_region_wise_achievements($this->current_campaign_detail, $this->region_list);
             
             //pr($regionwise_achievements);
+            
+            //echo $this->day_passed;exit;
 
             $this->set('achievements',$achievements);
             $this->set('regionwise_achievements',$regionwise_achievements);

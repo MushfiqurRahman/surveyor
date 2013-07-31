@@ -75,3 +75,5 @@
 8801914825528 Thank you! Your message have been updated.	2013-07-30 08:06 PM
 8801914825528 Thank you! Your message have been received.	2013-07-30 08:06 PM
 8801914825528 Thank you! Your message have been updated.	2013-07-30 08:07 PM
+88 Sorry! Your mobile number is invalid.	2013-07-31 11:26 AM
+8801914825528 Sorry! Consumer phone number must be of 11 digits. Please try again with right number.	2013-07-31 11:26 AM
