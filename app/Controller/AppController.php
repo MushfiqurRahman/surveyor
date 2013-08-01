@@ -37,6 +37,9 @@ class AppController extends Controller {
     public $total_outlet = 0;
     public $current_campaign_detail = array();
     
+    public $total_camp_days;
+    public $day_passed;
+    
     public $components = array(
         'Session',
         'Auth' => array(
@@ -59,8 +62,11 @@ class AppController extends Controller {
         $conditions['DATE(Campaign.end_date) >='] = date('Y-m-d');
         $this->current_campaign_detail = $this->Campaign->find('first',array('conditions' => $conditions));
         
-        //pr($this->current_campaign_detail);
+        $diff = abs(strtotime($this->current_campaign_detail['Campaign']['start_date']) - strtotime($this->current_campaign_detail['Campaign']['end_date']));
         
+        $this->total_camp_days = 1+($diff/(24*3600));
+        $this->day_passed = floor(abs(strtotime(date('Y-m-d',time())) - strtotime($this->current_campaign_detail['Campaign']['start_date']))/(24*3600));        
+                
         $this->set('current_campaign_detail',$this->current_campaign_detail);
     }
 

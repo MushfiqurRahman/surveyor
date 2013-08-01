@@ -30,3 +30,33 @@
 #1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
 #2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2013-08-01 17:45:43 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-02 00:05:19 Error: [MissingActionException] Action FeedbacksController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(FeedbacksController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-08-02 00:05:19 Error: [MissingActionException] Action FeedbacksController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(FeedbacksController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-08-02 00:05:20 Error: [MissingActionException] Action FeedbacksController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(FeedbacksController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-08-02 00:31:01 Error: [MissingActionException] Action FeedbacksController::report() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(FeedbacksController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-08-02 00:34:18 Error: [MissingViewException] View file "D:\xampp\htdocs\surveyor\app\View\Feedbacks\report.ctp" is missing.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\View\View.php(462): View->_getViewFileName(NULL)
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(959): View->render(NULL, NULL)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(110): Controller->render()
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(FeedbacksController), Object(CakeRequest), Object(CakeResponse))
+#4 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}

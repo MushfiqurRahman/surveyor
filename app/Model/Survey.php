@@ -223,6 +223,22 @@ class Survey extends AppModel {
 		)
 	);
         
+        /**
+ * hasOne associations
+ *
+ * @var array
+ */
+	public $hasOne = array(
+		'Feedback' => array(
+			'className' => 'Feedback',
+			'foreignKey' => 'survey_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+                        'dependent' => true
+		)
+	);
+        
         
          /**
         *

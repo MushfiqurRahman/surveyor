@@ -161,7 +161,11 @@ class Campaign extends AppModel {
             $achievements['achieved_total'] = $total_ach;
             $achievements['achievement_parcentage'] = round(100*$total_ach/$total_target);
             $achievements['target_till_date'] = round($achievements['total_allocation']*($day_passed+1)/$camp_days);
-            $achievements['required_rate'] = round(($achievements['total_allocation'] - $achievements['achieved_total'])/($camp_days - $day_passed));
+            if( $camp_days == $day_passed ){
+                $achievements['required_rate'] = ($achievements['total_allocation'] - $achievements['achieved_total']);
+            }else{
+                $achievements['required_rate'] = round(($achievements['total_allocation'] - $achievements['achieved_total'])/($camp_days - $day_passed));
+            }
             return $achievements;
         }
 }

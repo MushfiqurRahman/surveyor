@@ -11,8 +11,6 @@ class SurveysController extends AppController {
     public $helpers = array('Excel');
     
     public $region_list = array();
-    public $total_camp_days;
-    public $day_passed;
     
     /**
      * 
@@ -20,20 +18,7 @@ class SurveysController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->region_list = $this->Survey->House->Area->Region->find('list');
-        $this->set('regions', $this->region_list);
-        
-        $diff = abs(strtotime($this->current_campaign_detail['Campaign']['start_date']) - strtotime($this->current_campaign_detail['Campaign']['end_date']));
-        
-        $this->total_camp_days = 1+($diff/(24*3600));
-        
-        
-        //echo abs(strtotime(date('Y-m-d')) - strtotime($this->current_campaign_detail['Campaign']['start_date']));exit;
-        
-        $this->day_passed = floor(abs(strtotime(date('Y-m-d',time())) - strtotime($this->current_campaign_detail['Campaign']['start_date']))/(24*3600));        
-        
-//        echo $this->total_camp_days;
-//        echo ' '.$this->day_passed;
-        
+        $this->set('regions', $this->region_list);        
     }
     
 /**
@@ -52,25 +37,27 @@ class SurveysController extends AppController {
         public function dashboard(){
             $achievements = array();
             
-            $achievements['total_allocation'] = $this->current_campaign_detail['Campaign']['total_target'];            
-            $achievements['achieved_total'] = $this->Survey->find('count', array('conditions' => array(
-                'campaign_id' => $this->current_campaign_detail['Campaign']['id']
-                ),
-                'recursive' => -1));
-            
-            $achievements['achievement_parcentage'] = round($achievements['achieved_total']*100/$this->current_campaign_detail['Campaign']['total_target']);
-            $achievements['required_rate'] = round(($this->current_campaign_detail['Campaign']['total_target'] - $achievements['achieved_total'])/($this->total_camp_days - $this->day_passed));
+            if($this->current_campaign_detail){
+                $achievements['total_allocation'] = $this->current_campaign_detail['Campaign']['total_target'];            
+                $achievements['achieved_total'] = $this->Survey->find('count', array('conditions' => array(
+                    'campaign_id' => $this->current_campaign_detail['Campaign']['id']
+                    ),
+                    'recursive' => -1));
 
-            $achievements['target_till_date'] = round($this->current_campaign_detail['Campaign']['total_target']*($this->day_passed+1)/$this->total_camp_days);
-            
-            $regionwise_achievements = $this->Survey->get_region_wise_achievements($this->current_campaign_detail, $this->region_list);
-            
-            //pr($regionwise_achievements);
-            
-            //echo $this->day_passed;exit;
+                $achievements['achievement_parcentage'] = round($achievements['achieved_total']*100/$this->current_campaign_detail['Campaign']['total_target']);
+                $achievements['required_rate'] = round(($this->current_campaign_detail['Campaign']['total_target'] - $achievements['achieved_total'])/($this->total_camp_days - $this->day_passed));
 
-            $this->set('achievements',$achievements);
-            $this->set('regionwise_achievements',$regionwise_achievements);
+                $achievements['target_till_date'] = round($this->current_campaign_detail['Campaign']['total_target']*($this->day_passed+1)/$this->total_camp_days);
+
+                $regionwise_achievements = $this->Survey->get_region_wise_achievements($this->current_campaign_detail, $this->region_list);
+
+                //pr($regionwise_achievements);
+
+                //echo $this->day_passed;exit;
+
+                $this->set('achievements',$achievements);
+                $this->set('regionwise_achievements',$regionwise_achievements);
+            }
         }
         
         public function report(){
