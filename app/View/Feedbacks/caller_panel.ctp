@@ -4,6 +4,9 @@
 
     <div class="row-fluid">
             <div class="span12">
+                <?php if( $survey ){ 
+                    //pr($survey);
+                ?>
             <!-- BEGAIN MAIN CONTENT-->
             <div class="portlet box green">
                     <div class="portlet-title">
@@ -176,7 +179,7 @@
     </div>
 </div>
 
-            <div class="control-group">
+<!--            <div class="control-group">
 <label class="control-label-cc" style="font-weight:bold;">9. Aapni Ki Gold Leaf Er Simito Somoyer Notun Packer Cigarette Blend Poriborton Hoyeche Ki Na Janen?</label>
     <div class="controls-cc" style="margin-left:10px;">
         <label class="radio">
@@ -188,7 +191,7 @@
         No
         </label>   
     </div>
-</div>
+</div>-->
 
             <div class="control-group">
 <label class="control-label-cc" style="font-weight:bold;">10. Aapni Ki Gold Leaf Er Simito Somoyer Notun, Adhunik O Aakorshonio Packer Kono Video Dekhechilen?</label>
@@ -240,6 +243,12 @@
                     </div>
             </div>
             <!-- END FILTERING PORTLET-->
+            <?php }//enf of if
+                else{
+                    echo 'Please select another Region/Area/House, there is no survey found for the selected Region/Area/House';
+                    
+                }
+            ?>
 
 
                     <!-- END MAIN CONTENT-->

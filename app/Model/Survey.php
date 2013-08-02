@@ -244,26 +244,41 @@ class Survey extends AppModel {
         *
         * @return type 
         */
-        public function get_contain_array(){
-
-            return array(
-                'Representative' => array(
-                    'fields' => array('name','superviser_name'),
-                    'House' => array(
-                                'fields' => array('title'),
-                                'Area' => array(
+        public function get_contain_array( $is_feedback = false ){
+            
+            if( !$is_feedback ){
+                return array(
+                    'Representative' => array(
+                        'fields' => array('name','superviser_name'),
+                        'House' => array(
                                     'fields' => array('title'),
-                                    'Region' => array('fields' => array('title')))),
-                    ),
-                'Occupation' => array('title')
-            );
+                                    'Area' => array(
+                                        'fields' => array('title'),
+                                        'Region' => array('fields' => array('title')))),
+                        ),
+                    'Occupation' => array('title')
+                );
+            }else{
+                return array(
+                    'Feedback' => array('fields' => array('Feedback.*')),
+                    'Representative' => array(
+                        'fields' => array('name','superviser_name'),
+                        'House' => array(
+                                    'fields' => array('title'),
+                                    'Area' => array(
+                                        'fields' => array('title'),
+                                        'Region' => array('fields' => array('title')))),
+                        ),
+                    'Occupation' => array('title')
+                );
+            }
         }
         
         /**
          *
          * @return type 
          */
-        public function set_conditions( $surveyIds = null, $data = array() ){
+        public function set_conditions( $surveyIds = null, $data = array(), $is_feedback = false ){
             
             $conditions = array();
             
@@ -272,6 +287,9 @@ class Survey extends AppModel {
             }else{
                 $conditions[]['Survey.id'] = 0;
             }
+//            if( $is_feedback ){
+//                $conditions[]['Survey.feedback_taken'] = 1;
+//            }
             if( isset($data['start_date']) && !empty($data['start_date']) ){
                 $conditions[]['DATE(Survey.created) >='] = $data['start_date'];
             }
@@ -295,9 +313,6 @@ class Survey extends AppModel {
                     $conditions[]['adc <='] = $limits['upper'];
                 }
             }
-//            if( isset($data['']) && !empty($data['']) ){
-//                $conditions[][''] = $data[''];
-//            }
             return $conditions;
         }
         
@@ -357,6 +372,38 @@ class Survey extends AppModel {
                 $formatted[$i]['adc'] = $srv['Survey']['adc'];
                 $formatted[$i]['occupation'] = $srv['Occupation']['title'];
                 $formatted[$i]['date'] = date('Y-m-d',strtotime($srv['Survey']['created']));
+                $i++;
+            }
+            return $formatted;
+        }
+        
+        /**
+         *
+         * @param type $feedbacks
+         * @return type 
+         */
+        public function format_for_feedback_export( $feedbacks ){
+            $formatted = array();
+            $i = 0;
+            
+            foreach( $feedbacks as $srv ){
+                $formatted[$i]['id'] = $srv['Feedback']['id'];
+                $formatted[$i]['region'] = $srv['Representative']['House']['Area']['Region']['title'];
+                $formatted[$i]['area'] = $srv['Representative']['House']['Area']['title'];
+                $formatted[$i]['house'] = $srv['Representative']['House']['title'];
+                $formatted[$i]['br_name'] = $srv['Representative']['name'];
+                $formatted[$i]['sup_name'] = $srv['Representative']['superviser_name'];
+                
+                $formatted[$i]['customer_name'] = $srv['Feedback']['is_right_name']==1? 'Right' : 'Wrong';
+                $formatted[$i]['phone_no'] = $srv['Survey']['phone'];
+                $formatted[$i]['age'] = $srv['Feedback']['is_right_age']==1? 'Right' : 'Wrong';                
+                $formatted[$i]['occupation'] = $srv['Feedback']['is_right_occupation']==1? 'Right' : 'Wrong';
+                $formatted[$i]['current_brand'] = $srv['Feedback']['current_brand'];
+                $formatted[$i]['notice_new_pack'] = $srv['Feedback']['new_pack']==1 ? 'Yes' : 'No';                
+                $formatted[$i]['tobacco_quality'] = $srv['Feedback']['tobacco_quality']==1 ? 'Yes' : 'No';
+                $formatted[$i]['br_toolkit'] = $srv['Feedback']['br_toolkit']==1 ? 'Yes' : 'No';
+                $formatted[$i]['ptr_back_check'] = $srv['Feedback']['got_ptr']==1 ? 'Yes' : 'No';
+                $formatted[$i]['date'] = date('Y-m-d',strtotime($srv['Feedback']['created']));
                 $i++;
             }
             return $formatted;

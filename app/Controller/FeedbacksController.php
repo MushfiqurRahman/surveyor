@@ -31,7 +31,7 @@ class FeedbacksController extends AppController {
     }
     
     public function caller_panel(){
-        pr($this->request->data);
+        //pr($this->request->data);
         
         if( !empty($this->request->data['Feedback']) && isset($this->request->data['Feedback']['save']) ){
                         
@@ -48,6 +48,7 @@ class FeedbacksController extends AppController {
                 $this->Session->setFlash('Feedback saved successfully');
             }
         }      
+        //$this->Feedback->Survey->Behaviors->load('Containable');     
         
         $this->set('survey', $this->Feedback->Survey->find('first',array(            
             'conditions' => array(

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 01, 2013 at 09:09 PM
+-- Generation Time: Aug 02, 2013 at 06:00 AM
 -- Server version: 5.1.33
 -- PHP Version: 5.2.9
 
@@ -242,7 +242,6 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   `current_brand` varchar(30) NOT NULL,
   `new_pack` tinyint(1) NOT NULL DEFAULT '1',
   `tobacco_quality` tinyint(1) NOT NULL DEFAULT '1',
-  `tested` tinyint(1) NOT NULL DEFAULT '1',
   `br_toolkit` tinyint(1) NOT NULL DEFAULT '1',
   `got_ptr` tinyint(1) NOT NULL DEFAULT '1',
   `created` datetime NOT NULL,
@@ -253,8 +252,8 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
 -- Dumping data for table `feedbacks`
 --
 
-INSERT INTO `feedbacks` (`id`, `survey_id`, `user_id`, `is_right_name`, `is_right_age`, `is_right_occupation`, `current_brand`, `new_pack`, `tobacco_quality`, `tested`, `br_toolkit`, `got_ptr`, `created`) VALUES
-(4, 20, 6, 1, 1, 1, 'Gold Leaf', 1, 1, 1, 1, 0, '2013-08-02 03:08:32');
+INSERT INTO `feedbacks` (`id`, `survey_id`, `user_id`, `is_right_name`, `is_right_age`, `is_right_occupation`, `current_brand`, `new_pack`, `tobacco_quality`, `br_toolkit`, `got_ptr`, `created`) VALUES
+(4, 20, 6, 1, 1, 1, 'Gold Leaf', 1, 1, 1, 0, '2013-08-02 03:08:32');
 
 -- --------------------------------------------------------
 
@@ -2487,7 +2486,7 @@ CREATE TABLE IF NOT EXISTS `surveys` (
 --
 
 INSERT INTO `surveys` (`id`, `campaign_id`, `house_id`, `representative_id`, `rep_phone`, `mo_log_id`, `survey_counter`, `name`, `phone`, `age`, `adc`, `occupation_id`, `feedback_taken`, `created`, `modified`) VALUES
-(20, 8, 259, 10460, '8801914825528', 51, 1, 'BILLAH', '01685089561', 24, 10, 2, 0, '2013-07-28 03:52:46', '2013-08-02 03:08:32'),
+(20, 8, 259, 10460, '8801914825528', 51, 1, 'BILLAH', '01685089561', 24, 10, 2, 1, '2013-07-28 03:52:46', '2013-08-02 03:08:32'),
 (21, 8, 259, 10460, '8801914825528', 52, 2, 'CAPAL', '01685089571', 19, 15, 2, 0, '2013-07-28 03:52:57', '2013-07-28 03:52:57'),
 (22, 8, 259, 10460, '8801914825528', 53, 3, 'DELOWAR', '01685089541', 34, 20, 1, 0, '2013-07-28 03:53:05', '2013-07-28 03:53:05'),
 (23, 8, 259, 10461, '8801914825528', 54, 4, 'ERFAN', '01785089541', 34, 8, 2, 0, '2013-07-28 03:53:38', '2013-07-28 03:53:38'),

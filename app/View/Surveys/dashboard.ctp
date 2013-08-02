@@ -88,7 +88,7 @@
                                     </div>
                                 
                                 <div style="height:75px;">
-                                    <?php echo $this->Form->create('Feedback',array('type' => 'post', 'action' => 'report', 'class' => 'form-horizontal'));?>
+                                    <?php echo $this->Form->create('Survey',array('type' => 'post', 'action' => 'feedback_report', 'class' => 'form-horizontal'));?>
                                             <div style="width:20%; margin-left:50px;">
                                                     <label>Customer Care Feedback</label>
                                             </div>
