@@ -34,6 +34,11 @@ class FeedbacksController extends AppController {
         //pr($this->request->data);exit;
         
         if( !empty($this->request->data['Feedback']) && isset($this->request->data['Feedback']['save']) ){
+            
+            /**
+             * 1. Check already target fulfilled if yes then request him to select another house 
+             * 2. If not then 
+             */
                         //pr($this->request->data);exit;
 //            foreach( $this->data['Feedback'] as $key => $v ){
 //                if($key !='current_brand' && $key!= 'survey_id' ){
@@ -53,6 +58,7 @@ class FeedbacksController extends AppController {
                 'Survey.feedback_taken' => 0, 'Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
                 'Survey.house_id' => $this->houseIds,
                 'Survey.feedback_skipped' => 0,
+                'DATE(Survey.created)' => $this->request->data['Survey']['created'],
             );
         
         if( isset($this->request->data['Feedback']['skip']) ){
