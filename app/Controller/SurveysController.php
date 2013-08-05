@@ -61,6 +61,7 @@ class SurveysController extends AppController {
         }
         
         public function report(){
+            //pr($this->request->data);
             $this->_set_request_data_from_params();  
             
             $houseList = $this->Survey->House->house_list($this->request->data);//('list', array('conditions' => $this->_set_conditions()));
@@ -121,10 +122,14 @@ class SurveysController extends AppController {
 
                 $Surveys = $this->Survey->find('all', array(
                     'contain' => $this->Survey->get_contain_array(),
-                    'conditions' => array('Survey.id' => $SurveyIds),                                    
+                    'conditions' => $this->Survey->set_conditions($SurveyIds, $this->request->data),
                     'order' => array('Survey.created' => 'DESC')
-                ));                                
-                $Surveys = $this->Survey->format_for_export($Surveys);
+                ));         
+                //if( !empty($Surveys) ){
+                    $Surveys = $this->Survey->format_for_export($Surveys);
+//                }else{
+//                    $Surveys[0]['Survey']['no_data_found'] = "No data found";
+//                }
                 
                 $this->set('surveys',$Surveys);                
             }

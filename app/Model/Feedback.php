@@ -32,8 +32,8 @@ class Feedback extends AppModel {
 			),
 		),
 		'is_right_name' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
+			'notempty' => array(
+				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -42,8 +42,8 @@ class Feedback extends AppModel {
 			),
 		),
 		'is_right_age' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
+			'notempty' => array(
+				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -52,8 +52,8 @@ class Feedback extends AppModel {
 			),
 		),
 		'is_right_occupation' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
+			'notempty' => array(
+				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -72,8 +72,8 @@ class Feedback extends AppModel {
 			),
 		),
 		'new_pack' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
+			'notempty' => array(
+				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -82,8 +82,8 @@ class Feedback extends AppModel {
 			),
 		),
 		'tobacco_quality' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
+			'notempty' => array(
+				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -91,19 +91,10 @@ class Feedback extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'tested' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
+		
 		'br_toolkit' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
+			'notempty' => array(
+				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -112,8 +103,8 @@ class Feedback extends AppModel {
 			),
 		),
 		'got_ptr' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
+			'notempty' => array(
+				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

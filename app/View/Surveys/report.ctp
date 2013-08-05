@@ -264,6 +264,11 @@
                         <input type="hidden" name="data[Region][id]" value="<?php echo isset($this->data['Region']['id']) ? $this->data['Region']['id'] : '';?>"/>
                         <input type="hidden" name="data[Area][id]" value="<?php echo isset($this->data['Area']['id']) ? $this->data['Area']['id'] : '';?>"/>
                         <input type="hidden" name="data[House][id]" value="<?php echo isset($this->data['House']['id']) ? $this->data['House']['id'] : '';?>"/>
+                        <input name="start_date" type="hidden" value="<?php echo isset($this->data['start_date']) ? $this->data['start_date'] : '';?>" />
+                        <input name="end_date" type="hidden" value="<?php echo isset($this->data['end_date']) ? $this->data['end_date'] : '';?>" />   
+                        <input type="hidden" name="adc" value="<?php echo isset($this->data['adc']) ? $this->data['adc']: '';?>"/>
+                        <input type="hidden" name="age_limit" value="<?php echo isset($this->data['age_limit']) ? $this->data['age_limit']: 0;?>"/>
+                        <input type="hidden" name="occupation_id" value="<?php echo isset($this->data['occupation_id']) ? $this->data['occupation_id']: '';?>"/>                        
                         <input type="submit" name="export_report" value="Export"/>
                     </form>
 

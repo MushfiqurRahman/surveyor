@@ -31,15 +31,15 @@ class FeedbacksController extends AppController {
     }
     
     public function caller_panel(){
-        //pr($this->request->data);
+        //pr($this->request->data);exit;
         
         if( !empty($this->request->data['Feedback']) && isset($this->request->data['Feedback']['save']) ){
-                        
-            foreach( $this->data['Feedback'] as $key => $v ){
-                if($key !='current_brand' && $key!= 'survey_id' ){
-                    $this->request->data['Feedback'][$key] = ($v=='Right' || $v=='Yes')?1:0;
-                }
-            }
+                        //pr($this->request->data);exit;
+//            foreach( $this->data['Feedback'] as $key => $v ){
+//                if($key !='current_brand' && $key!= 'survey_id' ){
+//                    $this->request->data['Feedback'][$key] = ($v=='Right' || $v=='Yes')?1:0;
+//                }
+//            }
             $this->request->data['Feedback']['user_id'] = $this->Auth->user('id');
             unset($this->request->data['Feedback']['save']);
             if( $this->Feedback->save($this->data['Feedback']) ){
@@ -47,14 +47,24 @@ class FeedbacksController extends AppController {
                 $this->Feedback->Survey->saveField('feedback_taken', 1);
                 $this->Session->setFlash('Feedback saved successfully');
             }
-        }      
+        }   
+        
+        $conditions = array(
+                'Survey.feedback_taken' => 0, 'Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
+                'Survey.house_id' => $this->houseIds,
+                'Survey.feedback_skipped' => 0,
+            );
+        
+        if( isset($this->request->data['Feedback']['skip']) ){
+            $this->Feedback->Survey->id = $this->data['Feedback']['survey_id'];
+            $this->Feedback->Survey->saveField('feedback_skipped',1);
+            //pr($this->request->data);exit;
+            $conditions['Survey.id !='] = $this->request->data['Feedback']['survey_id'];
+        }
         //$this->Feedback->Survey->Behaviors->load('Containable');     
         
         $this->set('survey', $this->Feedback->Survey->find('first',array(            
-            'conditions' => array(
-                'Survey.feedback_taken' => 0, 'Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
-                'Survey.house_id' => $this->houseIds
-            ), 'recursive' => 0)));
+            'conditions' => $conditions, 'recursive' => 0)));
     }
 
 
