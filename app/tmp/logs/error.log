@@ -1,0 +1,30 @@
+2013-08-06 02:39:10 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-06 02:39:11 Error: [MissingControllerException] Controller class Favicon.pngController could not be found.
+#0 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-08-06 08:39:21 Error: [MissingActionException] Action SurveysController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(SurveysController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-08-06 08:39:22 Error: [MissingActionException] Action SurveysController::favicon.png() could not be found.
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(SurveysController), Object(CakeRequest), Object(CakeResponse))
+#2 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-08-06 10:06:45 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '==$G$2*E8 WHERE campaign_id=8 AND house_id=263' at line 1
+#0 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(437): PDOStatement->execute(Array)
+#1 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(403): DboSource->_execute('UPDATE campaign...', Array)
+#2 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(647): DboSource->execute('UPDATE campaign...', Array, Array)
+#3 D:\xampp\htdocs\surveyor\lib\Cake\Model\Datasource\DboSource.php(516): DboSource->fetchAll('UPDATE campaign...')
+#4 D:\xampp\htdocs\surveyor\lib\Cake\Model\Model.php(3055): DboSource->query('UPDATE campaign...')
+#5 D:\xampp\htdocs\surveyor\app\Controller\FeedbacksController.php(151): Model->query(Array, Array)
+#6 D:\xampp\htdocs\surveyor\app\Controller\FeedbacksController.php(83): FeedbacksController->_import('UPDATE campaign...')
+#7 [internal function]: FeedbacksController->import_feedback_target('1375762005Feedb...')
+#8 D:\xampp\htdocs\surveyor\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs()
+#9 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(FeedbacksController), Array)
+#10 D:\xampp\htdocs\surveyor\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(CakeRequest))
+#11 D:\xampp\htdocs\surveyor\app\webroot\index.php(92): Dispatcher->dispatch(Object(FeedbacksController), Object(CakeRequest), Object(CakeResponse))
+#12 {main}

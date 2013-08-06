@@ -62,6 +62,22 @@ class User extends AppModel {
 		),
 	);
         
+        public $hasMany = array(
+            'Feedback' => array(
+                'className' => 'Feedback',
+                'foreignKey' => 'user_id',
+                'dependent' => false,
+                'conditions' => '',
+                'fields' => '',
+                'order' => '',
+                'limit' => '',
+                'offset' => '',
+                'exclusive' => '',
+                'finderQuery' => '',
+                'counterQuery' => ''
+            )
+        );
+        
         /**
          *
          * @return boolean 

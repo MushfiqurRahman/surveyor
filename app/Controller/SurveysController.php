@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+set_time_limit ( 600 );
 /**
  * Surveys Controller
  *

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 05, 2013 at 05:55 AM
+-- Generation Time: Aug 06, 2013 at 06:26 AM
 -- Server version: 5.1.33
 -- PHP Version: 5.2.9
 
@@ -172,10 +172,10 @@ INSERT INTO `campaign_details` (`id`, `campaign_id`, `house_id`, `house_target`,
 (254, 8, 280, 5, 0, 0),
 (255, 8, 281, 5, 0, 0),
 (256, 8, 282, 5, 0, 0),
-(257, 8, 283, 5, 0, 0),
+(257, 8, 283, 5, 0, 10),
 (258, 8, 284, 5, 0, 0),
 (259, 8, 285, 5, 0, 0),
-(260, 8, 286, 5, 0, 0),
+(260, 8, 286, 5, 0, 7),
 (261, 8, 287, 5, 0, 0),
 (262, 8, 288, 5, 0, 0),
 (263, 8, 289, 5, 0, 0),
@@ -247,34 +247,21 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   `got_ptr` varchar(25) NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `feedbacks`
 --
 
 INSERT INTO `feedbacks` (`id`, `survey_id`, `user_id`, `is_right_name`, `is_right_age`, `is_right_occupation`, `current_brand`, `new_pack`, `tobacco_quality`, `br_toolkit`, `got_ptr`, `created`) VALUES
-(8, 23, 6, 'Duplicate Consumer', '30+', 'N/A', 'Gold Leaf', 'N/A', 'N/A', 'N/A', 'N/A', '2013-08-05 10:56:42');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `feedback_achievements`
---
-
-CREATE TABLE IF NOT EXISTS `feedback_achievements` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `campaign_id` int(11) NOT NULL,
-  `house_id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `feedback_total` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `feedback_achievements`
---
-
+(17, 20, 6, 'Right', 'Right', 'Wrong', 'JPGL', 'Yes', 'Yes', 'Yes', 'Yes', '1970-01-01 06:00:00'),
+(16, 23, 6, 'Right', 'Right', 'Right', 'JPGL', 'Yes', 'Yes', 'Yes', 'Yes', '0000-00-00 00:00:00'),
+(15, 22, 6, 'Right', 'Wrong', 'Right', 'JPGL', 'Yes', 'Yes', 'Yes', 'Yes', '0000-00-00 00:00:00'),
+(14, 21, 6, 'Right', 'Right', 'Right', 'JPGL', 'Yes', 'Yes', 'Yes', 'Yes', '0000-00-00 00:00:00'),
+(13, 20, 6, 'Right', 'Right', 'Wrong', 'JPGL', 'Yes', 'Yes', 'Yes', 'Yes', '0000-00-00 00:00:00'),
+(18, 21, 6, 'Right', 'Right', 'Right', 'JPGL', 'Yes', 'Yes', 'Yes', 'Yes', '1970-01-01 06:00:00'),
+(19, 22, 6, 'Right', 'Wrong', 'Right', 'JPGL', 'Yes', 'Yes', 'Yes', 'Yes', '1970-01-01 06:00:00'),
+(20, 23, 6, 'Right', 'Right', 'Right', 'JPGL', 'Yes', 'Yes', 'Yes', 'Yes', '1970-01-01 06:00:00');
 
 -- --------------------------------------------------------
 
@@ -294,7 +281,7 @@ CREATE TABLE IF NOT EXISTS `houses` (
 --
 
 INSERT INTO `houses` (`id`, `area_id`, `title`) VALUES
-(259, 82, 'Agrani Trading, Moghbazar '),
+(259, 82, 'Agrani Trading, Moghbazar'),
 (260, 82, 'Agrani Trading, Gulshan'),
 (261, 82, 'Agrani Trading, Motijheel'),
 (262, 82, 'Agrani Trading, Mirpur'),
@@ -495,7 +482,7 @@ CREATE TABLE IF NOT EXISTS `mo_logs` (
   `datetime` varchar(30) NOT NULL,
   `time_int` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=101 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=103 ;
 
 --
 -- Dumping data for table `mo_logs`
@@ -551,7 +538,9 @@ INSERT INTO `mo_logs` (`id`, `msisdn`, `sms`, `keyword`, `datetime`, `time_int`)
 (97, '8801914825528', 'BR 1, BILLAH, 01155500000, 24, 10, B, 9', 'BR', '2013-07-30', 1375193212),
 (98, '8801914825528', 'BR 1, BILLAH, 01155500000, 24, 10, B, 9', 'BR', '2013-07-30', 1375193246),
 (99, '88', 'BR 1, BILLAH, 168, 24, 10, B, 1', 'BR', '2013-07-31', 1375248374),
-(100, '8801914825528', 'BR 1, BILLAH, 168, 24, 10, B, 1', 'BR', '2013-07-31', 1375248379);
+(100, '8801914825528', 'BR 1, BILLAH, 168, 24, 10, B, 1', 'BR', '2013-07-31', 1375248379),
+(101, '8801914825528', 'BR BR1, BILLAH, 01685089561, 24, 10, B, 1', 'BR', '2013-08-06', 1375758039),
+(102, '8801914825528', 'BR 1, BILLAH, 01685089561, 24, 10, B, 1', 'BR', '2013-08-06', 1375758046);
 
 -- --------------------------------------------------------
 
@@ -567,7 +556,7 @@ CREATE TABLE IF NOT EXISTS `mt_logs` (
   `datetime` varchar(30) NOT NULL,
   `time_int` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=81 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=83 ;
 
 --
 -- Dumping data for table `mt_logs`
@@ -618,7 +607,9 @@ INSERT INTO `mt_logs` (`id`, `msisdn`, `sms`, `keyword`, `datetime`, `time_int`)
 (77, '8801914825528', 'Thank you! Your message have been received.', 'BR', '2013-07-30', 1375193212),
 (78, '8801914825528', 'Thank you! Your message have been updated.', 'BR', '2013-07-30', 1375193246),
 (79, '88', 'Sorry! Your mobile number is invalid.', 'BR', '2013-07-31', 1375248374),
-(80, '8801914825528', 'Sorry! Consumer phone number must be of 11 digits. Please try again with right number.', 'BR', '2013-07-31', 1375248379);
+(80, '8801914825528', 'Sorry! Consumer phone number must be of 11 digits. Please try again with right number.', 'BR', '2013-07-31', 1375248379),
+(81, '8801914825528', 'Invalid BR code! Please try again with valid code.', 'BR', '2013-08-06', 1375758039),
+(82, '8801914825528', 'Sorry! We have already finished our campaign with this consumer. Please try with other consumer.', 'BR', '2013-08-06', 1375758046);
 
 -- --------------------------------------------------------
 
@@ -2529,10 +2520,10 @@ CREATE TABLE IF NOT EXISTS `surveys` (
 --
 
 INSERT INTO `surveys` (`id`, `campaign_id`, `house_id`, `representative_id`, `rep_phone`, `mo_log_id`, `survey_counter`, `name`, `phone`, `age`, `adc`, `occupation_id`, `feedback_taken`, `feedback_skipped`, `created`, `modified`) VALUES
-(20, 8, 259, 10460, '8801914825528', 51, 1, 'BILLAH', '01685089561', 24, 10, 2, 0, 1, '2013-07-28 03:52:46', '2013-08-05 11:20:27'),
-(21, 8, 259, 10460, '8801914825528', 52, 2, 'CAPAL', '01685089571', 19, 15, 2, 0, 1, '2013-07-28 03:52:57', '2013-08-05 11:20:51'),
-(22, 8, 259, 10460, '8801914825528', 53, 3, 'DELOWAR', '01685089541', 34, 20, 1, 0, 1, '2013-07-28 03:53:05', '2013-08-05 11:20:56'),
-(23, 8, 259, 10461, '8801914825528', 54, 4, 'ERFAN', '01785089541', 34, 8, 2, 0, 0, '2013-07-28 03:53:38', '2013-08-05 10:56:42'),
+(20, 8, 259, 10460, '8801914825528', 51, 1, 'BILLAH', '01685089561', 24, 10, 2, 1, 1, '2013-07-28 03:52:46', '2013-08-06 12:18:11'),
+(21, 8, 259, 10460, '8801914825528', 52, 2, 'CAPAL', '01685089571', 19, 15, 2, 1, 1, '2013-07-28 03:52:57', '2013-08-06 12:18:11'),
+(22, 8, 259, 10460, '8801914825528', 53, 3, 'DELOWAR', '01685089541', 34, 20, 1, 1, 1, '2013-07-28 03:53:05', '2013-08-06 12:18:11'),
+(23, 8, 259, 10461, '8801914825528', 54, 4, 'ERFAN', '01785089541', 34, 8, 2, 1, 0, '2013-07-28 03:53:38', '2013-08-06 12:18:11'),
 (24, 8, 263, 10609, '8801914825528', 55, 1, 'EMTI', '01785089521', 24, 18, 2, 0, 0, '2013-07-28 03:53:46', '2013-07-28 03:53:46'),
 (25, 8, 263, 10609, '8801914825528', 56, 2, 'EMTI', '01785089531', 23, 11, 2, 0, 0, '2013-07-28 03:53:54', '2013-07-28 03:53:54'),
 (26, 8, 266, 10746, '8801914825528', 57, 1, 'RIFAT', '01185089531', 23, 11, 3, 0, 0, '2013-07-28 03:54:05', '2013-07-28 03:54:05'),
@@ -2558,7 +2549,7 @@ INSERT INTO `surveys` (`id`, `campaign_id`, `house_id`, `representative_id`, `re
 (46, 8, 259, 10460, '8801914825528', 95, 7, 'BILLAH', '01955509000', 24, 10, 2, 0, 0, '2013-07-30 20:05:27', '2013-07-30 20:05:27'),
 (47, 8, 259, 10460, '8801914825528', 96, 8, 'BILLAH', '01955500000', 24, 10, 2, 0, 0, '2013-07-30 20:06:09', '2013-07-30 20:06:09'),
 (48, 8, 259, 10460, '8801914825528', 98, 9, 'BILLAH', '01155500000', 24, 10, 2, 0, 0, '2013-07-30 20:06:52', '2013-07-30 20:07:26'),
-(50, 0, 0, 0, '', 0, 1, '', '', 0, 0, 0, 1, 0, '2013-08-02 03:07:07', '2013-08-02 03:07:07');
+(50, 0, 0, 0, '', 0, 1, '', '', 0, 0, 0, 0, 0, '2013-08-02 03:07:07', '2013-08-02 03:07:07');
 
 -- --------------------------------------------------------
 

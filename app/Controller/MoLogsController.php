@@ -209,11 +209,10 @@ class MoLogsController extends AppController{
             return $res;
         }else{
             $res = $this->MoLog->query('SELECT surveys.id, surveys.survey_counter FROM surveys '.
-                        'WHERE representative_id='.$repId.
-                        ' AND campaign_id='.$this->current_campaign_detail['Campaign']['id'].
+                        'WHERE campaign_id='.$this->current_campaign_detail['Campaign']['id'].
                         ' AND phone="'.$customer_phone_no.'"');
             if( count($res)>0 ){
-                $res['error'] = 'Sorry! You have already inserted values for this customer.';
+                $res['error'] = 'Sorry! This consumer has already been contacted.';
                 return $res;
             }
         }
@@ -239,7 +238,7 @@ class MoLogsController extends AppController{
             $ttl_msg_part != 8) {
             
             $error = "Your SMS format is wrong, plesae try again with right format.";            
-        }else if( strlen($processed['mobile_number']) <13 ){
+        }else if( strlen($processed['mobile_number']) <13 || strlen($processed['mobile_number'])>13 ){
             $error = 'Sorry! Your mobile number is invalid.';
         }else{                           
             $repId = $this->MoLog->check_rep_br_code( $processed['params'][1]);

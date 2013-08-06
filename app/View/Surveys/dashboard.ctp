@@ -142,7 +142,7 @@
 
                                                     //echo $this->Form->end(array('label' => 'Submit', 'class' => 'mws-button orange','style' => 'float:left; margin-top:-2px;'));
                                                 ?>				
-                                                <label>Survey Date</label>
+<!--                                                <label>Survey Date</label>-->
                                                 <input size="30" name="data[Survey][created]" required="required" onFocus="this.value=''" onClick="showCalendarControl(this);" type="text" value="" />   
                                                     <input type="submit" value="Submit" class="btn green" style="margin-top:-2px;"/>
                                                     <input type="reset" value="Reset" class="btn red" style="margin-top:-2px;"/>

@@ -111,5 +111,20 @@ class Region extends AppModel {
             }
             return $titles;
         }
+        
+        /**
+         *
+         * @param type $field_name
+         * @param type $value
+         * @return int 
+         */
+        public function get_id_by_field( $field_name, $value ){
+            $reg = $this->find('first',array('fields' => array('id'),'conditions' => array(
+                'Region.'.$field_name => $value), 'recursive' => -1));
+            if( !empty($reg) ){
+                return $reg['Region']['id'];
+            }
+            return 0;
+        }
 
 }

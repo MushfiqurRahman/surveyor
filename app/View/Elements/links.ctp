@@ -9,9 +9,10 @@
     echo ' | '.$this->Html->link('Representatives',array('controller' => 'representatives','action' => 'index'));
     echo ' | '.$this->Html->link('Surveys',array('controller' => 'surveys','action' => 'index'));
     echo ' | '.$this->Html->link('Users',array('controller' => 'users','action' => 'index'));
-    echo ' | '.$this->Html->link('Import Data',array('controller' => 'regions','action' => 'import_data'));
     echo ' | '.$this->Html->link('Off Days',array('controller' => 'off_days','action' => 'index'));
-//    echo $this->Html->link('',array('controller' => '','action' => ''));
+    echo ' | '.$this->Html->link('Import Data',array('controller' => 'regions','action' => 'import_data'));    
+    echo ' | '.$this->Html->link('Import Feedback Target',array('controller' => 'feedbacks','action' => 'import_feedback_target'));
+    echo ' | '.$this->Html->link('Import Feedback',array('controller' => 'feedbacks','action' => 'import_feedback'));
 ?>
     
     
