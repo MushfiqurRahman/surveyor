@@ -244,7 +244,7 @@ class Survey extends AppModel {
         *
         * @return type 
         */
-        public function get_contain_array( $is_feedback = false ){
+        public function get_contain_array( $is_feedback = false, $data = null ){
             
             if( !$is_feedback ){
                 return array(
@@ -258,9 +258,17 @@ class Survey extends AppModel {
                         ),
                     'Occupation' => array('title')
                 );
-            }else{
+            }else{                
+                $conditions = array();
+                if( isset($data['start_date']) ){
+                    $conditions[]['DATE(Feedback.created) >= '] = $data['start_date'];
+                }
+                if( isset($data['end_date']) ){
+                    $conditions[]['DATE(Feedback.created) <='] = $data['end_date'];
+                }
                 return array(
-                    'Feedback' => array('fields' => array('Feedback.*')),
+                    'Feedback' => array('fields' => array('Feedback.*'),
+                        'conditions' => $conditions),
                     'Representative' => array(
                         'fields' => array('name','superviser_name'),
                         'House' => array(
@@ -287,15 +295,17 @@ class Survey extends AppModel {
             }else{
                 $conditions[]['Survey.id'] = 0;
             }
-//            if( $is_feedback ){
-//                $conditions[]['Survey.feedback_taken'] = 1;
-//            }
-            if( isset($data['start_date']) && !empty($data['start_date']) ){
-                $conditions[]['DATE(Survey.created) >='] = $data['start_date'];
+            
+            //since Feedback reporting on Feedbacks created date. Not on survey date
+            if( !$is_feedback ){
+                if( isset($data['start_date']) && !empty($data['start_date']) ){
+                    $conditions[]['DATE(Survey.created) >='] = $data['start_date'];
+                }
+                if( isset($data['end_date']) && !empty($data['end_date']) ){
+                    $conditions[]['DATE(Survey.created) <='] = $data['end_date'];
+                }
             }
-            if( isset($data['end_date']) && !empty($data['end_date']) ){
-                $conditions[]['DATE(Survey.created) <='] = $data['end_date'];
-            }
+            
             if( isset($data['occupation_id']) && !empty($data['occupation_id']) ){
                 $conditions[]['Survey.occupation_id'] = $data['occupation_id'];
             }
@@ -382,30 +392,58 @@ class Survey extends AppModel {
          * @param type $feedbacks
          * @return type 
          */
-        public function format_for_feedback_export( $feedbacks ){
-            $formatted = array();
-            $i = 0;
+//        public function format_for_feedback_export( $feedbacks ){
+//            $formatted = array();
+//            $i = 0;
+//            
+//            foreach( $feedbacks as $srv ){
+//                $formatted[$i]['id'] = $srv['Feedback']['id'];
+//                $formatted[$i]['region'] = $srv['Representative']['House']['Area']['Region']['title'];
+//                $formatted[$i]['area'] = $srv['Representative']['House']['Area']['title'];
+//                $formatted[$i]['house'] = $srv['Representative']['House']['title'];
+//                $formatted[$i]['br_name'] = $srv['Representative']['name'];
+//                $formatted[$i]['sup_name'] = $srv['Representative']['superviser_name'];
+//                
+//                $formatted[$i]['customer_name'] = $srv['Feedback']['is_right_name']==1? 'Right' : 'Wrong';
+//                $formatted[$i]['phone_no'] = $srv['Survey']['phone'];
+//                $formatted[$i]['age'] = $srv['Feedback']['is_right_age']==1? 'Right' : 'Wrong';                
+//                $formatted[$i]['occupation'] = $srv['Feedback']['is_right_occupation']==1? 'Right' : 'Wrong';
+//                $formatted[$i]['current_brand'] = $srv['Feedback']['current_brand'];
+//                $formatted[$i]['notice_new_pack'] = $srv['Feedback']['new_pack']==1 ? 'Yes' : 'No';                
+//                $formatted[$i]['tobacco_quality'] = $srv['Feedback']['tobacco_quality']==1 ? 'Yes' : 'No';
+//                $formatted[$i]['br_toolkit'] = $srv['Feedback']['br_toolkit']==1 ? 'Yes' : 'No';
+//                $formatted[$i]['ptr_back_check'] = $srv['Feedback']['got_ptr']==1 ? 'Yes' : 'No';
+//                $formatted[$i]['date'] = date('Y-m-d',strtotime($srv['Feedback']['created']));
+//                $i++;
+//            }
+//            return $formatted;
+//        }
+        
+        /**
+         *
+         * @desc Used in Feedback Model
+         * @param type $campaign_id
+         * @param type $houseId
+         * @param type $date
+         * @return boolean true/false
+         */
+        public function is_feedback_achieved($campaign_id, $houseId, $date ){
+            $houseTarget = $this->Campaign->CampaignDetail->find('first',array('fields' => array(
+                    'CampaignDetail.house_feedback_target'
+                ),
+                'conditions' => array('CampaignDetail.campaign_id' => $campaign_id,
+                    'CampaignDetail.house_id' => $houseId), 
+                'recursive' => -1
+            ));
             
-            foreach( $feedbacks as $srv ){
-                $formatted[$i]['id'] = $srv['Feedback']['id'];
-                $formatted[$i]['region'] = $srv['Representative']['House']['Area']['Region']['title'];
-                $formatted[$i]['area'] = $srv['Representative']['House']['Area']['title'];
-                $formatted[$i]['house'] = $srv['Representative']['House']['title'];
-                $formatted[$i]['br_name'] = $srv['Representative']['name'];
-                $formatted[$i]['sup_name'] = $srv['Representative']['superviser_name'];
-                
-                $formatted[$i]['customer_name'] = $srv['Feedback']['is_right_name']==1? 'Right' : 'Wrong';
-                $formatted[$i]['phone_no'] = $srv['Survey']['phone'];
-                $formatted[$i]['age'] = $srv['Feedback']['is_right_age']==1? 'Right' : 'Wrong';                
-                $formatted[$i]['occupation'] = $srv['Feedback']['is_right_occupation']==1? 'Right' : 'Wrong';
-                $formatted[$i]['current_brand'] = $srv['Feedback']['current_brand'];
-                $formatted[$i]['notice_new_pack'] = $srv['Feedback']['new_pack']==1 ? 'Yes' : 'No';                
-                $formatted[$i]['tobacco_quality'] = $srv['Feedback']['tobacco_quality']==1 ? 'Yes' : 'No';
-                $formatted[$i]['br_toolkit'] = $srv['Feedback']['br_toolkit']==1 ? 'Yes' : 'No';
-                $formatted[$i]['ptr_back_check'] = $srv['Feedback']['got_ptr']==1 ? 'Yes' : 'No';
-                $formatted[$i]['date'] = date('Y-m-d',strtotime($srv['Feedback']['created']));
-                $i++;
+            $total_feedback = $this->find('count',array('conditions' => array(
+                'Survey.campaign_id' => $campaign_id, 'Survey.house_id' => $houseId,
+                'Survey.feedback_taken' => 1,'DATE(Survey.created)' => $date
+            )));            
+            
+            if( $total_feedback >= $houseTarget['CampaignDetail']['house_feedback_target'] ){
+                return true;
             }
-            return $formatted;
+            return false;
         }
 }

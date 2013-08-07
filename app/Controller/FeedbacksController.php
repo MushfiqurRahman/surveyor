@@ -9,6 +9,7 @@ set_time_limit ( 600 );
 class FeedbacksController extends AppController {
     
     private $houseIds = array();
+    public $helpers = array('Excel');
     
     public function beforeFilter() {
         parent::beforeFilter();
@@ -27,10 +28,11 @@ class FeedbacksController extends AppController {
         }
     }
     
-    public function report(){
-        
-    }
     
+    
+    /**
+     * 
+     */
     public function caller_panel(){
         //pr($this->request->data);exit;
         
@@ -43,33 +45,100 @@ class FeedbacksController extends AppController {
                 $this->Feedback->Survey->saveField('feedback_taken', 1);
                 $this->Session->setFlash('Feedback saved successfully');
             }
+        } else if( isset($this->request->data['Feedback']['skip']) ){
+            $this->Feedback->Survey->id = $this->data['Feedback']['survey_id'];
+            $this->Feedback->Survey->saveField('feedback_skipped',1);                
         }   
         
+        $hId = $this->Feedback->house_target_not_achieved($this->current_campaign_detail['Campaign']['id'],
+                $this->houseIds, $this->request->data['Survey']['created']);
         
-        
-            /**
-             * 1. Check already target fulfilled if yes then request him to select another house 
-             * 2. If not then 
-             */
-        $conditions = array(
+        //0 means all the houses given in $this->houseIds target is fulfilled
+        if( $hId!=0 ){
+            $this->houseIds = $hId;
+            
+            $conditions = array(
             'Survey.feedback_taken' => 0, 
             'Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
             'Survey.house_id' => $this->houseIds,
             'Survey.feedback_skipped' => 0,
             'DATE(Survey.created)' => $this->request->data['Survey']['created'],
-        );
-        if( isset($this->request->data['Feedback']['skip']) ){
-            $this->Feedback->Survey->id = $this->data['Feedback']['survey_id'];
-            $this->Feedback->Survey->saveField('feedback_skipped',1);
-            $conditions['Survey.id !='] = $this->request->data['Feedback']['survey_id'];
-        }
-        
-        
-        //$this->Feedback->Survey->Behaviors->load('Containable');     
-        
-        $this->set('survey', $this->Feedback->Survey->find('first',array(            
-            'conditions' => $conditions, 'recursive' => 0)));
+            );                    
+            $this->set('survey', $this->Feedback->Survey->find('first',array(            
+                'conditions' => $conditions, 'recursive' => 0)));
+        }else{
+            $this->set('target_achieved',true);
+        }        
     }
+    
+    /**
+     * 
+     */
+    public function feedback_report(){
+        $this->_set_request_data_from_params();  
+
+        $houseList = $this->Feedback->Survey->House->house_list($this->request->data);//('list', array('conditions' => $this->_set_conditions()));
+
+        if( isset($this->request->data['House']['id']) && !empty($this->request->data['House']['id']) ){
+            $houseIds[] = $this->request->data['House']['id'];
+        }else{
+            $houseIds = $this->Feedback->Survey->House->id_from_list($houseList);                
+        }
+
+        $SurveyIds = $this->Feedback->Survey->find('list',array('fields' => 'id','conditions' => 
+            array('Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
+                    'Survey.house_id' => $houseIds, 'Survey.feedback_taken' => 1)));            
+
+        $this->Feedback->Behaviors->load('Containable');
+
+        $this->paginate = array(
+            'contain' => $this->Feedback->get_contain_array(),
+            'conditions' => $this->Feedback->set_conditions($SurveyIds, $this->request->data),                                    
+            'order' => array('Survey.created' => 'DESC'),
+            'limit' => 10,
+        );                
+        $feedbacks = $this->paginate();
+
+        $this->set('achievements',$this->Feedback->Survey->Campaign->achievements_by_house(
+                $houseIds, $this->current_campaign_detail['Campaign']['id'],
+                $this->total_camp_days, $this->day_passed));
+
+        //pr($feedbacks);exit;           
+        $this->set('feedbacks', $feedbacks);
+
+    }
+
+    public function export_feedback_report(){
+
+        $this->layout = 'ajax';           
+
+        if( !empty($this->request->data) ){
+
+            $houseList = $this->Feedback->Survey->House->house_list($this->request->data);
+
+            if( isset($this->request->data['House']['id']) && !empty($this->request->data['House']['id']) ){
+                $houseIds[] = $this->request->data['House']['id'];
+            }else{
+                $houseIds = $this->Feedback->Survey->House->id_from_list($houseList);                
+            }
+
+            $SurveyIds = $this->Feedback->Survey->find('list',array('fields' => 'id','conditions' => 
+                array('Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
+                    'Survey.house_id' => $houseIds, 'Survey.feedback_taken' => 1)));            
+
+            $this->Feedback->Behaviors->load('Containable');
+
+            $feedbacks = $this->Feedback->find('all', array(
+                'contain' => $this->Feedback->get_contain_array(),
+                'conditions' => $this->Feedback->set_conditions($SurveyIds, $this->request->data),                                      
+                'order' => array('Feedback.created' => 'DESC')
+            ));                                
+            $feedbacks = $this->Feedback->format_for_feedback_export($feedbacks);
+
+            $this->set('feedbacks',$feedbacks);                
+        }
+    }
+        
     
     /**
      * Import House Feedback Target

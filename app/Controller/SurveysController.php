@@ -136,70 +136,70 @@ class SurveysController extends AppController {
             }
         }
         
-        public function feedback_report(){
-            $this->_set_request_data_from_params();  
-            
-            $houseList = $this->Survey->House->house_list($this->request->data);//('list', array('conditions' => $this->_set_conditions()));
-                       
-            if( isset($this->request->data['House']['id']) && !empty($this->request->data['House']['id']) ){
-                $houseIds[] = $this->request->data['House']['id'];
-            }else{
-                $houseIds = $this->Survey->House->id_from_list($houseList);                
-            }
-            
-            $SurveyIds = $this->Survey->find('list',array('fields' => 'id','conditions' => 
-                array('Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
-                      'Survey.house_id' => $houseIds, 'Survey.feedback_taken' => 1)));            
-
-            $this->Survey->Behaviors->load('Containable');
-
-            $this->paginate = array(
-                'contain' => $this->Survey->get_contain_array( true ),
-                'conditions' => $this->Survey->set_conditions($SurveyIds, $this->request->data),                                    
-                'order' => array('Survey.created' => 'DESC'),
-                'limit' => 10,
-            );                
-            $feedbacks = $this->paginate();
-            
-            $this->set('achievements',$this->Survey->Campaign->achievements_by_house(
-                    $houseIds, $this->current_campaign_detail['Campaign']['id'],
-                    $this->total_camp_days, $this->day_passed));
-
-            //pr($feedbacks);exit;           
-            $this->set('feedbacks', $feedbacks);
-            
-        }
-        
-        public function export_feedback_report(){
-            
-            $this->layout = 'ajax';           
-            
-            if( !empty($this->request->data) ){
-                
-                $houseList = $this->Survey->House->house_list($this->request->data);
-                       
-                if( isset($this->request->data['House']['id']) && !empty($this->request->data['House']['id']) ){
-                    $houseIds[] = $this->request->data['House']['id'];
-                }else{
-                    $houseIds = $this->Survey->House->id_from_list($houseList);                
-                }
-
-                $SurveyIds = $this->Survey->find('list',array('fields' => 'id','conditions' => 
-                    array('Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
-                        'Survey.house_id' => $houseIds, 'Survey.feedback_taken' => 1)));            
-
-                $this->Survey->Behaviors->load('Containable');
-
-                $feedbacks = $this->Survey->find('all', array(
-                    'contain' => $this->Survey->get_contain_array( true ),
-                    'conditions' => array('Survey.id' => $SurveyIds),                                    
-                    'order' => array('Survey.created' => 'DESC')
-                ));                                
-                $feedbacks = $this->Survey->format_for_feedback_export($feedbacks);
-                
-                $this->set('feedbacks',$feedbacks);                
-            }
-        }
+//        public function feedback_report(){
+//            $this->_set_request_data_from_params();  
+//            
+//            $houseList = $this->Survey->House->house_list($this->request->data);//('list', array('conditions' => $this->_set_conditions()));
+//                       
+//            if( isset($this->request->data['House']['id']) && !empty($this->request->data['House']['id']) ){
+//                $houseIds[] = $this->request->data['House']['id'];
+//            }else{
+//                $houseIds = $this->Survey->House->id_from_list($houseList);                
+//            }
+//            
+//            $SurveyIds = $this->Survey->find('list',array('fields' => 'id','conditions' => 
+//                array('Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
+//                      'Survey.house_id' => $houseIds, 'Survey.feedback_taken' => 1)));            
+//
+//            $this->Survey->Behaviors->load('Containable');
+//
+//            $this->paginate = array(
+//                'contain' => $this->Survey->get_contain_array( true, $this->request->data ),
+//                'conditions' => $this->Survey->set_conditions($SurveyIds, $this->request->data, true),                                    
+//                'order' => array('Survey.created' => 'DESC'),
+//                'limit' => 10,
+//            );                
+//            $feedbacks = $this->paginate();
+//            
+//            $this->set('achievements',$this->Survey->Campaign->achievements_by_house(
+//                    $houseIds, $this->current_campaign_detail['Campaign']['id'],
+//                    $this->total_camp_days, $this->day_passed));
+//
+//            //pr($feedbacks);exit;           
+//            $this->set('feedbacks', $feedbacks);
+//            
+//        }
+//        
+//        public function export_feedback_report(){
+//            
+//            $this->layout = 'ajax';           
+//            
+//            if( !empty($this->request->data) ){
+//                
+//                $houseList = $this->Survey->House->house_list($this->request->data);
+//                       
+//                if( isset($this->request->data['House']['id']) && !empty($this->request->data['House']['id']) ){
+//                    $houseIds[] = $this->request->data['House']['id'];
+//                }else{
+//                    $houseIds = $this->Survey->House->id_from_list($houseList);                
+//                }
+//
+//                $SurveyIds = $this->Survey->find('list',array('fields' => 'id','conditions' => 
+//                    array('Survey.campaign_id' => $this->current_campaign_detail['Campaign']['id'],
+//                        'Survey.house_id' => $houseIds, 'Survey.feedback_taken' => 1)));            
+//
+//                $this->Survey->Behaviors->load('Containable');
+//
+//                $feedbacks = $this->Survey->find('all', array(
+//                    'contain' => $this->Survey->get_contain_array( true ),
+//                    'conditions' => array('Survey.id' => $SurveyIds),                                    
+//                    'order' => array('Survey.created' => 'DESC')
+//                ));                                
+//                $feedbacks = $this->Survey->format_for_feedback_export($feedbacks);
+//                
+//                $this->set('feedbacks',$feedbacks);                
+//            }
+//        }
         
         /**
          *

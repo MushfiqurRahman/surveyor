@@ -170,11 +170,11 @@
                                 ?>
                                     <tr class="odd gradeX">
                                         <td><?php echo $fb['Feedback']['id'];?></td>
-                                        <td><?php echo $fb['Representative']['House']['Area']['Region']['title'];?></td>
-                                        <td class="hidden-phone"><?php echo $fb['Representative']['House']['Area']['title'];?></td>
-                                        <td class="hidden-phone"><?php echo $fb['Representative']['House']['title'];?></td>
-                                        <td class="center hidden-phone"><?php echo $fb['Representative']['name'];?></td>
-                                        <td class="hidden-phone"><?php echo $fb['Representative']['superviser_name'];?></td>
+                                        <td><?php echo $fb['Survey']['Representative']['House']['Area']['Region']['title'];?></td>
+                                        <td class="hidden-phone"><?php echo $fb['Survey']['Representative']['House']['Area']['title'];?></td>
+                                        <td class="hidden-phone"><?php echo $fb['Survey']['Representative']['House']['title'];?></td>
+                                        <td class="center hidden-phone"><?php echo $fb['Survey']['Representative']['name'];?></td>
+                                        <td class="hidden-phone"><?php echo $fb['Survey']['Representative']['superviser_name'];?></td>
                                         <td class="hidden-phone"><?php echo $fb['Feedback']['is_right_name']?></td>
 <!--                                        <td class="hidden-phone"><?php echo $fb['Survey']['phone'];?></td>-->
                                         <td class="center hidden-phone"><?php echo $fb['Feedback']['is_right_age'];?></td>
@@ -209,6 +209,8 @@
                         <input type="hidden" name="data[Region][id]" value="<?php echo isset($this->data['Region']['id']) ? $this->data['Region']['id'] : '';?>"/>
                         <input type="hidden" name="data[Area][id]" value="<?php echo isset($this->data['Area']['id']) ? $this->data['Area']['id'] : '';?>"/>
                         <input type="hidden" name="data[House][id]" value="<?php echo isset($this->data['House']['id']) ? $this->data['House']['id'] : '';?>"/>
+                        <input name="start_date" type="hidden" value="<?php echo isset($this->data['start_date']) ? $this->data['start_date'] : '';?>" />
+                        <input name="end_date" type="hidden" value="<?php echo isset($this->data['end_date']) ? $this->data['end_date'] : '';?>" />   
                         <input type="submit" name="export_report" value="Export"/>
                     </form>
 

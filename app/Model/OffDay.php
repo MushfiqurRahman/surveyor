@@ -58,4 +58,11 @@ class OffDay extends AppModel {
 			'order' => ''
 		)
 	);
+        
+        public function get_total_off_days( $campaign_id, $start_day, $end_day ){
+            $total_off_days = $this->find('count',array('conditions' => array(
+                'campaign_id' => $campaign_id, 'off_day >=' => $start_day, 'off_day <=' => $end_day
+            )));
+            return $total_off_days;
+        }
 }

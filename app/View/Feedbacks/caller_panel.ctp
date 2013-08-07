@@ -4,7 +4,12 @@
 
     <div class="row-fluid">
             <div class="span12">
-                <?php if( $survey ){ 
+                <?php 
+                if( isset($target_achieved) ){
+                    echo '<font color="red"><b>Your selected house(s) feedback target already filled! Better you select '.
+                    'other Region/Area/House/Date.</b></font>';
+                }
+                else if( !empty($survey) ){ 
                     //pr($survey);
                 ?>
             <!-- BEGAIN MAIN CONTENT-->
@@ -61,6 +66,7 @@
                 <input type="hidden" name="data[Region][id]" value="<?php echo $this->data['Region']['id'];?>"/>
                 <input type="hidden" name="data[Area][id]" value="<?php echo $this->data['Area']['id'];?>"/>
                 <input type="hidden" name="data[House][id]" value="<?php echo $this->data['House']['id'];?>"/>
+                <input type="hidden" name="data[Survey][created]" value="<?php echo $this->data['Survey']['created'];?>"/>
                 <input type="hidden" name="data[Feedback][survey_id]" value="<?php echo $survey['Survey']['id'];?>"/>
         
 <label class="control-label-cc" style="font-weight:bold;">1. Aapni Ki <?php echo $survey['Survey']['name'];?> Shaheb Bolchen?</label>
@@ -367,7 +373,7 @@
                     </div>
             </div>
             <!-- END FILTERING PORTLET-->
-            <?php }//enf of if
+            <?php }//end of if
                 else{
                     echo 'Please select another Region/Area/House, there is no survey found for the selected Region/Area/House';
                     

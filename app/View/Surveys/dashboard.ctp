@@ -87,8 +87,10 @@
                                     </form>
                                     </div>
                                 
+                                <?php if($loggedinUser['is_cc']){?>
+                                
                                 <div style="height:75px;">
-                                    <?php echo $this->Form->create('Survey',array('type' => 'post', 'action' => 'feedback_report', 'class' => 'form-horizontal'));?>
+                                    <?php echo $this->Form->create('Feedback',array('type' => 'post', 'action' => 'feedback_report', 'class' => 'form-horizontal'));?>
                                             <div style="width:20%; margin-left:50px;">
                                                     <label>Customer Care Feedback</label>
                                             </div>
@@ -117,6 +119,8 @@
                                             </div>
                                     </form>
                                     </div>
+                                
+                                
                                 
                                 <div style="height:125px;">
                                     <?php echo $this->Form->create('Feedback',array('type' => 'post', 'action' => 'caller_panel', 'class' => 'form-horizontal'));?>
@@ -149,10 +153,11 @@
                                                     <?php echo $this->Form->end();?>
                                             </div>
                                     </form>
-                                    </div>
-                                
                                 </div>
+                                <?php }?>
+
                             </div>
+                        </div>
                     </div>
 
                             <!-- BEGIN STACK CHART CONTROLS PORTLET-->

@@ -53,6 +53,8 @@ class AppController extends Controller {
     public function beforeFilter(){    
         parent::beforeFilter();
         
+        $this->set('loggedinUser', $this->Auth->user());
+        
         //since the current campaign detail is necessary everywhere
         $this->loadModel('Campaign');
         $this->Campaign->unbindModel(array('hasMany' => array('CampaignDetail','Survey')));
@@ -64,8 +66,20 @@ class AppController extends Controller {
         
         $diff = abs(strtotime($this->current_campaign_detail['Campaign']['start_date']) - strtotime($this->current_campaign_detail['Campaign']['end_date']));
         
-        $this->total_camp_days = 1+($diff/(24*3600));
+        $this->loadModel('OffDay');
+        
+        
+        $this->total_camp_days = 1+($diff/(24*3600)) - ($this->OffDay->get_total_off_days(
+                $this->current_campaign_detail['Campaign']['id'], 
+                $this->current_campaign_detail['Campaign']['start_date'],
+                $this->current_campaign_detail['Campaign']['end_date']));
+        
         $this->day_passed = floor(abs(strtotime(date('Y-m-d',time())) - strtotime($this->current_campaign_detail['Campaign']['start_date']))/(24*3600));        
+        
+        $this->day_passed = $this->day_passed - ($this->OffDay->get_total_off_days(
+                $this->current_campaign_detail['Campaign']['id'],
+                $this->current_campaign_detail['Campaign']['start_date'],
+                date('Y-m-d',time())));
                 
         $this->set('current_campaign_detail',$this->current_campaign_detail);
     }
