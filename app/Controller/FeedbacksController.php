@@ -319,8 +319,9 @@ class FeedbacksController extends AppController {
                 $feedback['Feedback']['br_toolkit'] = trim($objWorksheet->getCellByColumnAndRow(13,$i)->getValue());
                 $feedback['Feedback']['got_ptr'] = trim($objWorksheet->getCellByColumnAndRow(14,$i)->getValue());
                 
-                $time = trim($objWorksheet->getCellByColumnAndRow(15,$i)->getValue());
-                $time = date('Y-m-d H:i:s',strtotime($time));
+                $time = trim($objWorksheet->getCellByColumnAndRow(16,$i)->getValue());
+                $this->log('time is---->:'.$time,'error');
+                //$time = date('Y-m-d H:i:s',strtotime($time));
                 $feedback['Feedback']['created'] = $time;
                 
                 $this->Feedback->create();
