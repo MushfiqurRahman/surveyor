@@ -152,7 +152,8 @@ class Feedback extends AppModel {
             }
             
             foreach( $houseIds as $hid){
-                if( !$this->Survey->is_feedback_achieved($campaignId, $hid, $survey_date) ){
+                if( !$this->Survey->is_feedback_achieved($campaignId, $hid, $survey_date) && 
+                     $this->Survey->has_survey_for_feedback($campaignId, $hid, $survey_date) ){
                     return $hid;
                 }
             }
@@ -232,5 +233,21 @@ class Feedback extends AppModel {
                 $i++;
             }
             return $formatted;
+        }
+        
+        /**
+         *
+         * @param type $user_id
+         * @param type $date
+         * @return type 
+         */
+        public function total_fb_by_date_n_user( $user_id, $date ){
+            
+            $todays_total_fb = $this->query('SELECT COUNT(*) as todays_total_fb FROM feedbacks INNER JOIN surveys ON '.
+                    'feedbacks.survey_id = surveys.id WHERE feedbacks.user_id='.$user_id.
+                    ' AND DATE(surveys.created)="'.$date.'" AND surveys.feedback_taken=1');
+            return $todays_total_fb[0][0]['todays_total_fb'];
+//            return $this->find('count',array('conditions' => array('Feedback.user_id' => $user_id, 
+//                'DATE(Feedback.created)' => $date)));
         }
 }

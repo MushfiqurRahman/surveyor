@@ -216,7 +216,7 @@ class Survey extends AppModel {
 		),
 		'House' => array(
 			'className' => 'House',
-			'foreignKey' => 'representative_id',
+			'foreignKey' => 'house_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -442,6 +442,24 @@ class Survey extends AppModel {
             )));            
             
             if( $total_feedback >= $houseTarget['CampaignDetail']['house_feedback_target'] ){
+                return true;
+            }
+            return false;
+        }
+        
+        /**
+         * @desc Used in Feedback.php model
+         * @param type $campaignId
+         * @param type $houseId
+         * @param type $survey_date
+         * @return boolean 
+         */
+        public function has_survey_for_feedback($campaignId, $houseId, $survey_date){
+            $totalRemains = $this->find('count',array('conditions' => array(
+                'Survey.campaign_id' => $campaignId, 'Survey.house_id' => $houseId,
+                'Survey.feedback_taken' => 0, 'DATE(Survey.created)' => $survey_date
+            )));
+            if( $totalRemains > 0){
                 return true;
             }
             return false;

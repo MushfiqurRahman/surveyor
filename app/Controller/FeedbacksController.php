@@ -36,6 +36,8 @@ class FeedbacksController extends AppController {
     public function caller_panel(){
         //pr($this->request->data);exit;
         
+        
+        
         if( !empty($this->request->data['Feedback']) && isset($this->request->data['Feedback']['save']) ){               
             $this->request->data['Feedback']['user_id'] = $this->Auth->user('id');
             unset($this->request->data['Feedback']['save']);
@@ -63,9 +65,15 @@ class FeedbacksController extends AppController {
             'Survey.house_id' => $this->houseIds,
             'Survey.feedback_skipped' => 0,
             'DATE(Survey.created)' => $this->request->data['Survey']['created'],
-            );                    
+            );  
+//            pr($this->Feedback->total_fb_by_date_n_user($this->Auth->user('id'), $this->request->data['Survey']['created']));exit;
+            $this->set('todays_total_fb_by_cc', $this->Feedback->total_fb_by_date_n_user($this->Auth->user('id'), $this->request->data['Survey']['created']));
+//            pr($this->Feedback->Survey->find('first',array(            
+//                'conditions' => $conditions, 'recursive' => 0)));
             $this->set('survey', $this->Feedback->Survey->find('first',array(            
                 'conditions' => $conditions, 'recursive' => 0)));
+            
+            
         }else{
             $this->set('target_achieved',true);
         }        

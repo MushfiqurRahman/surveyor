@@ -25,7 +25,7 @@
                 <?php //pr($survey);?>
                     <div class="portlet-body">
                             <h5>House Name : <?php echo $survey['House']['title'];?></h5>
-                            <h5>Today's Submission: XXXXX</h5>
+                            <h5>Today's Submission: <?php echo $todays_total_fb_by_cc;?></h5>
                             <h5 style="background:yellow; font-weight:bold;">Consumer Mobile Number: <?php echo $survey['Survey']['phone'];?></h5>
                     </div>
             </div>
