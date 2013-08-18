@@ -67,15 +67,15 @@ class RegionsController extends AppController {
             //pr($totalRow);
             
             for($i=2; $i<=$totalRow; $i++){                
-                $region['Region']['title'] = $objWorksheet->getCellByColumnAndRow(6,$i)->getValue();
+                $region['Region']['title'] = trim($objWorksheet->getCellByColumnAndRow(6,$i)->getValue());
                 $regId = $this->_save_region( $region );
                 
                 $area['Area']['region_id'] = $regId;
-                $area['Area']['title'] = $objWorksheet->getCellByColumnAndRow(5,$i)->getValue();
+                $area['Area']['title'] = trim($objWorksheet->getCellByColumnAndRow(5,$i)->getValue());
                 $areaId = $this->_save_area( $area );
                 
                 $house['House']['area_id'] = $areaId;                
-                $house['House']['title'] = $objWorksheet->getCellByColumnAndRow(4,$i)->getValue();
+                $house['House']['title'] = trim($objWorksheet->getCellByColumnAndRow(4,$i)->getValue());
                 $houseId = $this->_save_house($house);
                 
                 $sup['Representative']['house_id'] = $houseId;
@@ -92,7 +92,7 @@ class RegionsController extends AppController {
                 $br['Representative']['name'] = $objWorksheet->getCellByColumnAndRow(0,$i)->getValue();
                 $br['Representative']['superviser_id'] = $supId;
                 $br['Representative']['superviser_name'] = $sup['Representative']['name'];
-                $br['Representative']['br_code'] = $objWorksheet->getCellByColumnAndRow(1,$i)->getValue();
+                $br['Representative']['br_code'] = trim($objWorksheet->getCellByColumnAndRow(1,$i)->getValue());
                 $brId = $this->_save_representative( $br );                
             }
             return true;

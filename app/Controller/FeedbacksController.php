@@ -211,7 +211,8 @@ class FeedbacksController extends AppController {
                     $house = $objWorksheet->getCellByColumnAndRow(2,$i)->getValue();
                     $house = trim($house);
                     $houseD = $this->Region->Area->House->find('first',array('fields' => array(
-                            'House.id'),'conditions' => array('House.area_id' => $areaId),
+                            'House.id'),'conditions' => array('House.area_id' => $areaId, 
+                                'House.title' => $house),
                             'recursive' => -1));
                     
                     if( !empty($houseD) ){
