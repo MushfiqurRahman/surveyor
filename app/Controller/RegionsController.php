@@ -1,6 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
-set_time_limit ( 600 );
+set_time_limit ( 1600 );
 /**
  * Regions Controller
  *

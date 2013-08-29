@@ -208,9 +208,10 @@ class MoLogsController extends AppController{
         if( count($res)>0 ){
             return $res;
         }else{
+            //checking for mobile number duplicacy
             $res = $this->MoLog->query('SELECT surveys.id, surveys.survey_counter FROM surveys '.
                         'WHERE campaign_id='.$this->current_campaign_detail['Campaign']['id'].
-                        ' AND phone="'.$customer_phone_no.'"');
+                        ' AND representative_id = '.$repId. ' AND phone="'.$customer_phone_no.'"');
             if( count($res)>0 ){
                 $res['error'] = 'Sorry! This consumer has already been contacted.';
                 return $res;
