@@ -11,17 +11,27 @@
                 <label>End Date</label><input size="30" name="data[Campaign][end_date]" required="required" onFocus="this.value=''" onClick="showCalendarControl(this);" type="text"  value="<?php echo isset($this->data['Campaign']['end_date']) ? $this->data['Campaign']['end_date'] : '';?>" />
                 
         <h3>Target by House</h3><br/>
+            <table>
+                <tr>
+                    <th>House Name</th><th>House Target</th><th>House Feedback Target</th>
+                </tr>
                 <?php                    
                     foreach($this->data['CampaignDetail'] as $i => $cmpDt){
                 ?>
                         <input type="hidden" name="data[CampaignDetail][<?php echo $i;?>][id]" value="<?php echo $cmpDt['id'];?>"/>
                         <input type="hidden" name="data[CampaignDetail][<?php echo $i;?>][campaign_id]" value="<?php echo $cmpDt['campaign_id'];?>"/>
                         <input type="hidden" name="data[CampaignDetail][<?php echo $i;?>][house_id]" value="<?php echo $cmpDt['house_id'];?>"/>
-                        <label><?php echo $cmpDt['House']['title'];?></label>
-                        <input type="text" name="data[CampaignDetail][<?php echo $i;?>][house_target]" required="required" value="<?php echo $cmpDt['house_target'];?>"/>
+                        <input type="hidden" name="data[CampaignDetail][<?php echo $i;?>][house_achieved]" value="<?php echo $cmpDt['house_achieved'];?>"/>
+                        
+                        <tr>
+                            <td><?php echo $cmpDt['House']['title'];?></td>
+                            <td><input type="text" name="data[CampaignDetail][<?php echo $i;?>][house_target]" required="required" value="<?php echo $cmpDt['house_target'];?>"/></td>
+                            <td><input type="text" name="data[CampaignDetail][<?php echo $i;?>][house_feedback_target]" required="required" value="<?php echo $cmpDt['house_feedback_target'];?>"/></td>
+                        </tr>
                 <?php                        
                     }
                 ?>
+            </table>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>
 </div>

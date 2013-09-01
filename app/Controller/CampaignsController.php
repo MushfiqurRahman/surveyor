@@ -156,6 +156,14 @@ class CampaignsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
                     //pr($this->data);exit;
                     if($this->Campaign->check_total($this->request->data)){
+                        
+                        if( strpos($this->request->data['Campaign']['start_date'], ' 00:00:00')===false ){
+                            $this->request->data['Campaign']['start_date'] = $this->data['Campaign']['start_date'].' 00:00:00';
+                        }
+                        if( strpos($this->request->data['Campaign']['end_date'], ' 00:00:00')===false ){
+                            $this->request->data['Campaign']['end_date'] = $this->data['Campaign']['end_date'].' 00:00:00';
+                        }
+                        
 			if ($this->Campaign->saveAssociated($this->request->data)) {
                             
                             $this->Campaign->Achievement->update_region_target($this->request->data, $id);
@@ -171,7 +179,7 @@ class CampaignsController extends AppController {
                 $this->Campaign->Behaviors->load('Containable');
                 $this->request->data = $this->Campaign->find('first',array('contain' => array(
                     'CampaignDetail' => array(
-                        'fields' => array('id','house_id','house_target'),
+                        'fields' => array('id','house_id','house_target', 'house_achieved', 'house_feedback_target'),
                         'House' => array('title')
                     )),
                     'conditions' => array('Campaign.id' => $id)));

@@ -118,6 +118,13 @@ class Campaign extends AppModel {
 		),
 	);
         
+        /**
+         * Changing fields as datetime field 
+         */
+        public function beforeSave(){
+            return true;
+        }
+        
         
         /**
          *
