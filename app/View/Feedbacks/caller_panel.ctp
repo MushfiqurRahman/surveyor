@@ -94,35 +94,6 @@
     </div>
 
 </div>
-        
-                 
-<!--            <div class="control-group">
-<label class="control-label-cc" style="font-weight:bold;">2. Aami iHover Call Centre Thekey Bolchi? Aami Apnar Sathey Cigarette Bishoye Kichu Kotha Boltey Chai, Apnar Ki Somoy Hobey?</label>
-    <div class="controls-cc" style="margin-left:10px;">
-        <label class="radio">
-        <input type="radio" name="optionsRadios2" value="Yes"  checked>
-        Yes
-        </label>
-        <label class="radio">
-        <input type="radio" name="optionsRadios2" value="No" >
-        No
-        </label>   
-    </div>
-</div>
-
-            <div class="control-group">
-<label class="control-label-cc" style="font-weight:bold;">3. Sir, Aami Apnar Porichoi Nischit Korar Jonno Kichu Bektigoto Proshno Korbo, Aapni Ki Doya Korey Uttor Diye Aamake Sahajjo Korben?</label>
-    <div class="controls-cc" style="margin-left:10px;">
-        <label class="radio">
-        <input type="radio" name="optionsRadios3" value="Yes"  checked>
-        Yes
-        </label>
-        <label class="radio">
-        <input type="radio" name="optionsRadios3" value="No">
-        No
-        </label>   
-    </div>
-</div>-->
 
             <div class="control-group">
 <label class="control-label-cc" style="font-weight:bold;">2. Aapnar Boyosti Ki Bolben? - <?php echo $survey['Survey']['age'];?></label>
@@ -272,20 +243,6 @@
     </div>
 </div>
 
-<!--            <div class="control-group">
-<label class="control-label-cc" style="font-weight:bold;">9. Aapni Ki Gold Leaf Er Simito Somoyer Notun Packer Cigarette Blend Poriborton Hoyeche Ki Na Janen?</label>
-    <div class="controls-cc" style="margin-left:10px;">
-        <label class="radio">
-        <input type="radio" name="data[Feedback][tested]" value="Yes"  checked>
-        Yes
-        </label>
-        <label class="radio">
-        <input type="radio" name="data[Feedback][tested]" value="No">
-        No
-        </label>   
-    </div>
-</div>-->
-
             <div class="control-group">
 <label class="control-label-cc" style="font-weight:bold;">7. Aapni Ki Gold Leaf Er Simito Somoyer Notun, Adhunik O Aakorshonio Packer Kono Video Dekhechilen?</label>
     <div class="controls-cc" style="margin-left:10px;">
@@ -361,6 +318,7 @@
                 <input type="hidden" name="data[Region][id]" value="<?php echo $this->data['Region']['id'];?>"/>
                 <input type="hidden" name="data[Area][id]" value="<?php echo $this->data['Area']['id'];?>"/>
                 <input type="hidden" name="data[House][id]" value="<?php echo $this->data['House']['id'];?>"/>
+                <input type="hidden" name="data[Survey][created]" value="<?php echo $this->data['Survey']['created'];?>"/>
                 <input type="hidden" name="data[Feedback][survey_id]" value="<?php echo $survey['Survey']['id'];?>"/>
                 <input class="btn yellow btn-block" value="Skip & Next" type="submit" name="data[Feedback][skip]"/>
                 <?php echo $this->Form->end();?>

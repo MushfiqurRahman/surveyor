@@ -165,8 +165,11 @@ class Feedback extends AppModel {
          */
         public function get_contain_array( ){
             
-            return array(
-                'Survey' => array('fields' => array('Survey.*'),
+            return array(                
+                'User' => array('fields' => array('email')
+                ),                
+                'Survey' => array('fields' => array('id','campaign_id','house_id','representative_id',
+                    'name','phone','age','occupation_id'),
                     'Representative' => array(
                         'fields' => array('name','superviser_name'),
                         'House' => array(
@@ -219,16 +222,19 @@ class Feedback extends AppModel {
                 $formatted[$i]['house'] = $srv['Survey']['Representative']['House']['title'];
                 $formatted[$i]['br_name'] = $srv['Survey']['Representative']['name'];
                 $formatted[$i]['sup_name'] = $srv['Survey']['Representative']['superviser_name'];
-                
-                $formatted[$i]['customer_name'] = $srv['Feedback']['is_right_name'];
-                //$formatted[$i]['phone_no'] = $srv['Survey']['phone'];
-                $formatted[$i]['age'] = $srv['Feedback']['is_right_age'];                
-                $formatted[$i]['occupation'] = $srv['Feedback']['is_right_occupation'];
+                $formatted[$i]['customer_name'] = $srv['Survey']['name'];
+                $formatted[$i]['customer_name_check'] = $srv['Feedback']['is_right_name'];
+                $formatted[$i]['consumer_phone'] = $srv['Survey']['phone'];
+                $formatted[$i]['age'] = $srv['Survey']['age'];                
+                $formatted[$i]['age_check'] = $srv['Feedback']['is_right_age'];                
+                $formatted[$i]['consumer_occupation'] = $srv['Survey']['Occupation']['title'];
+                $formatted[$i]['occupation_check'] = $srv['Feedback']['is_right_occupation'];
                 $formatted[$i]['current_brand'] = $srv['Feedback']['current_brand'];
                 $formatted[$i]['notice_new_pack'] = $srv['Feedback']['new_pack'];                
                 $formatted[$i]['tobacco_quality'] = $srv['Feedback']['tobacco_quality'];
                 $formatted[$i]['br_toolkit'] = $srv['Feedback']['br_toolkit'];
                 $formatted[$i]['ptr_back_check'] = $srv['Feedback']['got_ptr'];
+                $formatted[$i]['cc_email'] = $srv['User']['email'];
                 $formatted[$i]['date'] = date('Y-m-d',strtotime($srv['Feedback']['created']));
                 $i++;
             }

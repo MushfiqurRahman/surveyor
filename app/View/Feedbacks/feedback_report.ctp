@@ -151,15 +151,19 @@
                                         <th class="hidden-phone">BR Name</th>
                                         <th class="hidden-phone">SUP Name</th>
                                         <th class="hidden-phone">Consumer Name</th>
-<!--                                        <th class="hidden-phone">Phone No</th>-->
-                                        <th class="hidden-phone">AGE</th>
-                                        <th class="hidden-phone">Occupation</th>
+                                        <th class="hidden-phone">Consumer Name Check</th>
+                                        <th class="hidden-phone">Consumer Phone</th>
+                                        <th class="hidden-phone">Consumer AGE</th>
+                                        <th class="hidden-phone">AGE Check</th>
+                                        <th class="hidden-phone">Consumer Occupation</th>
+                                        <th class="hidden-phone">Occupation Check</th>
                                         <th class="hidden-phone">Current Brand</th>
                                         <th class="hidden-phone">Noticed New Pack</th>
                                         <th class="hidden-phone">Tobacco Quality</th>
                                         <th class="hidden-phone">BR Toolkit</th>
                                         <th class="hidden-phone">PTR Back Check</th>
                                         <th class="hidden-phone">Calling Date</th>
+                                        <th class="hidden-phone">CC Email</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -175,16 +179,20 @@
                                         <td class="hidden-phone"><?php echo $fb['Survey']['Representative']['House']['title'];?></td>
                                         <td class="center hidden-phone"><?php echo $fb['Survey']['Representative']['name'];?></td>
                                         <td class="hidden-phone"><?php echo $fb['Survey']['Representative']['superviser_name'];?></td>
+                                        <td class="hidden-phone"><?php echo $fb['Survey']['name'];?></td>
                                         <td class="hidden-phone"><?php echo $fb['Feedback']['is_right_name']?></td>
-<!--                                        <td class="hidden-phone"><?php echo $fb['Survey']['phone'];?></td>-->
+                                        <td class="hidden-phone"><?php echo $fb['Survey']['phone']?></td>
+                                        <td class="hidden-phone"><?php echo $fb['Survey']['age'];?></td>
                                         <td class="center hidden-phone"><?php echo $fb['Feedback']['is_right_age'];?></td>
+                                        <td class="hidden-phone"><?php echo $fb['Survey']['Occupation']['title'];?></td>
                                         <td class="hidden-phone"><?php echo $fb['Feedback']['is_right_occupation'];?></td>
                                         <td class="hidden-phone"><?php echo $fb['Feedback']['current_brand'];?></td>
                                         <td class="hidden-phone"><?php echo $fb['Feedback']['new_pack'];?></td>
                                         <td class="hidden-phone"><?php echo $fb['Feedback']['tobacco_quality'];?></td>
                                         <td class="hidden-phone"><?php echo $fb['Feedback']['br_toolkit'];?></td>
                                         <td class="hidden-phone"><?php echo $fb['Feedback']['got_ptr'];?></td>
-                                        <td class="hidden-phone"><?php echo $fb['Feedback']['created'];?></td>
+                                        <td class="hidden-phone"><?php echo $fb['User']['email'];?></td>
+                                        <td class="hidden-phone"><?php echo $fb['Feedback']['created'];?></td>                                        
                                     </tr> 
                                 <?php
                                     }

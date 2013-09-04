@@ -34,9 +34,8 @@ class FeedbacksController extends AppController {
      * 
      */
     public function caller_panel(){
-        //pr($this->request->data);exit;
-        
-        
+        //pr($this->request->data);
+        //exit;       
         
         if( !empty($this->request->data['Feedback']) && isset($this->request->data['Feedback']['save']) ){               
             $this->request->data['Feedback']['user_id'] = $this->Auth->user('id');
@@ -71,10 +70,9 @@ class FeedbacksController extends AppController {
 //            pr($this->Feedback->Survey->find('first',array(            
 //                'conditions' => $conditions, 'recursive' => 0)));
             $this->set('survey', $this->Feedback->Survey->find('first',array(            
-                'conditions' => $conditions, 'recursive' => 0)));
+                'conditions' => $conditions, 'recursive' => 0)));            
             
-            
-        }else{
+        }else{            
             $this->set('target_achieved',true);
         }        
     }
