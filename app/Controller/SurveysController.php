@@ -54,8 +54,6 @@ class SurveysController extends AppController {
 
                 //pr($regionwise_achievements);
 
-                //echo $this->day_passed;exit;
-
                 $this->set('achievements',$achievements);
                 $this->set('regionwise_achievements',$regionwise_achievements);
             }
@@ -83,7 +81,7 @@ class SurveysController extends AppController {
                 'contain' => $this->Survey->get_contain_array(),
                 'conditions' => $this->Survey->set_conditions($SurveyIds, $this->request->data),                                    
                 'order' => array('Survey.created' => 'DESC'),
-                'limit' => 10,
+                'limit' => $this->Auth->user('pagination_limit'),
             );                
             $Surveys = $this->paginate();
             

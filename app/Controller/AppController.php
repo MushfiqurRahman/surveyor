@@ -146,6 +146,13 @@ class AppController extends Controller {
             if( isset($this->request->params['named']['occupation_id']) ){
                 $this->request->data['occupation_id'] = $this->request->params['named']['occupation_id'];
             }
+            
+            if( isset($this->request->params['named']['is_right_name']) ){
+                $this->request->data['Feedback']['is_right_name'] = $this->request->params['named']['is_right_name'];
+            }
+            if( isset($this->request->params['named']['got_ptr']) ){
+                $this->request->data['Feedback']['got_ptr'] = $this->request->params['named']['got_ptr'];
+            }
         } 
     }    
 }

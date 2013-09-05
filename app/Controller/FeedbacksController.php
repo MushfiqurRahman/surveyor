@@ -80,7 +80,7 @@ class FeedbacksController extends AppController {
     /**
      * 
      */
-    public function feedback_report(){
+    public function feedback_report(){        
         $this->_set_request_data_from_params();  
 
         $houseList = $this->Feedback->Survey->House->house_list($this->request->data);//('list', array('conditions' => $this->_set_conditions()));
@@ -101,7 +101,7 @@ class FeedbacksController extends AppController {
             'contain' => $this->Feedback->get_contain_array(),
             'conditions' => $this->Feedback->set_conditions($SurveyIds, $this->request->data),                                    
             'order' => array('Survey.created' => 'DESC'),
-            'limit' => 10,
+            'limit' => $this->Auth->user('pagination_limit'),
         );                
         $feedbacks = $this->paginate();
 
@@ -109,7 +109,7 @@ class FeedbacksController extends AppController {
                 $houseIds, $this->current_campaign_detail['Campaign']['id'],
                 $this->total_camp_days, $this->day_passed));
 
-        //pr($feedbacks);exit;           
+        $this->set('houses', $houseList);          
         $this->set('feedbacks', $feedbacks);
 
     }
@@ -136,7 +136,7 @@ class FeedbacksController extends AppController {
 
             $feedbacks = $this->Feedback->find('all', array(
                 'contain' => $this->Feedback->get_contain_array(),
-                'conditions' => $this->Feedback->set_conditions($SurveyIds, $this->request->data),                                      
+                'conditions' => $this->Feedback->set_conditions($SurveyIds, $this->request->data, true),                                      
                 'order' => array('Feedback.created' => 'DESC')
             ));                                
             $feedbacks = $this->Feedback->format_for_feedback_export($feedbacks);

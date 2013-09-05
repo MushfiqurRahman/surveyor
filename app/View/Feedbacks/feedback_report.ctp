@@ -58,14 +58,14 @@
                                             <a href="javascript:;" class="remove"></a>
                                     </div>
                             </div>
-                            <div class="portlet-body">
-                                    <div style="height:160px;">
+    <div class="portlet-body">
+        <div style="height:315px;">
 
-     <form class="form-horizontal" name="search" method="post" action="feedback_report" id="">
+            <form class="form-horizontal" name="search" method="post" action="feedback_report" id="">
 
             <div>
                     <div class="control-group">
-    <label class="control-label">House Name</label>
+    
     <div class="controls">
         <?php 
             //echo $this->Form->create('Survey',array('type' => 'get', 'action'=>'report', 'class' => 'form-horizontal'));    
@@ -76,23 +76,83 @@
             if( isset($this->data['Area']['id']) ){
                 echo $this->Form->input('Area.id', array('type' => 'hidden'));
             }
-            if( isset($this->data['House']['id']) ){
-                echo $this->Form->input('House.id', array('type' => 'hidden'));
-            }
+//            if( isset($this->data['House']['id']) ){
+//                echo $this->Form->input('House.id', array('type' => 'hidden'));
+//            }
         ?>
 <!--        <input type="hidden" name="data[Region][id]" value="<?php echo $this->data['Region']['id'];?>"/>
         <input type="hidden" name="data[Area][id]" value="<?php echo $this->data['Area']['id'];?>"/>-->
 <!--        <input type="hidden" name="data[House][id]" value="<?php echo $this->data['House']['id'];?>"/>-->
     </div>
     </div>
-
-
-                    <div class="control-group">
-    <label class="control-label">Date Ranges</label>
-    <div class="controls">
-        <input size="25" name="start_date" onFocus="this.value=''" onClick="showCalendarControl(this);" type="text"  value="<?php echo isset($this->data['start_date']) ? $this->data['start_date'] : '';?>" />
-        <input size="25" name="end_date" onFocus="this.value=''" onClick="showCalendarControl(this);" type="text"  value="<?php echo isset($this->data['end_date']) ? $this->data['end_date'] : '';?>" />   
+                
+    <div class="control-group">
+        <label class="control-label">House Name</label>
+        <div class="controls">
+            <?php         
+                $selected_house_id = isset($this->data['House']['id']) ? $this->data['House']['id'] : '';
+                echo $this->Form->input('House.id',array('type' => 'select', 'options' => $houses, 
+                    'label' => false, 'class' => 'span6 m-wrap', 'empty' => 'Choose a House', 'selected' => $selected_house_id));
+            ?>        
+        </div>
     </div>
+
+
+    <div class="control-group">
+        <label class="control-label">Name Check</label>
+        <div class="controls" style="margin-bottom:10px;">     
+            <?php 
+                $options = array('0' => 'All','Right' => 'Right', 'Wrong' => 'Wrong', 
+                    'Duplicate Consumer' => 'Duplicate Consumer');
+                
+                $selectedVal = isset($this->data['Feedback']['is_right_name']) ? $this->data['Feedback']['is_right_name'] : 0;
+                    //var_dump($selectedVal);exit;
+            ?>
+            <select name="data[Feedback][is_right_name]">
+                <?php                    
+                    foreach($options as $k => $opt){
+                        if( $k===$selectedVal){
+                            echo '<option value="'.$k.'" selected="selected">'.$opt.'</option>';
+                        }else{
+                            echo '<option value="'.$k.'">'.$opt.'</option>';
+                        }  
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+                
+    <div class="control-group">
+        <label class="control-label">PTR Check</label>
+        <div class="controls" style="margin-bottom:10px;">   
+            <?php 
+                $options = array('0' => 'All','Yes' => 'Yes', 'No' => 'No', 'N/A' => 'N/A');
+                $selectedPtr = isset($this->data['Feedback']['got_ptr']) ? $this->data['Feedback']['got_ptr'] : 0;
+            ?>
+            <select name="data[Feedback][got_ptr]">
+                <?php                    
+                    foreach($options as $k => $opt){
+                ?>
+                <option value="<?php echo $k;?>" <?php echo $selectedPtr === $k ? 'selected="selected"': '';?>>
+                    <?php echo $opt;?>
+                </option>
+                <?php
+                    }
+                ?>
+<!--                <option value="0">All</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="N/A">N/A</option>-->
+            </select>
+        </div>
+    </div>
+                
+    <div class="control-group">    
+        <label class="control-label">Date Ranges</label>
+        <div class="controls" style="margin-bottom:10px;">            
+            <input size="25" name="start_date" onFocus="this.value=''" onClick="showCalendarControl(this);" type="text"  value="<?php echo isset($this->data['start_date']) ? $this->data['start_date'] : '';?>" />
+            <input size="25" name="end_date" onFocus="this.value=''" onClick="showCalendarControl(this);" type="text"  value="<?php echo isset($this->data['end_date']) ? $this->data['end_date'] : '';?>" />   
+        </div>
     </div>
                 <!-- 3rd row end -->
                     <hr />
@@ -113,6 +173,13 @@
             }
             if( isset($this->data['House']['id']) && $this->data['House']['id']){
                 $url_params['house_id'] = $this->data['House']['id'];
+            }
+            
+            if( isset($this->data['Feedback']['is_right_name']) && $this->data['Feedback']['is_right_name']){
+                $url_params['is_right_name'] = $this->data['Feedback']['is_right_name'];
+            }
+            if( isset($this->data['Feedback']['got_ptr']) && $this->data['Feedback']['got_ptr']){
+                $url_params['got_ptr'] = $this->data['Feedback']['got_ptr'];
             }
             $this->Paginator->options(array('url' => $url_params));            
         ?>
@@ -141,7 +208,7 @@
                                 </div>
                             </div>
                             <div class="portlet-body">
-                                <table class="table table-striped table-bordered" id="sample_1">
+                                <table class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
                                         <th>SL</th>
@@ -161,15 +228,15 @@
                                         <th class="hidden-phone">Noticed New Pack</th>
                                         <th class="hidden-phone">Tobacco Quality</th>
                                         <th class="hidden-phone">BR Toolkit</th>
-                                        <th class="hidden-phone">PTR Back Check</th>
-                                        <th class="hidden-phone">Calling Date</th>
+                                        <th class="hidden-phone">PTR Back Check</th>                                        
                                         <th class="hidden-phone">CC Email</th>
+                                        <th class="hidden-phone">Calling Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php
                                 if( isset($feedbacks) && !empty($feedbacks)){
-                                    //pr($feedbacks);
+//                                    pr($feedbacks);
                                     foreach( $feedbacks as $fb ){
                                 ?>
                                     <tr class="odd gradeX">
@@ -203,8 +270,13 @@
                                                                            
                                 </tbody>
                         </table>
-                                <div class="paging">
-	<?php
+        <div class="paging">
+        <?php
+            echo $this->Paginator->counter(array(
+            'format' => __('Showing {:current} records out of {:count} total')
+            ));
+            echo '<br/>';
+	
             echo $this->Paginator->prev('< ' . __('previous | '), array(), null, array('class' => 'prev disabled'));
             echo $this->Paginator->numbers(array('separator' => ' | '));
             echo $this->Paginator->next(__(' | next') . ' >', array(), null, array('class' => 'next disabled'));

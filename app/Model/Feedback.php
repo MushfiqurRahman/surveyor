@@ -187,12 +187,24 @@ class Feedback extends AppModel {
          *
          * @return type 
          */
-        public function set_conditions( $surveyIds = null, $data = array() ){
+        public function set_conditions( $surveyIds = null, $data = array(), $is_for_xl_report = false ){
             
             $conditions = array();
             
             if( $surveyIds ){
                 $conditions[]['Feedback.survey_id'] = $surveyIds;                
+            }else{
+                $conditions[]['Feedback.survey_id'] = 0;
+            }
+            
+            //for Excell export no need to set the following conditions
+            if( $is_for_xl_report == false ){
+                if( isset($data['Feedback']['is_right_name']) && $data['Feedback']['is_right_name'] != '0' ){
+                    $conditions[]['Feedback.is_right_name'] = $data['Feedback']['is_right_name'];
+                }
+                if( isset($data['Feedback']['got_ptr']) && $data['Feedback']['got_ptr'] != '0' ){
+                    $conditions[]['Feedback.got_ptr'] = $data['Feedback']['got_ptr'];
+                }
             }
             
             //since Feedback reporting on Feedbacks created date. Not on survey date            
@@ -202,6 +214,7 @@ class Feedback extends AppModel {
             if( isset($data['end_date']) && !empty($data['end_date']) ){
                 $conditions[]['DATE(Feedback.created) <='] = $data['end_date'];
             }
+            
             return $conditions;
         }
         
@@ -222,8 +235,8 @@ class Feedback extends AppModel {
                 $formatted[$i]['house'] = $srv['Survey']['Representative']['House']['title'];
                 $formatted[$i]['br_name'] = $srv['Survey']['Representative']['name'];
                 $formatted[$i]['sup_name'] = $srv['Survey']['Representative']['superviser_name'];
-                $formatted[$i]['customer_name'] = $srv['Survey']['name'];
-                $formatted[$i]['customer_name_check'] = $srv['Feedback']['is_right_name'];
+                $formatted[$i]['consumer_name'] = $srv['Survey']['name'];
+                $formatted[$i]['consumer_name_check'] = $srv['Feedback']['is_right_name'];
                 $formatted[$i]['consumer_phone'] = $srv['Survey']['phone'];
                 $formatted[$i]['age'] = $srv['Survey']['age'];                
                 $formatted[$i]['age_check'] = $srv['Feedback']['is_right_age'];                
